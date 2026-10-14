@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { API_BASE_URL } from '../services/apiClient';
 
 /**
  * Zustand Store for Agent Chat with SSE streaming
@@ -8,7 +9,7 @@ export const useAgentChatStore = create((set, get) => ({
     {
       id: 'welcome',
       sender: 'agent',
-      text: "Namaste! I am the **Dravya Autonomous AI Agent**. I run on strict multi-agent tool loops with 8 read-only diagnostic tools. All incoming requests are Zod-validated, and real verified database rows are injected into analytical charts. Ask me about live voltages, botanical identification, or adulteration markers!",
+      text: "Namaste! I am your **Dravya Laboratory AI Assistant**. I analyze real-time electrochemical sensor signals, verify botanical monographs against official Ayurvedic Pharmacopoeia standards, and flag potential adulterants. How can I assist with your sample evaluation today?",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ],
@@ -57,7 +58,7 @@ export const useAgentChatStore = create((set, get) => ({
     const token = localStorage.getItem('etongue_auth_token') || 'demo_token';
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/agent/chat', {
+      const response = await fetch(`${API_BASE_URL}/v1/agent/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

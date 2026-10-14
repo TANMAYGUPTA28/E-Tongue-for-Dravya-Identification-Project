@@ -13,6 +13,7 @@ import {
   Radio
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function LiveAiAgentStream() {
   const [telemetry, setTelemetry] = useState(null);
@@ -26,7 +27,7 @@ export default function LiveAiAgentStream() {
   // Poll live telemetry periodically
   const fetchLive = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/sensors/live');
+      const res = await fetch(`${API_BASE_URL}/sensors/live`);
       if (res.ok) {
         const data = await res.json();
         setTelemetry(data);
@@ -46,7 +47,7 @@ export default function LiveAiAgentStream() {
     toast.loading('Streaming IoT sensor packet to Dravya AI Agent...', { id: 'feed' });
 
     try {
-      const res = await fetch('http://localhost:5000/api/iot/demo-feed', {
+      const res = await fetch(`${API_BASE_URL}/iot/demo-feed`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ specimenKey }),
@@ -110,7 +111,7 @@ export default function LiveAiAgentStream() {
         <div className="flex items-center gap-2 font-mono text-xs">
           <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#070A14] border border-white/10">
             <Database className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-zinc-300">MongoDB Persisted</span>
+            <span className="text-zinc-300">Certified Archive Ledger</span>
           </span>
           <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
             <span className={`w-2 h-2 rounded-full ${isStreaming ? 'bg-emerald-400 channel-pulse-dot' : 'bg-zinc-500'}`} />

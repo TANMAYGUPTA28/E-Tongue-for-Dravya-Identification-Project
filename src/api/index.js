@@ -1,6 +1,6 @@
 import { STATS, SENSOR_STREAM_DEFAULT, DRAVYA_LIBRARY, CONFUSION_MATRIX, FEATURE_IMPORTANCE, TESTIMONIALS, FAQ_ITEMS } from './mockData';
 
-const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 // Helper to check if backend is reachable
 export async function checkBackendHealth() {

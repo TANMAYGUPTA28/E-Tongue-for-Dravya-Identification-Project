@@ -1,0 +1,148 @@
+{
+  "modelType": "Random Forest Classifier (Bagging Ensemble)",
+  "nEstimators": 24,
+  "maxDepth": 4,
+  "totalSamples": 240,
+  "trainSamplesCount": 176,
+  "testSamplesCount": 64,
+  "accuracy": 100,
+  "macroF1": 1,
+  "cvFolds": 5,
+  "cvAccuracies": [
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "cvMeanAccuracy": 100,
+  "evaluationMethod": "Stratified 75% train / 25% test split with 5-fold cross-validation on calibrated standards",
+  "datasetSource": "Ayurvedic Pharmacopoeia of India (API) 6-channel potentiometric calibration dataset",
+  "featureImportances": [
+    {
+      "id": "S6",
+      "sensor": "S6: Ruthenium Oxide",
+      "rasa": "Kashaya",
+      "target": "Tannins & Polyphenols",
+      "weight": 24.4
+    },
+    {
+      "id": "S1",
+      "sensor": "S1: Lipid Membrane",
+      "rasa": "Madhura",
+      "target": "Neutral Glycosides & Lipids",
+      "weight": 20.2
+    },
+    {
+      "id": "S2",
+      "sensor": "S2: Conductive Polyaniline",
+      "rasa": "Amla",
+      "target": "Organic Acids (Ascorbic)",
+      "weight": 16.2
+    },
+    {
+      "id": "S3",
+      "sensor": "S3: Chitosan Matrix",
+      "rasa": "Lavana",
+      "target": "Halides & Electrolytes",
+      "weight": 14.6
+    },
+    {
+      "id": "S4",
+      "sensor": "S4: Phthalocyanine",
+      "rasa": "Tikta",
+      "target": "Alkaloids & Withanolides",
+      "weight": 13.5
+    },
+    {
+      "id": "S5",
+      "sensor": "S5: Crown Ether",
+      "rasa": "Katu",
+      "target": "Curcuminoids & Volatiles",
+      "weight": 11
+    }
+  ],
+  "confusionMatrix": {
+    "ashwagandha_pure": {
+      "ashwagandha_pure": 8,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "ashwagandha_adulterated": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 8,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "haritaki_pure": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 8,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "guduchi_pure": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 8,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "turmeric_pure": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 8,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "turmeric_metanil": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 8,
+      "honey_pure": 0,
+      "honey_syrup": 0
+    },
+    "honey_pure": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 8,
+      "honey_syrup": 0
+    },
+    "honey_syrup": {
+      "ashwagandha_pure": 0,
+      "ashwagandha_adulterated": 0,
+      "haritaki_pure": 0,
+      "guduchi_pure": 0,
+      "turmeric_pure": 0,
+      "turmeric_metanil": 0,
+      "honey_pure": 0,
+      "honey_syrup": 8
+    }
+  },
+  "trainedAt": "2026-10-14T13:32:35.311Z"
+}

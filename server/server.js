@@ -19,7 +19,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { REFERENCE_SPECIES } from './data/herbalDatabase.js';
-import { classifySample, SENSOR_INFO } from './services/randomForest.js';
+import { classifySample, SENSOR_INFO, getEvaluatedMetrics } from './services/randomForest.js';
 import { iotManager } from './services/iotSimulator.js';
 import { storage } from './services/storage.js';
 import { aiAgent } from './services/agentService.js';
@@ -42,8 +42,30 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+app.use(cors({
+  origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  credentials: true,
+}));
 app.use(express.json());
+
+// Health check endpoints (root and API prefixed)
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    service: 'DRAVYA 6000 Chemometrics Workstation',
+    uptime: process.uptime(),
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    service: 'DRAVYA 6000 Chemometrics Workstation',
+  });
+});
 
 // Mount Autonomous Agentic SSE Router (/api/v1/agent/chat, /api/v1/agent/chat-sync)
 app.use('/api/v1/agent', agentRouter);
@@ -405,15 +427,7 @@ app.delete('/api/specimens/:lotId', async (req, res) => {
 // =========================================================================
 
 app.get('/api/model/metrics', (req, res) => {
-  res.json({
-    algorithm: 'Random Forest Classifier (Ensemble Bagging)',
-    nEstimators: 24, maxDepth: 4, oobAccuracy: 98.4,
-    subspaceFeatures: 'm = √6 ≈ 2',
-    splitCriterion: 'Gini Impurity (MDI)',
-    sensorGiniImportances: SENSOR_INFO.map((s) => ({
-      id: s.id, name: s.name, rasa: s.rasa, target: s.target, importance: s.defaultWeight,
-    })),
-  });
+  res.json(getEvaluatedMetrics());
 });
 
 // Reference species list

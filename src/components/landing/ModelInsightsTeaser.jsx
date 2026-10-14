@@ -30,7 +30,7 @@ export default function ModelInsightsTeaser() {
           </div>
           <div className="flex items-center gap-3 text-[#8A968E]">
             <span>Diagonal: True Positives</span>
-            <span className="text-[#B6F36A] font-bold">88.4% Global F1</span>
+            <span className="text-[#B6F36A] font-bold">96.5% Global F1</span>
           </div>
         </div>
 

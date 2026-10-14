@@ -1,9 +1,35 @@
 /**
  * API Client for DRAVYA 6000 Potentiostat & Chemometrics Backend
- * Connects React frontend directly to Express/Spring REST endpoints
+ * Uses environment variable with seamless proxy fallback
  */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
+/**
+ * Human-friendly error mapper that translates technical stack traces,
+ * HTTP codes, and network errors into clean non-technical guidance.
+ */
+export function mapErrorMessage(error, defaultMsg = 'Unable to complete request. Please try again.') {
+  if (!error) return defaultMsg;
+  const msg = typeof error === 'string' ? error : error.message || '';
+  
+  if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('ECONNREFUSED')) {
+    return 'Workstation service is temporarily unreachable. Please ensure the laboratory server is running.';
+  }
+  if (msg.includes('401') || msg.includes('credentials') || msg.includes('password')) {
+    return 'Invalid email or password. Please verify your laboratory credentials.';
+  }
+  if (msg.includes('403') || msg.includes('Forbidden') || msg.includes('Unauthorized')) {
+    return 'Session expired or insufficient clearance. Please sign in again.';
+  }
+  if (msg.includes('Restricted domain') || msg.includes('domain')) {
+    return 'Only authorized institutional (.edu, .ac.in), Gmail, or Yahoo accounts are permitted.';
+  }
+  if (msg.includes('OTP') || msg.includes('code') || msg.includes('expired')) {
+    return msg;
+  }
+  return defaultMsg;
+}
 
 export async function fetchSystemStatus() {
   try {

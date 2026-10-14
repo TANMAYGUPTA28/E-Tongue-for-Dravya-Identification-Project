@@ -121,9 +121,9 @@ export default function GenerativeRenderer({ componentData }) {
   // 3. Classification Candidate Bar Chart
   if (chartType === 'bar') {
     const barData = rows || [
-      { name: 'Haritaki', confidence: 98.4 },
-      { name: 'Bibhitaki', confidence: 1.2 },
-      { name: 'Amalaki', confidence: 0.4 },
+      { name: 'Haritaki', confidence: 96.4 },
+      { name: 'Bibhitaki', confidence: 2.3 },
+      { name: 'Amalaki', confidence: 1.1 },
     ];
 
     return (
@@ -192,7 +192,7 @@ export default function GenerativeRenderer({ componentData }) {
           </div>
           <div>
             <span className="text-[#8A968E] block text-[10px]">Purity Score:</span>
-            <span className="font-bold text-[#B6F36A]">{metadata?.purity || '98.4%'}</span>
+            <span className="font-bold text-[#B6F36A]">{metadata?.purity || '96.4%'}</span>
           </div>
         </div>
 

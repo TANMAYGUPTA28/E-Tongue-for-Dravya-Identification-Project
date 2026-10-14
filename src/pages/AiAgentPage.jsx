@@ -17,6 +17,7 @@ import {
 import toast from 'react-hot-toast';
 import LiveAiAgentStream from '../components/LiveAiAgentStream';
 import ChatPanel from '../components/agent/ChatPanel';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function AiAgentPage() {
   const [telemetry, setTelemetry] = useState(null);
@@ -35,7 +36,7 @@ export default function AiAgentPage() {
   // Poll live telemetry from backend
   const fetchLiveSensors = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/sensors/live');
+      const res = await fetch(`${API_BASE_URL}/sensors/live`);
       if (res.ok) {
         const data = await res.json();
         setTelemetry(data);
@@ -53,7 +54,7 @@ export default function AiAgentPage() {
   const runAgentReasoning = async (voltages = telemetry?.voltages || [0.72, 0.38, 0.45, 2.78, 1.15, 2.35], sampleName = telemetry?.sampleName || 'Ashwagandha') => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/agent/analyze', {
+      const res = await fetch(`${API_BASE_URL}/agent/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ voltages, sampleName }),
@@ -61,7 +62,7 @@ export default function AiAgentPage() {
       const data = await res.json();
       setAgentAnalysis(data);
     } catch (err) {
-      toast.error('Could not reach backend AI Agent service');
+      toast.error('Unable to connect to analysis engine. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -86,7 +87,7 @@ export default function AiAgentPage() {
     setChatLoading(true);
     try {
       const activeVoltages = telemetry?.voltages || [0.72, 0.38, 0.45, 2.78, 1.15, 2.35];
-      const res = await fetch('http://localhost:5000/api/agent/chat', {
+      const res = await fetch(`${API_BASE_URL}/agent/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,7 +104,7 @@ export default function AiAgentPage() {
     } catch (err) {
       setChatMessages((prev) => [
         ...prev,
-        { sender: 'agent', text: 'Error communicating with Dravya AI backend agent. Ensure Express server is running on port 5000.', time: 'Now' },
+        { sender: 'agent', text: 'Unable to communicate with the assistant service. Please check your network connection and try again.', time: 'Now' },
       ]);
     } finally {
       setChatLoading(false);
@@ -133,11 +134,11 @@ export default function AiAgentPage() {
         <div className="flex items-center gap-2 font-mono text-xs">
           <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#090D1A] border border-white/10 text-zinc-300">
             <Database className="w-3.5 h-3.5 text-emerald-400" />
-            <span>MongoDB Connected</span>
+            <span>Archive Database Connected</span>
           </span>
           <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 font-semibold">
             <Cpu className="w-3.5 h-3.5 text-teal-400" />
-            <span>ESP32-S3 Protocol Active</span>
+            <span>Sensor Stream Active</span>
           </span>
         </div>
       </div>

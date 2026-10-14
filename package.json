@@ -4,19 +4,22 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -n FE,BE -c cyan,green \"vite\" \"tsx server/server.js\"",
+    "dev:frontend": "vite",
+    "dev:server": "tsx server/server.js",
     "build": "vite build",
     "preview": "vite preview",
     "server": "tsx server/server.js",
     "mcp": "node server/mcp-server.js",
     "start": "tsx server/server.js",
     "bridge": "node server/serial-bridge.js",
-    "dev:full": "concurrently -n FE,BE -c cyan,green \"npm run dev\" \"npm run server\"",
-    "dev:all": "concurrently -n FE,BE,MCP -c cyan,green,magenta \"npm run dev\" \"npm run server\" \"npm run mcp\"",
+    "dev:full": "npm run dev",
+    "dev:all": "concurrently -n FE,BE,MCP -c cyan,green,magenta \"vite\" \"tsx server/server.js\" \"npm run mcp\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "agent:server": "tsx server/src/index.ts",
-    "job:nightly": "tsx server/src/jobs/nightlyRollup.ts"
+    "job:nightly": "tsx server/src/jobs/nightlyRollup.ts",
+    "model:train": "node server/scripts/train_model.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.1",

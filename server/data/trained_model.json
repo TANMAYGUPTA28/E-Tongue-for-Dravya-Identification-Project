@@ -1,0 +1,1549 @@
+{
+  "metadata": {
+    "modelType": "Random Forest Ensemble Classifier",
+    "nEstimators": 25,
+    "maxDepth": 4,
+    "evaluationDatasetSize": 300,
+    "trainSamples": 240,
+    "heldOutTestSamples": 60,
+    "testAccuracy": 98.3,
+    "crossValidationMean": 99.3,
+    "crossValidationStdDev": 0.8,
+    "perClassAccuracy": {
+      "Haritaki (Terminalia chebula)": 100,
+      "Adulterated Ashwagandha (Starch Cut)": 100,
+      "Authentic Guduchi / Giloy": 92.9,
+      "Pure Ashwagandha Root": 100,
+      "Lakadong Turmeric (Haridra)": 100,
+      "Adulterated Turmeric (Metanil Yellow)": 100
+    },
+    "featureImportances": [
+      {
+        "sensor": "S5: Crown Ether (Pungent)",
+        "importancePercentage": 26.8
+      },
+      {
+        "sensor": "S6: Ruthenium Oxide (Astringent)",
+        "importancePercentage": 21.6
+      },
+      {
+        "sensor": "S1: Lipid Membrane (Sweet)",
+        "importancePercentage": 18.1
+      },
+      {
+        "sensor": "S2: Conductive Polyaniline (Sour)",
+        "importancePercentage": 14
+      },
+      {
+        "sensor": "S4: Phthalocyanine (Bitter)",
+        "importancePercentage": 13.1
+      },
+      {
+        "sensor": "S3: Chitosan Matrix (Salty)",
+        "importancePercentage": 6.5
+      }
+    ],
+    "trainedAt": "2026-10-14T13:15:58.377Z",
+    "isSyntheticCalibratedData": true,
+    "dataDisclaimer": "Trained on 300 potentiostat sensor assay vectors calibrated against Ayurvedic Pharmacopoeia of India reference standards with physical Gaussian ionic noise."
+  },
+  "trees": [
+    {
+      "id": 1,
+      "root": {
+        "type": "internal",
+        "featureIndex": 2,
+        "threshold": 1.8,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.535,
+          "samples": 196,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 1.026,
+            "samples": 145,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.788,
+              "samples": 99,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 59,
+                "confidence": 0.542
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 40,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Adulterated Ashwagandha (Starch Cut)",
+              "samples": 46,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 51,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Turmeric (Metanil Yellow)",
+          "samples": 44,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 2,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 2.515,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.828,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.535,
+            "samples": 155,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.435,
+              "samples": 111,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 72,
+                "confidence": 0.5
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 39,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 44,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Ashwagandha (Starch Cut)",
+            "samples": 39,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 3,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 2.578,
+          "samples": 195,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.535,
+            "samples": 156,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 2.855,
+              "samples": 113,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 74,
+                "confidence": 0.5
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 39,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 43,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 39,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 45,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 4,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 0.534,
+        "samples": 240,
+        "left": {
+          "type": "leaf",
+          "prediction": "Adulterated Turmeric (Metanil Yellow)",
+          "samples": 46,
+          "confidence": 1
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.497,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 0.57,
+            "samples": 151,
+            "left": {
+              "type": "leaf",
+              "prediction": "Adulterated Ashwagandha (Starch Cut)",
+              "samples": 40,
+              "confidence": 1
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 2.515,
+              "samples": 111,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 73,
+                "confidence": 0.575
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 38,
+                "confidence": 1
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 43,
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 0.995,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.535,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 2.48,
+            "samples": 148,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.967,
+              "samples": 106,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 65,
+                "confidence": 0.508
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 41,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Haritaki (Terminalia chebula)",
+              "samples": 42,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 46,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 6,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.515,
+          "samples": 192,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 1.967,
+            "samples": 147,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 0.785,
+              "samples": 109,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 37,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 72,
+                "confidence": 0.556
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Pure Ashwagandha Root",
+              "samples": 38,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 45,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 48,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 7,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.561,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 0.994,
+          "samples": 195,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 1.989,
+            "samples": 149,
+            "left": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.378,
+              "samples": 111,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 37,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 74,
+                "confidence": 0.554
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Pure Ashwagandha Root",
+              "samples": 38,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 46,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 45,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 8,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.578,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 1.967,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.535,
+            "samples": 151,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 0.991,
+              "samples": 109,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 71,
+                "confidence": 0.521
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 38,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 42,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Pure Ashwagandha Root",
+            "samples": 43,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 9,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 0.609,
+          "samples": 187,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 1.634,
+            "samples": 149,
+            "left": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 38,
+              "confidence": 1
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.435,
+              "samples": 111,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 40,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 71,
+                "confidence": 0.507
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 38,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 53,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 10,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.497,
+          "samples": 193,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 0.534,
+            "samples": 147,
+            "left": {
+              "type": "leaf",
+              "prediction": "Adulterated Turmeric (Metanil Yellow)",
+              "samples": 39,
+              "confidence": 1
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 0.967,
+              "samples": 108,
+              "left": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 39,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 69,
+                "confidence": 0.551
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 46,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 47,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 11,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.497,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 2.578,
+          "samples": 190,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.494,
+            "samples": 149,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 1.275,
+              "samples": 81,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 41,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 40,
+                "confidence": 0.925
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.964,
+              "samples": 68,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Ashwagandha (Starch Cut)",
+                "samples": 39,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 29,
+                "confidence": 1
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 41,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Lakadong Turmeric (Haridra)",
+          "samples": 50,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 12,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 0.995,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.883,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.597,
+            "samples": 153,
+            "left": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.596,
+              "samples": 76,
+              "left": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 36,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 40,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 2.48,
+              "samples": 77,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 43,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 34,
+                "confidence": 1
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Authentic Guduchi / Giloy",
+            "samples": 41,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 13,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.535,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.515,
+          "samples": 182,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 0.525,
+            "samples": 135,
+            "left": {
+              "type": "leaf",
+              "prediction": "Adulterated Ashwagandha (Starch Cut)",
+              "samples": 34,
+              "confidence": 1
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.964,
+              "samples": 101,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 56,
+                "confidence": 0.536
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 45,
+                "confidence": 1
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 47,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Lakadong Turmeric (Haridra)",
+          "samples": 58,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 14,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 0.57,
+        "samples": 240,
+        "left": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 46,
+          "confidence": 1
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.515,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.535,
+            "samples": 153,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.435,
+              "samples": 112,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 66,
+                "confidence": 0.561
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 46,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 41,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 41,
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 0.753,
+          "samples": 196,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 44,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.497,
+            "samples": 152,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.788,
+              "samples": 110,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 67,
+                "confidence": 0.507
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 43,
+                "confidence": 0.977
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 42,
+              "confidence": 1
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 44,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 16,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.561,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 0.57,
+          "samples": 192,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Ashwagandha (Starch Cut)",
+            "samples": 48,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 1.989,
+            "samples": 144,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 2.564,
+              "samples": 105,
+              "left": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 70,
+                "confidence": 0.529
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 35,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Pure Ashwagandha Root",
+              "samples": 39,
+              "confidence": 1
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 48,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 17,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.497,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 2.578,
+          "samples": 190,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.788,
+            "samples": 146,
+            "left": {
+              "type": "internal",
+              "featureIndex": 2,
+              "threshold": 0.555,
+              "samples": 103,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 61,
+                "confidence": 0.59
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 42,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Adulterated Ashwagandha (Starch Cut)",
+              "samples": 43,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Haritaki (Terminalia chebula)",
+            "samples": 44,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Lakadong Turmeric (Haridra)",
+          "samples": 50,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 18,
+      "root": {
+        "type": "internal",
+        "featureIndex": 2,
+        "threshold": 0.609,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 1.632,
+          "samples": 155,
+          "left": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 42,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.485,
+            "samples": 113,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 2.883,
+              "samples": 75,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 46,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 29,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Haritaki (Terminalia chebula)",
+              "samples": 38,
+              "confidence": 1
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 0.534,
+          "samples": 85,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 34,
+            "confidence": 1
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Ashwagandha (Starch Cut)",
+            "samples": 51,
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 2.48,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 1.989,
+          "samples": 193,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.605,
+            "samples": 147,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.634,
+              "samples": 81,
+              "left": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 46,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 35,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.994,
+              "samples": 66,
+              "left": {
+                "type": "leaf",
+                "prediction": "Adulterated Ashwagandha (Starch Cut)",
+                "samples": 35,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Adulterated Turmeric (Metanil Yellow)",
+                "samples": 31,
+                "confidence": 1
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Pure Ashwagandha Root",
+            "samples": 46,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 47,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 20,
+      "root": {
+        "type": "internal",
+        "featureIndex": 3,
+        "threshold": 2.564,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 0.57,
+          "samples": 154,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Ashwagandha (Starch Cut)",
+            "samples": 42,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 0.785,
+            "samples": 112,
+            "left": {
+              "type": "leaf",
+              "prediction": "Adulterated Turmeric (Metanil Yellow)",
+              "samples": 41,
+              "confidence": 1
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 0.957,
+              "samples": 71,
+              "left": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 33,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 38,
+                "confidence": 1
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.883,
+          "samples": 86,
+          "left": {
+            "type": "leaf",
+            "prediction": "Pure Ashwagandha Root",
+            "samples": 45,
+            "confidence": 1
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Authentic Guduchi / Giloy",
+            "samples": 41,
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 21,
+      "root": {
+        "type": "internal",
+        "featureIndex": 3,
+        "threshold": 2.326,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.8,
+          "samples": 113,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 0.609,
+            "samples": 73,
+            "left": {
+              "type": "leaf",
+              "prediction": "Haritaki (Terminalia chebula)",
+              "samples": 37,
+              "confidence": 1
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Adulterated Ashwagandha (Starch Cut)",
+              "samples": 36,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 40,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.554,
+          "samples": 127,
+          "left": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 48,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.875,
+            "samples": 79,
+            "left": {
+              "type": "leaf",
+              "prediction": "Pure Ashwagandha Root",
+              "samples": 39,
+              "confidence": 1
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Authentic Guduchi / Giloy",
+              "samples": 40,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.026,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.535,
+          "samples": 194,
+          "left": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.881,
+            "samples": 144,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 0.967,
+              "samples": 105,
+              "left": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 65,
+                "confidence": 0.508
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 40,
+                "confidence": 1
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Authentic Guduchi / Giloy",
+              "samples": 39,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Lakadong Turmeric (Haridra)",
+            "samples": 50,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 23,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.535,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 0.57,
+          "samples": 194,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Ashwagandha (Starch Cut)",
+            "samples": 44,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.828,
+            "samples": 150,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.422,
+              "samples": 111,
+              "left": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 66,
+                "confidence": 0.515
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 45,
+                "confidence": 0.956
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Haritaki (Terminalia chebula)",
+              "samples": 39,
+              "confidence": 1
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Lakadong Turmeric (Haridra)",
+          "samples": 46,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 24,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.519,
+        "samples": 240,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.8,
+          "samples": 190,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.535,
+            "samples": 148,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 1.297,
+              "samples": 102,
+              "left": {
+                "type": "leaf",
+                "prediction": "Pure Ashwagandha Root",
+                "samples": 65,
+                "confidence": 0.554
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Authentic Guduchi / Giloy",
+                "samples": 37,
+                "confidence": 0.946
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Lakadong Turmeric (Haridra)",
+              "samples": 46,
+              "confidence": 1
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 42,
+            "confidence": 1
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "prediction": "Haritaki (Terminalia chebula)",
+          "samples": 50,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": 25,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 0.57,
+        "samples": 240,
+        "left": {
+          "type": "leaf",
+          "prediction": "Adulterated Ashwagandha (Starch Cut)",
+          "samples": 45,
+          "confidence": 1
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 0.534,
+          "samples": 195,
+          "left": {
+            "type": "leaf",
+            "prediction": "Adulterated Turmeric (Metanil Yellow)",
+            "samples": 41,
+            "confidence": 1
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.883,
+            "samples": 154,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.634,
+              "samples": 113,
+              "left": {
+                "type": "leaf",
+                "prediction": "Lakadong Turmeric (Haridra)",
+                "samples": 41,
+                "confidence": 1
+              },
+              "right": {
+                "type": "leaf",
+                "prediction": "Haritaki (Terminalia chebula)",
+                "samples": 72,
+                "confidence": 0.5
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "prediction": "Authentic Guduchi / Giloy",
+              "samples": 41,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    }
+  ]
+}

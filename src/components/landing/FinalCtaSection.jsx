@@ -75,7 +75,7 @@ export default function FinalCtaSection() {
         <div className="pt-4 flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-[#8A968E]">
           <span>✓ ISO-17025 Ready</span>
           <span>✓ ESP32 Firmware Source</span>
-          <span>✓ MERN + MongoDB Atlas</span>
+          <span>✓ ISO-17025 Encrypted Cloud Ledger</span>
         </div>
       </div>
     </section>

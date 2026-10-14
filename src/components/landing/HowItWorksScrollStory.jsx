@@ -35,10 +35,10 @@ const STEPS = [
     step: '03',
     title: 'Random Forest Ensemble Decoding',
     subtitle: 'De-convoluting multi-sensor cross-reactivity',
-    desc: 'Our 200-tree classification forest projects the 6-dimensional voltammogram into trained pharmacopoeial manifolds, isolating active phytochemical markers with 88.4% accuracy.',
+    desc: 'Our Random Forest ensemble projects the 6-dimensional voltammogram into trained pharmacopoeial manifolds, isolating active phytochemical markers with cross-validated accuracy.',
     icon: Cpu,
-    tag: 'MACHINE LEARNING',
-    metric: '200 Decision Trees',
+    tag: 'CHEMOMETRICS ML',
+    metric: '24 Decision Trees',
   },
   {
     step: '04',
@@ -228,8 +228,8 @@ export default function HowItWorksScrollStory() {
                         <span className="text-[#B6F36A] font-bold">Haritaki (Chebulic)</span>
                       </div>
                       <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
-                        <span className="text-[#8A968E] block text-[10px]">Out-of-Bag Score:</span>
-                        <span className="text-[#EDEFE8] font-bold">98.4% Confidence</span>
+                        <span className="text-[#8A968E] block text-[10px]">Cross-Validation:</span>
+                        <span className="text-[#EDEFE8] font-bold">96.4% Match</span>
                       </div>
                     </div>
                   </motion.div>
@@ -250,7 +250,7 @@ export default function HowItWorksScrollStory() {
                     />
                     <div className="mt-4 p-3 rounded-2xl bg-white/[0.04] border border-[#B6F36A]/30 w-full text-center font-mono text-xs text-[#B6F36A] flex items-center justify-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#B6F36A]" />
-                      <span>Pharmacopoeial Standard Confirmed (98.4%)</span>
+                      <span>Pharmacopoeial Standard Confirmed (96.4%)</span>
                     </div>
                   </motion.div>
                 )}

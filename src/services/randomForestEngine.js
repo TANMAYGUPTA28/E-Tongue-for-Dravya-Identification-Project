@@ -341,7 +341,7 @@ export function trainRandomForest(dataset, options = {}) {
     }
   });
 
-  const oobAccuracy = oobTotal > 0 ? ((oobCorrect / oobTotal) * 100).toFixed(1) : 98.4;
+  const oobAccuracy = oobTotal > 0 ? parseFloat(((oobCorrect / oobTotal) * 100).toFixed(1)) : null;
 
   const totalImp = featureImportances.reduce((a, b) => a + b, 0) || 1;
   const normalizedImportance = featureImportances.map((val) =>

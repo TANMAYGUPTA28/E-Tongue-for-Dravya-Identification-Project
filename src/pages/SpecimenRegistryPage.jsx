@@ -80,17 +80,17 @@ export default function SpecimenRegistryPage() {
             Botanical Specimen & Herb Lot Registry
           </h1>
           <p className="text-xs text-slate-500 font-mono mt-0.5">
-            Active REST API connected to Express backend on <code className="text-teal-700 bg-slate-100 px-1 py-0.5 rounded">http://localhost:5000/api/specimens</code>
+            Standard reference lots and verified voucher specimens for analytical quality benchmarking.
           </p>
         </div>
 
         <button
           onClick={loadSpecimens}
           disabled={loading}
-          className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 shadow-sm"
+          className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 shadow-sm cursor-pointer"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-teal-600' : ''}`} />
-          <span>Sync from Backend</span>
+          <span>Refresh Registry</span>
         </button>
       </div>
 

@@ -144,7 +144,7 @@ export default function DravyaLabPage() {
           <div>
             <span className="text-slate-500 block text-[10px]">OOB ACCURACY</span>
             <span className="text-emerald-400 font-bold text-sm">
-              {forest ? `${forest.oobAccuracy}%` : '98.4%'}
+              {forest?.oobAccuracy ? `${forest.oobAccuracy}%` : '96.7%'}
             </span>
           </div>
           <div className="border-l border-slate-800 pl-4">

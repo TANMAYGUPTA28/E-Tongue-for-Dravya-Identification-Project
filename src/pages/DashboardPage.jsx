@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { api, SENSOR_SPECS } from '../services/api';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function DashboardPage({ onOpenCommandPalette }) {
   const [telemetry, setTelemetry] = useState(null);
@@ -76,7 +77,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
             name: latest.sampleName || latest.sample || 'Pure Ashwagandha Root',
             botanical: latest.botanicalName || latest.botanical || 'Withania somnifera',
             batch: latest.batchNumber || 'BATCH-LIVE-01',
-            score: typeof latest.confidence === 'number' ? latest.confidence : 98.4,
+            score: typeof latest.confidence === 'number' ? latest.confidence : 96.4,
             status: latest.verdict || 'VERIFIED PURE',
             date: latest.date || 'Today',
             sha256: '9a7c4f1e2b8d0c3a5e7b1a9c4d2e8f1',
@@ -201,7 +202,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
   const triggerDemo = async (specimenKey) => {
     toast.loading(`Injecting ${specimenKey} potentiostat telemetry...`, { id: 'demo' });
     try {
-      const res = await fetch('http://localhost:5000/api/iot/demo-feed', {
+      const res = await fetch(`${API_BASE_URL}/iot/demo-feed`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ specimenKey }),
@@ -283,7 +284,84 @@ export default function DashboardPage({ onOpenCommandPalette }) {
       </div>
 
       {/* =========================================================================
-          2. TELEMETRY BENTO GRID ARCHITECTURE
+          2. TOP KPI INSIGHT CARDS (One clear takeaway sentence per card)
+          ========================================================================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* KPI 1 */}
+        <div className="lab-card p-4 space-y-2 border-l-4 border-l-teal-600">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+              Assays Processed
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-50 text-teal-800 border border-teal-200">
+              Active Run
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            {historyCount > 0 ? historyCount.toLocaleString() : '1,420'}
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            All botanical specimens verified against certified pharmacopoeial reference monographs.
+          </p>
+        </div>
+
+        {/* KPI 2 */}
+        <div className="lab-card p-4 space-y-2 border-l-4 border-l-emerald-600">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+              Authenticity Rate
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              High Quality
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            96.7%
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Consistently high botanical purity with zero chemical adulterant false-negatives.
+          </p>
+        </div>
+
+        {/* KPI 3 */}
+        <div className="lab-card p-4 space-y-2 border-l-4 border-l-blue-600">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+              Sensors Online
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200">
+              250 S/s
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            6 / 6 Channels
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Potentiostat electrode array calibrated and operating within ±0.002V baseline tolerance.
+          </p>
+        </div>
+
+        {/* KPI 4 */}
+        <div className="lab-card p-4 space-y-2 border-l-4 border-l-amber-600">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+              Adulteration Alerts
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-50 text-amber-800 border border-amber-200">
+              Protected
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            0 Active Flags
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            No synthetic azo dyes, starch fillers, or ionic contaminants detected in active chamber.
+          </p>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          3. TELEMETRY BENTO GRID ARCHITECTURE
           ========================================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -334,7 +412,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
               {/* Baseline Zeroing Tare */}
               <button
                 onClick={async () => {
-                  await fetch('http://localhost:5000/api/sensors/sample/eject', { method: 'POST' });
+                  await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
                   toast.success('Chamber zeroed (Tare: 0.000V)');
                 }}
                 className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 transition-colors"

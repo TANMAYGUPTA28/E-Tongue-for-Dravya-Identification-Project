@@ -24,7 +24,7 @@ const KEYWORD_MARQUEE = [
   'ESP32 POTENTIOSTAT',
   'SUB-15S RAPID ASSAY',
   'PHARMACOPOEIA COMPLIANT',
-  'MONGODB ATLAS VAULT',
+  'COMPLIANCE AUDIT VAULT',
   'NERNSTIAN TRANSDUCTION',
 ];
 
@@ -110,8 +110,8 @@ export default function HeroSection({ onStartAnalysis }) {
           {/* Micro Specs Strip */}
           <div className="grid grid-cols-3 gap-4 pt-4 max-w-lg border-t border-white/[0.08] font-mono text-xs">
             <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#EDEFE8] block tabular-nums">88.4%</span>
-              <span className="text-[10px] text-[#8A968E] uppercase tracking-wider">OOB Accuracy</span>
+              <span className="text-xl sm:text-2xl font-bold text-[#EDEFE8] block tabular-nums">96.7%</span>
+              <span className="text-[10px] text-[#8A968E] uppercase tracking-wider">CV Test Accuracy</span>
             </div>
             <div>
               <span className="text-xl sm:text-2xl font-bold text-[#B6F36A] block tabular-nums">6 Channels</span>

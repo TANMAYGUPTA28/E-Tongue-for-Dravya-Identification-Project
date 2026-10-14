@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
 
 export default function ConfidenceRing({
-  percentage = 88.4,
+  percentage = 96.4,
   size = 140,
   strokeWidth = 10,
   label = 'Authenticity Match',
   color = '#B6F36A',
   className = '',
 }) {
+  const isAvailable = typeof percentage === 'number' && !isNaN(percentage);
+  const displayPct = isAvailable ? percentage : 0;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const strokeDashoffset = isAvailable ? circumference - (displayPct / 100) * circumference : circumference;
 
   return (
     <div className={`relative flex flex-col items-center justify-center ${className}`}>
@@ -45,12 +47,12 @@ export default function ConfidenceRing({
         </svg>
 
         {/* Center Percentage Display */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="font-mono text-2xl font-bold tracking-tight text-[#EDEFE8]">
-            {percentage}%
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-1">
+          <span className="font-mono text-xl sm:text-2xl font-bold tracking-tight text-[#EDEFE8]">
+            {isAvailable ? `${displayPct}%` : 'Not enough data yet'}
           </span>
           <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A968E]">
-            CONFIDENCE
+            {isAvailable ? 'CONFIDENCE' : 'ESTIMATE'}
           </span>
         </div>
       </div>

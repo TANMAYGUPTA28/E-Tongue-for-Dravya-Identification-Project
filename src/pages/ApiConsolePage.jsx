@@ -11,8 +11,8 @@ const ENDPOINTS = [
     sampleResponse: {
       status: 'UP',
       components: {
-        potentiostatHardware: { status: 'UP', details: { port: 'COM5', baud: 115200 } },
-        randomForestEngine: { status: 'UP', details: { trees: 20, oobAccuracy: 98.4 } },
+        potentiostatHardware: { status: 'UP', details: { port: 'COM3', baud: 115200 } },
+        randomForestEngine: { status: 'UP', details: { trees: 24, accuracy: 96.7 } },
         shadRasaElectrodeArray: { status: 'UP', details: { activeChannels: 6 } },
       },
     },

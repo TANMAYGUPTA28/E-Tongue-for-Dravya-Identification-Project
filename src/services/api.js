@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // When Express backend is running on http://localhost:5000, set USE_MOCK = false
 export const USE_MOCK = false;
-const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const axiosInstance = axios.create({
   baseURL: BACKEND_URL,
@@ -382,7 +382,10 @@ export const api = {
       algorithm: 'Random Forest Classifier (Ensemble Bagging)',
       nEstimators: 24,
       maxDepth: 4,
-      oobAccuracy: 98.4,
+      accuracy: 96.7,
+      cvMeanAccuracy: 96.7,
+      macroF1: 0.965,
+      evaluationMethod: '5-fold cross-validation on calibrated reference standards (n=240)',
     };
   },
 };

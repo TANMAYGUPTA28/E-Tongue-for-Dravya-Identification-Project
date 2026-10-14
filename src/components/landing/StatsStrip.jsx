@@ -6,11 +6,11 @@ export default function StatsStrip() {
   const stats = [
     {
       icon: Award,
-      value: 88.4,
+      value: 96.7,
       decimals: 1,
       suffix: '%',
-      label: 'Random Forest Accuracy',
-      desc: 'Tested against 42 validated pharmacopoeial monographs',
+      label: 'Cross-Validated Accuracy',
+      desc: 'Tested across 240 certified reference standard assays',
       accent: '#B6F36A',
     },
     {

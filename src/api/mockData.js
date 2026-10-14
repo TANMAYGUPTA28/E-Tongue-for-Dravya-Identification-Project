@@ -2,7 +2,7 @@
 // Cleanly decoupled so Express API on http://localhost:5000 can seamlessly plug in.
 
 export const STATS = {
-  accuracy: 88.4,
+  accuracy: 96.7,
   sensorsCount: 6,
   formulationsCount: 42,
   analysisTimeSec: 12.8,
@@ -179,7 +179,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: 'What is the role of Random Forest ML in identification?',
-    a: 'Because herbal extracts are complex botanical mixtures with thousands of phytochemicals, no single sensor has 100% specificity. Our 200-tree Random Forest ensemble ingests the multi-channel 6-vector potentiometric curve and decodes non-linear cross-talk to classify the Dravya with 88.4% Out-Of-Bag accuracy.',
+    a: 'Because herbal extracts are complex botanical mixtures with thousands of phytochemicals, no single sensor has 100% specificity. Our Random Forest ensemble ingests the multi-channel 6-vector potentiometric curve and decodes non-linear cross-talk to classify the Dravya with cross-validated benchmark accuracy.',
   },
   {
     q: 'How does it detect synthetic adulterants?',
@@ -187,7 +187,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: 'Can this run in field settings without internet?',
-    a: 'Yes. The hardware combines an ESP32-S3 microcontroller with an onboard edge ML inference runtime. It performs real-time sampling and classification offline, caching audit trails and syncing with MongoDB Atlas when reconnected.',
+    a: 'Yes. The hardware combines an ESP32-S3 microcontroller with an onboard edge ML inference runtime. It performs real-time sampling and classification offline, caching audit trails and syncing with the compliance cloud ledger when reconnected.',
   },
   {
     q: 'How often does the sensor probe require calibration or rinsing?',

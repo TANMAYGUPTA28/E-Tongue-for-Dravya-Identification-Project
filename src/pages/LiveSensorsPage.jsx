@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Activity, Play, Pause, RotateCcw, Sliders, ShieldCheck } from 'lucide-react';
 import { api, SENSOR_SPECS } from '../services/api';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function LiveSensorsPage() {
   const [telemetry, setTelemetry] = useState(null);
@@ -171,49 +172,49 @@ export default function LiveSensorsPage() {
             <span className="text-[11px] text-slate-400 mr-1">Immerse Sample:</span>
             <button
               onClick={async () => {
-                await fetch('http://localhost:5000/api/sample/select', {
+                await fetch(`${API_BASE_URL}/sample/select`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ sampleId: 'smp-ashwagandha' }),
                 });
                 toast.success('Electrodes dipped in Pure Ashwagandha Extract');
               }}
-              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs"
+              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs cursor-pointer"
             >
               Ashwagandha
             </button>
             <button
               onClick={async () => {
-                await fetch('http://localhost:5000/api/sample/select', {
+                await fetch(`${API_BASE_URL}/sample/select`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ sampleId: 'smp-haritaki' }),
                 });
                 toast.success('Electrodes dipped in Haritaki Decoction');
               }}
-              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs"
+              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs cursor-pointer"
             >
               Haritaki
             </button>
             <button
               onClick={async () => {
-                await fetch('http://localhost:5000/api/sample/select', {
+                await fetch(`${API_BASE_URL}/sample/select`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ sampleId: 'smp-turmeric' }),
                 });
                 toast.success('Electrodes dipped in Lakadong Turmeric');
               }}
-              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs"
+              className="px-2 py-1 rounded bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-sans text-xs shadow-xs cursor-pointer"
             >
               Turmeric
             </button>
             <button
               onClick={async () => {
-                await fetch('http://localhost:5000/api/sensors/sample/eject', { method: 'POST' });
+                await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
                 toast.success('Electrodes rinsed with Deionized Water (0.00 V)');
               }}
-              className="px-2 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-sans text-xs font-semibold"
+              className="px-2 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-sans text-xs font-semibold cursor-pointer"
             >
               💧 Rinse (0.00V)
             </button>

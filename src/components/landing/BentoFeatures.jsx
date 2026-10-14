@@ -183,7 +183,7 @@ export default function BentoFeatures() {
             ) : (
               <>
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Passes Ayurvedic Pharmacopoeia (98.4%)</span>
+                <span>Passes Ayurvedic Pharmacopoeia (96.4%)</span>
               </>
             )}
           </div>
@@ -244,7 +244,7 @@ export default function BentoFeatures() {
           </div>
 
           <div className="flex items-center justify-between font-mono text-xs text-[#8A968E] pt-2 border-t border-white/5">
-            <span>Indexed in MongoDB Atlas database</span>
+            <span>Indexed in certified pharmacopoeial registry</span>
             <a href="#library" className="text-[#B6F36A] hover:underline flex items-center gap-1">
               <span>View Full Library</span>
               <ArrowRight className="w-3 h-3" />
@@ -288,7 +288,7 @@ export default function BentoFeatures() {
             </div>
             <div className="grid grid-cols-2 gap-2 text-[10px] text-[#8A968E] pt-1">
               <div>Sample Lot: ET-9924-A</div>
-              <div>OOB Confidence: 98.4%</div>
+              <div>Certified Match: 96.4%</div>
               <div>Adulteration: 0.00%</div>
               <div>Tannin Peak: 3.22V</div>
             </div>
@@ -306,7 +306,7 @@ export default function BentoFeatures() {
                 Edge-to-Cloud Data Pipeline
               </h3>
               <span className="text-xs text-[#8A968E] font-mono">
-                ESP32 UART ➔ Raspberry Pi ➔ MongoDB Atlas
+                ESP32 Sensor ➔ Edge Gateway ➔ Secure Cloud Vault
               </span>
             </div>
           </div>
@@ -335,7 +335,7 @@ export default function BentoFeatures() {
 
             <div className="flex-1 px-3 flex items-center justify-center">
               <div className="w-full h-0.5 bg-gradient-to-r from-[#E0A03A] to-[#38BDF8] relative animate-pulse">
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] text-[#8A968E]">REST / WS</span>
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] text-[#8A968E]">Telemetry</span>
               </div>
             </div>
 
@@ -343,7 +343,7 @@ export default function BentoFeatures() {
               <div className="w-10 h-10 mx-auto rounded-xl bg-[#0C1711] border border-white/10 flex items-center justify-center text-[#38BDF8]">
                 <Cloud className="w-5 h-5" />
               </div>
-              <span className="block text-[10px] text-[#8A968E]">Mongo Atlas</span>
+              <span className="block text-[10px] text-[#8A968E]">Cloud Vault</span>
             </div>
           </div>
         </SpotlightCard>

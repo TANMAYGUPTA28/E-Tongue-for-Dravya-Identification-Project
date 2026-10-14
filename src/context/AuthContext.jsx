@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { API_BASE_URL, mapErrorMessage } from '../services/apiClient';
 
 const AuthContext = createContext(null);
 
@@ -31,67 +32,83 @@ export function AuthProvider({ children }) {
   });
 
   const sendOtp = async (email) => {
-    const res = await fetch('http://localhost:5000/api/auth/send-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Failed to dispatch verification code');
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to dispatch verification code');
+      }
+      return data;
+    } catch (err) {
+      throw new Error(mapErrorMessage(err));
     }
-    return data;
   };
 
   const verifyOtp = async (email, otp) => {
-    const res = await fetch('http://localhost:5000/api/auth/verify-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, otp }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'OTP verification failed');
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Verification code failed');
+      }
+      return data;
+    } catch (err) {
+      throw new Error(mapErrorMessage(err));
     }
-    return data;
   };
 
   const login = async (email, password) => {
-    const res = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Laboratory authentication failed');
-    }
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Authentication failed');
+      }
 
-    setUser(data.user);
-    setToken(data.token);
-    localStorage.setItem('etongue_user', JSON.stringify(data.user));
-    localStorage.setItem('etongue_token', data.token);
-    toast.success(`Welcome back, ${data.user.name}!`);
-    return true;
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem('etongue_user', JSON.stringify(data.user));
+      localStorage.setItem('etongue_token', data.token);
+      toast.success(`Welcome back, ${data.user.name}!`);
+      return true;
+    } catch (err) {
+      throw new Error(mapErrorMessage(err));
+    }
   };
 
   const signup = async (name, email, password, role, institution, otp) => {
-    const res = await fetch('http://localhost:5000/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password, role, institution, otp }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Sign up registration failed');
-    }
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role, institution, otp }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
 
-    setUser(data.user);
-    setToken(data.token);
-    localStorage.setItem('etongue_user', JSON.stringify(data.user));
-    localStorage.setItem('etongue_token', data.token);
-    toast.success(`Account registered for ${data.user.name}`);
-    return true;
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem('etongue_user', JSON.stringify(data.user));
+      localStorage.setItem('etongue_token', data.token);
+      toast.success(`Account registered for ${data.user.name}`);
+      return true;
+    } catch (err) {
+      throw new Error(mapErrorMessage(err));
+    }
   };
 
   const logout = () => {

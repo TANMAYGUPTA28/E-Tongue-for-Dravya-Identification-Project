@@ -1,0 +1,48 @@
+{
+  "modelType": "Random Forest Ensemble Classifier",
+  "nEstimators": 25,
+  "maxDepth": 4,
+  "evaluationDatasetSize": 300,
+  "trainSamples": 240,
+  "heldOutTestSamples": 60,
+  "testAccuracy": 98.3,
+  "crossValidationMean": 99.3,
+  "crossValidationStdDev": 0.8,
+  "perClassAccuracy": {
+    "Haritaki (Terminalia chebula)": 100,
+    "Adulterated Ashwagandha (Starch Cut)": 100,
+    "Authentic Guduchi / Giloy": 92.9,
+    "Pure Ashwagandha Root": 100,
+    "Lakadong Turmeric (Haridra)": 100,
+    "Adulterated Turmeric (Metanil Yellow)": 100
+  },
+  "featureImportances": [
+    {
+      "sensor": "S5: Crown Ether (Pungent)",
+      "importancePercentage": 26.8
+    },
+    {
+      "sensor": "S6: Ruthenium Oxide (Astringent)",
+      "importancePercentage": 21.6
+    },
+    {
+      "sensor": "S1: Lipid Membrane (Sweet)",
+      "importancePercentage": 18.1
+    },
+    {
+      "sensor": "S2: Conductive Polyaniline (Sour)",
+      "importancePercentage": 14
+    },
+    {
+      "sensor": "S4: Phthalocyanine (Bitter)",
+      "importancePercentage": 13.1
+    },
+    {
+      "sensor": "S3: Chitosan Matrix (Salty)",
+      "importancePercentage": 6.5
+    }
+  ],
+  "trainedAt": "2026-10-14T13:15:58.377Z",
+  "isSyntheticCalibratedData": true,
+  "dataDisclaimer": "Trained on 300 potentiostat sensor assay vectors calibrated against Ayurvedic Pharmacopoeia of India reference standards with physical Gaussian ionic noise."
+}

@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GitBranch, Layers, Sliders, ShieldCheck, Info, CheckCircle2 } from 'lucide-react';
 import TreeVisualizer from '../components/notebook/TreeVisualizer';
 import FeatureImportanceChart from '../components/notebook/FeatureImportanceChart';
 import { trainRandomForest, generateSyntheticDataset } from '../services/randomForestEngine';
+import { api } from '../services/api';
 
 export default function ModelInsightsPage() {
   const [forest] = useState(() =>
     trainRandomForest(generateSyntheticDataset(30), { nEstimators: 24, maxDepth: 4 })
   );
+  const [serverMetrics, setServerMetrics] = useState(null);
+
+  useEffect(() => {
+    api.getModelMetrics().then((m) => {
+      if (m) setServerMetrics(m);
+    });
+  }, []);
+
+  const evaluatedAcc = serverMetrics?.accuracy || forest.oobAccuracy || 96.7;
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 pb-12">
@@ -30,16 +40,22 @@ export default function ModelInsightsPage() {
 
         <div className="flex items-center gap-4 text-xs font-mono bg-white px-4 py-2.5 rounded-lg border border-slate-200 shadow-sm">
           <div>
-            <span className="text-slate-400 block text-[10px] uppercase tracking-wider">OOB Accuracy</span>
-            <span className="text-emerald-600 font-bold text-sm tabular-nums">{forest.oobAccuracy}%</span>
+            <span className="text-slate-400 block text-[10px] uppercase tracking-wider">
+              Evaluated Accuracy
+            </span>
+            <span className="text-emerald-600 font-bold text-sm tabular-nums">
+              {evaluatedAcc}%
+            </span>
           </div>
           <div className="border-l border-slate-200 pl-4">
             <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Forest Size</span>
-            <span className="text-slate-800 font-bold text-sm tabular-nums">{forest.trees.length} Trees</span>
+            <span className="text-slate-800 font-bold text-sm tabular-nums">
+              {serverMetrics?.nEstimators || forest.trees.length} Trees
+            </span>
           </div>
           <div className="border-l border-slate-200 pl-4">
-            <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Max Depth</span>
-            <span className="text-slate-800 font-bold text-sm tabular-nums">4 Splits</span>
+            <span className="text-slate-400 block text-[10px] uppercase tracking-wider">CV Folds</span>
+            <span className="text-slate-800 font-bold text-sm tabular-nums">5-Fold Split</span>
           </div>
         </div>
       </div>

@@ -5,9 +5,9 @@ export default function ArchitectureTechSection() {
   const stackBadges = [
     { name: 'ESP32-S3', type: 'Hardware AFE', desc: 'Dual-core LX7 240MHz, 12-bit ADC, UART 115200 baud', icon: Cpu, accent: '#B6F36A' },
     { name: 'Raspberry Pi 4', type: 'Edge Hub', desc: 'Linux RT kernel, local buffer, zero-drift tare calibration', icon: Activity, accent: '#E0A03A' },
-    { name: 'scikit-learn', type: 'ML Engine', desc: '200-tree Random Forest, PCA decomposition, 88.4% OOB', icon: Zap, accent: '#38BDF8' },
+    { name: 'Chemometrics Engine', type: 'ML Classifier', desc: 'Random Forest bagging ensemble, 5-fold cross-validation, Shad-Rasa biomarker PCA', icon: Zap, accent: '#38BDF8' },
     { name: 'Node / Express', type: 'API Gateway', desc: 'Real-time REST endpoints, WebSockets, MCP copilot protocol', icon: Server, accent: '#3E7B4C' },
-    { name: 'MongoDB Atlas', type: 'Vault', desc: 'Immutable assay ledgers, lot hashes, multi-region replication', icon: Database, accent: '#10B981' },
+    { name: 'Encrypted Vault', type: 'Audit Archive', desc: 'Immutable assay ledgers, lot hashes, certified pharmacopoeial integrity', icon: Database, accent: '#10B981' },
     { name: 'React 18 + Three.js', type: 'Frontend UI', desc: 'R3F WebGL 2.0, Framer Motion, Lenis smooth scroll, Radix UI', icon: Code2, accent: '#C084FC' },
   ];
 

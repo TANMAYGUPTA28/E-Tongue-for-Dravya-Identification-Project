@@ -225,7 +225,7 @@ export default function LoginPage() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#B6F36A]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#B6F36A] animate-pulse" />
-              <span>{isSignUp ? '2-FACTOR ANALYST REGISTRATION' : 'LABORATORY AUTHENTICATION (JWT)'}</span>
+              <span>{isSignUp ? 'TWO-FACTOR ANALYST REGISTRATION' : 'LABORATORY CLEARANCE AUTHENTICATION'}</span>
             </div>
             <h1 className="font-display-hero text-3xl sm:text-5xl text-[#EDEFE8]">
               {isSignUp ? 'Create Clearance' : 'Enter Workstation'}
@@ -235,23 +235,13 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Dev OTP Helper Banner */}
-          {devOtpHint && (
+          {/* Verification Code Notice */}
+          {otpSent && (
             <div className="p-3.5 rounded-2xl bg-[#B6F36A]/10 border border-[#B6F36A]/30 text-[#B6F36A] text-xs font-mono flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <KeyRound className="w-4 h-4 animate-bounce" />
-                <span>Dispatched Lab OTP: <strong className="text-white tracking-widest text-sm bg-black/40 px-2 py-0.5 rounded">{devOtpHint}</strong></span>
+                <KeyRound className="w-4 h-4" />
+                <span>Verification code dispatched to your inbox. Please enter the 6 digits below.</span>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setOtpValues(devOtpHint.split(''));
-                  toast.success('OTP auto-filled');
-                }}
-                className="text-[11px] underline hover:text-white cursor-pointer"
-              >
-                Auto-fill
-              </button>
             </div>
           )}
 
@@ -422,7 +412,7 @@ export default function LoginPage() {
               disabled={loading || (domainCheck && !domainCheck.valid)}
               className="w-full mt-2 py-3.5 rounded-full bg-[#B6F36A] hover:bg-[#cbfb88] disabled:bg-[#3E7B4C]/40 disabled:text-[#8A968E] text-[#07100B] font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(182,243,106,0.35)] transition-all cursor-pointer"
             >
-              <span>{loading ? 'Authenticating...' : isSignUp ? 'Verify OTP & Create Credentials' : 'Sign In with JWT'}</span>
+              <span>{loading ? 'Authenticating...' : isSignUp ? 'Verify Code & Create Clearance' : 'Sign In to Workstation'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
@@ -437,10 +427,10 @@ export default function LoginPage() {
                 className="w-full py-3 rounded-full bg-[#E0A03A]/15 hover:bg-[#E0A03A]/25 border border-[#E0A03A]/30 text-[#E0A03A] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(224,160,58,0.15)]"
               >
                 <Zap className="w-3.5 h-3.5" />
-                <span>One-Click Hackathon Access (Tanmay Gupta)</span>
+                <span>Quick Laboratory Demo Access (Preset Analyst)</span>
               </button>
               <p className="text-[10px] text-[#8A968E] font-mono text-center mt-2">
-                Instant clearance • Zero credentials stored in DOM • Real JWT Session
+                Pre-configured laboratory analyst profile for testing and evaluation.
               </p>
             </div>
           )}
@@ -482,7 +472,7 @@ export default function LoginPage() {
         {/* Footer Security Badge */}
         <div className="flex items-center gap-2 text-[#8A968E] font-mono text-xs">
           <ShieldCheck className="w-4 h-4 text-[#B6F36A]" />
-          <span>Secured with ISO-17025, HMAC-SHA256 JWT, & Whitelisted Institutional TLS</span>
+          <span>Compliant with ISO-17025 Standards & Institutional Access Controls</span>
         </div>
       </div>
 
@@ -496,9 +486,9 @@ export default function LoginPage() {
         <div className="flex items-center justify-between font-mono text-xs text-[#8A968E] z-10">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#B6F36A] animate-ping" />
-            <span className="text-[#EDEFE8] font-bold">AFE POTENTIOSTAT MATRIX</span>
+            <span className="text-[#EDEFE8] font-bold">ELECTROCHEMICAL SENSOR ARRAY</span>
           </div>
-          <span>250 S/s INGESTION</span>
+          <span>REAL-TIME STREAMING</span>
         </div>
 
         {/* Centerpiece Quotation & Graphic */}
@@ -519,12 +509,12 @@ export default function LoginPage() {
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 font-mono text-xs">
             <div>
-              <span className="text-2xl font-bold text-[#EDEFE8] block tabular-nums">98.4%</span>
-              <span className="text-[10px] text-[#8A968E] uppercase">RF Accuracy</span>
+              <span className="text-2xl font-bold text-[#EDEFE8] block tabular-nums">Evaluated</span>
+              <span className="text-[10px] text-[#8A968E] uppercase">Cross-Validated</span>
             </div>
             <div>
-              <span className="text-2xl font-bold text-[#B6F36A] block tabular-nums">JWT + OTP</span>
-              <span className="text-[10px] text-[#8A968E] uppercase">2-Factor Auth</span>
+              <span className="text-2xl font-bold text-[#B6F36A] block tabular-nums">2-Factor</span>
+              <span className="text-[10px] text-[#8A968E] uppercase">Verification</span>
             </div>
             <div>
               <span className="text-2xl font-bold text-[#E0A03A] block tabular-nums">&lt; 15s</span>
@@ -536,7 +526,7 @@ export default function LoginPage() {
         {/* Bottom Status */}
         <div className="font-mono text-[11px] text-[#4F5B53] z-10 flex items-center justify-between">
           <span>Biomimetic Olfactory & Gustatory AI Lab</span>
-          <span>E-Tongue Workstation v3.2</span>
+          <span>Dravya 6000 Workstation</span>
         </div>
       </div>
     </div>

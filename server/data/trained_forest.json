@@ -1,0 +1,1860 @@
+{
+  "trees": [
+    {
+      "id": 1,
+      "root": {
+        "type": "internal",
+        "featureIndex": 3,
+        "threshold": 0.292,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 0.602,
+          "samples": 48,
+          "left": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "honey_syrup",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 25,
+            "prediction": "honey_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 1.028,
+          "samples": 128,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 1.752,
+            "samples": 101,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 2.54,
+              "samples": 79,
+              "left": {
+                "type": "leaf",
+                "samples": 39,
+                "prediction": "turmeric_pure",
+                "confidence": 53.8
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 40,
+                "prediction": "ashwagandha_pure",
+                "confidence": 57.5
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 22,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 0.765,
+            "samples": 27,
+            "left": {
+              "type": "leaf",
+              "samples": 26,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "haritaki_pure",
+              "confidence": 100
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 0.319,
+        "samples": 176,
+        "left": {
+          "type": "leaf",
+          "samples": 33,
+          "prediction": "honey_syrup",
+          "confidence": 100
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 0.918,
+          "samples": 143,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 0.502,
+            "samples": 100,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.664,
+              "samples": 75,
+              "left": {
+                "type": "leaf",
+                "samples": 25,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 50,
+                "prediction": "guduchi_pure",
+                "confidence": 40
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.615,
+            "samples": 43,
+            "left": {
+              "type": "leaf",
+              "samples": 27,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 16,
+              "prediction": "haritaki_pure",
+              "confidence": 100
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 0.991,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 2.237,
+          "samples": 108,
+          "left": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 1.395,
+            "samples": 83,
+            "left": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 1.617,
+              "samples": 60,
+              "left": {
+                "type": "leaf",
+                "samples": 39,
+                "prediction": "ashwagandha_pure",
+                "confidence": 51.3
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "haritaki_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 25,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 1.945,
+          "samples": 68,
+          "left": {
+            "type": "leaf",
+            "samples": 32,
+            "prediction": "ashwagandha_adulterated",
+            "confidence": 100
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.424,
+            "samples": 36,
+            "left": {
+              "type": "leaf",
+              "samples": 21,
+              "prediction": "honey_syrup",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.633,
+              "samples": 15,
+              "left": {
+                "type": "leaf",
+                "samples": 1,
+                "prediction": "honey_syrup",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 14,
+                "prediction": "honey_pure",
+                "confidence": 100
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 0.317,
+        "samples": 176,
+        "left": {
+          "type": "leaf",
+          "samples": 26,
+          "prediction": "honey_syrup",
+          "confidence": 100
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 2.647,
+          "samples": 150,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.573,
+            "samples": 125,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 2.992,
+              "samples": 63,
+              "left": {
+                "type": "leaf",
+                "samples": 41,
+                "prediction": "guduchi_pure",
+                "confidence": 56.1
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.807,
+              "samples": 62,
+              "left": {
+                "type": "leaf",
+                "samples": 25,
+                "prediction": "ashwagandha_pure",
+                "confidence": 96
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 37,
+                "prediction": "honey_pure",
+                "confidence": 51.4
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 25,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.533,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.092,
+          "samples": 152,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.979,
+            "samples": 129,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 1.945,
+              "samples": 106,
+              "left": {
+                "type": "leaf",
+                "samples": 62,
+                "prediction": "guduchi_pure",
+                "confidence": 35.5
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 44,
+                "prediction": "honey_pure",
+                "confidence": 54.5
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "ashwagandha_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 24,
+          "prediction": "haritaki_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 6,
+      "root": {
+        "type": "internal",
+        "featureIndex": 2,
+        "threshold": 2.377,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.412,
+          "samples": 147,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.448,
+            "samples": 28,
+            "left": {
+              "type": "leaf",
+              "samples": 27,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "turmeric_pure",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.608,
+            "samples": 119,
+            "left": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 2,
+              "threshold": 0.502,
+              "samples": 96,
+              "left": {
+                "type": "leaf",
+                "samples": 74,
+                "prediction": "haritaki_pure",
+                "confidence": 29.7
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 29,
+          "prediction": "turmeric_metanil",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 7,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 0.33,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 0.17,
+          "samples": 29,
+          "left": {
+            "type": "leaf",
+            "samples": 27,
+            "prediction": "honey_syrup",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 2,
+            "prediction": "honey_syrup",
+            "confidence": 50
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 2.392,
+          "samples": 147,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 2.647,
+            "samples": 123,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 1.515,
+              "samples": 101,
+              "left": {
+                "type": "leaf",
+                "samples": 76,
+                "prediction": "guduchi_pure",
+                "confidence": 28.9
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 25,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 22,
+              "prediction": "haritaki_pure",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 24,
+            "prediction": "honey_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 2.973,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.608,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.401,
+            "samples": 69,
+            "left": {
+              "type": "leaf",
+              "samples": 21,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 0.967,
+              "samples": 48,
+              "left": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "turmeric_metanil",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 27,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.726,
+            "samples": 80,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.399,
+              "samples": 23,
+              "left": {
+                "type": "leaf",
+                "samples": 1,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "ashwagandha_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 1.439,
+              "samples": 57,
+              "left": {
+                "type": "leaf",
+                "samples": 37,
+                "prediction": "honey_pure",
+                "confidence": 51.4
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 20,
+                "prediction": "haritaki_pure",
+                "confidence": 100
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 0.425,
+          "samples": 27,
+          "left": {
+            "type": "leaf",
+            "samples": 26,
+            "prediction": "honey_syrup",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 1,
+            "prediction": "honey_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 1.945,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.771,
+          "samples": 122,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 0.765,
+            "samples": 97,
+            "left": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 0.692,
+              "samples": 39,
+              "left": {
+                "type": "leaf",
+                "samples": 19,
+                "prediction": "turmeric_metanil",
+                "confidence": 94.7
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 20,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.696,
+              "samples": 58,
+              "left": {
+                "type": "leaf",
+                "samples": 25,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 33,
+                "prediction": "ashwagandha_pure",
+                "confidence": 54.5
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 25,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 3.008,
+          "samples": 54,
+          "left": {
+            "type": "leaf",
+            "samples": 31,
+            "prediction": "honey_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "honey_syrup",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.535,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.706,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 1.945,
+            "samples": 118,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.931,
+              "samples": 78,
+              "left": {
+                "type": "leaf",
+                "samples": 55,
+                "prediction": "turmeric_pure",
+                "confidence": 36.4
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "ashwagandha_pure",
+                "confidence": 95.7
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 0.236,
+              "samples": 40,
+              "left": {
+                "type": "leaf",
+                "samples": 17,
+                "prediction": "honey_syrup",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "honey_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 31,
+            "prediction": "turmeric_metanil",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 27,
+          "prediction": "haritaki_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 11,
+      "root": {
+        "type": "internal",
+        "featureIndex": 3,
+        "threshold": 2.963,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.803,
+          "samples": 147,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.637,
+            "samples": 117,
+            "left": {
+              "type": "internal",
+              "featureIndex": 2,
+              "threshold": 0.414,
+              "samples": 47,
+              "left": {
+                "type": "leaf",
+                "samples": 26,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "turmeric_metanil",
+                "confidence": 95.2
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 0.256,
+              "samples": 70,
+              "left": {
+                "type": "leaf",
+                "samples": 38,
+                "prediction": "honey_pure",
+                "confidence": 57.9
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 32,
+                "prediction": "ashwagandha_pure",
+                "confidence": 56.3
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 30,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 29,
+          "prediction": "guduchi_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 12,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.495,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.706,
+          "samples": 147,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 1.03,
+            "samples": 119,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 2.782,
+              "samples": 91,
+              "left": {
+                "type": "leaf",
+                "samples": 67,
+                "prediction": "ashwagandha_pure",
+                "confidence": 26.9
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 24,
+                "prediction": "haritaki_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 28,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 28,
+            "prediction": "turmeric_metanil",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 0.414,
+          "samples": 29,
+          "left": {
+            "type": "leaf",
+            "samples": 28,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 1,
+            "prediction": "guduchi_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "root": {
+        "type": "internal",
+        "featureIndex": 0,
+        "threshold": 2.935,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 0.439,
+          "samples": 148,
+          "left": {
+            "type": "leaf",
+            "samples": 28,
+            "prediction": "turmeric_metanil",
+            "confidence": 100
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.622,
+            "samples": 120,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 0.702,
+              "samples": 75,
+              "left": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 52,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 38.5
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 2.86,
+              "samples": 45,
+              "left": {
+                "type": "leaf",
+                "samples": 29,
+                "prediction": "ashwagandha_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 16,
+                "prediction": "guduchi_pure",
+                "confidence": 93.8
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 28,
+          "prediction": "honey_syrup",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 14,
+      "root": {
+        "type": "internal",
+        "featureIndex": 3,
+        "threshold": 2.96,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.03,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.614,
+            "samples": 101,
+            "left": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 2.409,
+              "samples": 78,
+              "left": {
+                "type": "leaf",
+                "samples": 55,
+                "prediction": "honey_syrup",
+                "confidence": 40
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "haritaki_pure",
+                "confidence": 95.7
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 2.361,
+            "samples": 48,
+            "left": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 27,
+          "prediction": "guduchi_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 15,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.498,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.401,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 1.702,
+            "samples": 117,
+            "left": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 2.985,
+              "samples": 93,
+              "left": {
+                "type": "leaf",
+                "samples": 72,
+                "prediction": "ashwagandha_pure",
+                "confidence": 27.8
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "honey_syrup",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 0.754,
+              "samples": 24,
+              "left": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "turmeric_metanil",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 1,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.779,
+            "samples": 32,
+            "left": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "ashwagandha_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 31,
+              "prediction": "haritaki_pure",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 0.359,
+          "samples": 27,
+          "left": {
+            "type": "leaf",
+            "samples": 1,
+            "prediction": "guduchi_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 26,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 2.092,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 1.675,
+          "samples": 127,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 0.667,
+            "samples": 103,
+            "left": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.425,
+              "samples": 57,
+              "left": {
+                "type": "leaf",
+                "samples": 36,
+                "prediction": "guduchi_pure",
+                "confidence": 55.6
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.217,
+              "samples": 46,
+              "left": {
+                "type": "leaf",
+                "samples": 25,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "honey_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 24,
+            "prediction": "turmeric_metanil",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.513,
+          "samples": 49,
+          "left": {
+            "type": "leaf",
+            "samples": 21,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 28,
+            "prediction": "ashwagandha_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 1.927,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.528,
+          "samples": 127,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 1.749,
+            "samples": 101,
+            "left": {
+              "type": "internal",
+              "featureIndex": 2,
+              "threshold": 0.403,
+              "samples": 75,
+              "left": {
+                "type": "leaf",
+                "samples": 51,
+                "prediction": "honey_syrup",
+                "confidence": 35.3
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 24,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 95.8
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 26,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.808,
+            "samples": 26,
+            "left": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "turmeric_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 1,
+          "threshold": 1.621,
+          "samples": 49,
+          "left": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.439,
+            "samples": 31,
+            "left": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 30,
+              "prediction": "ashwagandha_pure",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 18,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.647,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 2.985,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 2.365,
+            "samples": 123,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.109,
+              "samples": 99,
+              "left": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 78,
+                "prediction": "honey_pure",
+                "confidence": 26.9
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 24,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 26,
+            "prediction": "honey_syrup",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 27,
+          "prediction": "haritaki_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 19,
+      "root": {
+        "type": "internal",
+        "featureIndex": 2,
+        "threshold": 2.361,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 2.09,
+          "samples": 151,
+          "left": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 0.853,
+            "samples": 93,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 0.732,
+              "samples": 52,
+              "left": {
+                "type": "leaf",
+                "samples": 29,
+                "prediction": "honey_syrup",
+                "confidence": 51.7
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "honey_pure",
+                "confidence": 95.7
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.401,
+              "samples": 41,
+              "left": {
+                "type": "leaf",
+                "samples": 19,
+                "prediction": "guduchi_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 0,
+            "threshold": 0.805,
+            "samples": 58,
+            "left": {
+              "type": "leaf",
+              "samples": 32,
+              "prediction": "ashwagandha_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 26,
+              "prediction": "haritaki_pure",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 25,
+          "prediction": "turmeric_metanil",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 20,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 2.433,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 2.237,
+          "samples": 142,
+          "left": {
+            "type": "internal",
+            "featureIndex": 1,
+            "threshold": 1.683,
+            "samples": 119,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.921,
+              "samples": 93,
+              "left": {
+                "type": "leaf",
+                "samples": 71,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 29.6
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "ashwagandha_pure",
+                "confidence": 95.5
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 26,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 34,
+          "prediction": "haritaki_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 21,
+      "root": {
+        "type": "internal",
+        "featureIndex": 1,
+        "threshold": 2.534,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 4,
+          "threshold": 1.515,
+          "samples": 151,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.266,
+            "samples": 122,
+            "left": {
+              "type": "internal",
+              "featureIndex": 1,
+              "threshold": 0.49,
+              "samples": 97,
+              "left": {
+                "type": "leaf",
+                "samples": 41,
+                "prediction": "ashwagandha_pure",
+                "confidence": 56.1
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 56,
+                "prediction": "honey_pure",
+                "confidence": 35.7
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 29,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.599,
+          "samples": 25,
+          "left": {
+            "type": "leaf",
+            "samples": 1,
+            "prediction": "turmeric_metanil",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 24,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 2.237,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.526,
+          "samples": 149,
+          "left": {
+            "type": "internal",
+            "featureIndex": 5,
+            "threshold": 1.105,
+            "samples": 45,
+            "left": {
+              "type": "leaf",
+              "samples": 23,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 22,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 2,
+            "threshold": 1.027,
+            "samples": 104,
+            "left": {
+              "type": "internal",
+              "featureIndex": 4,
+              "threshold": 1.023,
+              "samples": 79,
+              "left": {
+                "type": "leaf",
+                "samples": 57,
+                "prediction": "honey_pure",
+                "confidence": 40.4
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 22,
+                "prediction": "ashwagandha_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "leaf",
+          "samples": 27,
+          "prediction": "turmeric_pure",
+          "confidence": 100
+        }
+      }
+    },
+    {
+      "id": 23,
+      "root": {
+        "type": "internal",
+        "featureIndex": 4,
+        "threshold": 1.272,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 2,
+          "threshold": 1.733,
+          "samples": 127,
+          "left": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 0.477,
+            "samples": 101,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 0.285,
+              "samples": 43,
+              "left": {
+                "type": "leaf",
+                "samples": 17,
+                "prediction": "honey_syrup",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 26,
+                "prediction": "honey_pure",
+                "confidence": 100
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 3,
+              "threshold": 1.454,
+              "samples": 58,
+              "left": {
+                "type": "leaf",
+                "samples": 19,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 39,
+                "prediction": "haritaki_pure",
+                "confidence": 51.3
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 0.732,
+            "samples": 26,
+            "left": {
+              "type": "leaf",
+              "samples": 25,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "ashwagandha_adulterated",
+              "confidence": 100
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 5,
+          "threshold": 1.646,
+          "samples": 49,
+          "left": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "turmeric_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "leaf",
+            "samples": 26,
+            "prediction": "guduchi_pure",
+            "confidence": 100
+          }
+        }
+      }
+    },
+    {
+      "id": 24,
+      "root": {
+        "type": "internal",
+        "featureIndex": 5,
+        "threshold": 1.906,
+        "samples": 176,
+        "left": {
+          "type": "internal",
+          "featureIndex": 0,
+          "threshold": 0.582,
+          "samples": 125,
+          "left": {
+            "type": "internal",
+            "featureIndex": 4,
+            "threshold": 1.135,
+            "samples": 65,
+            "left": {
+              "type": "leaf",
+              "samples": 21,
+              "prediction": "turmeric_metanil",
+              "confidence": 100
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 1.712,
+              "samples": 44,
+              "left": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "turmeric_pure",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 21,
+                "prediction": "guduchi_pure",
+                "confidence": 100
+              }
+            }
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 0.283,
+            "samples": 60,
+            "left": {
+              "type": "internal",
+              "featureIndex": 5,
+              "threshold": 0.267,
+              "samples": 35,
+              "left": {
+                "type": "leaf",
+                "samples": 19,
+                "prediction": "honey_syrup",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 16,
+                "prediction": "honey_pure",
+                "confidence": 93.8
+              }
+            },
+            "right": {
+              "type": "internal",
+              "featureIndex": 0,
+              "threshold": 1.938,
+              "samples": 25,
+              "left": {
+                "type": "leaf",
+                "samples": 23,
+                "prediction": "ashwagandha_adulterated",
+                "confidence": 100
+              },
+              "right": {
+                "type": "leaf",
+                "samples": 2,
+                "prediction": "honey_pure",
+                "confidence": 50
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "internal",
+          "featureIndex": 3,
+          "threshold": 2.514,
+          "samples": 51,
+          "left": {
+            "type": "leaf",
+            "samples": 23,
+            "prediction": "haritaki_pure",
+            "confidence": 100
+          },
+          "right": {
+            "type": "internal",
+            "featureIndex": 3,
+            "threshold": 2.981,
+            "samples": 28,
+            "left": {
+              "type": "leaf",
+              "samples": 27,
+              "prediction": "ashwagandha_pure",
+              "confidence": 100
+            },
+            "right": {
+              "type": "leaf",
+              "samples": 1,
+              "prediction": "guduchi_pure",
+              "confidence": 100
+            }
+          }
+        }
+      }
+    }
+  ],
+  "featureImportances": [
+    20.2,
+    16.2,
+    14.6,
+    13.5,
+    11,
+    24.4
+  ]
+}

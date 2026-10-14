@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import ThreeSensorProbeStage from '../components/ThreeSensorProbeStage';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function SpatialWorkstationPage() {
   const [activeSection, setActiveSection] = useState(0);
@@ -58,7 +59,7 @@ export default function SpatialWorkstationPage() {
     toast.loading('Descending Titanium Probe into Dravya Extract...', { id: 'dip' });
 
     try {
-      await fetch('http://localhost:5000/api/iot/demo-feed', {
+      await fetch(`${API_BASE_URL}/iot/demo-feed`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ specimenKey: 'haritaki' }),
@@ -72,20 +73,20 @@ export default function SpatialWorkstationPage() {
 
       setTimeout(() => {
         setActiveSection(3);
-        toast.success('3D Spatial Radar Spider Fingerprint Materialized');
+        toast.success('Spatial Fingerprint Materialized');
       }, 5500);
     } catch (e) {
       toast.dismiss('dip');
-      toast.error('Could not reach backend');
+      toast.error('Unable to connect to sensor feed');
     }
   };
 
   const calibrateArray = async () => {
     toast.loading('Trimming zero offsets across 6 micro-electrodes...', { id: 'cal' });
     try {
-      await fetch('http://localhost:5000/api/sensors/sample/eject', { method: 'POST' });
+      await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
       toast.dismiss('cal');
-      toast.success('3D Array Calibrated: Baseline ΔV = 0.000V');
+      toast.success('Sensor Array Calibrated: Baseline ΔV = 0.000V');
       setIsDipping(false);
       setActiveSection(0);
     } catch (e) {

@@ -17,6 +17,7 @@ import {
   Compass
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../services/apiClient';
 
 export default function CommandPalette({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
@@ -83,7 +84,7 @@ export default function CommandPalette({ isOpen, onClose }) {
       id: 'nav-history',
       category: 'Navigation',
       title: 'Sample Audit History Archive',
-      subtitle: 'MongoDB live ledger with timestamped cryptographic hashes',
+      subtitle: 'Certified laboratory audit ledger with tamper-evident records',
       icon: FileText,
       color: 'text-amber-600 bg-amber-50',
       action: () => navigate('/history'),
@@ -99,7 +100,7 @@ export default function CommandPalette({ isOpen, onClose }) {
       color: 'text-slate-700 bg-slate-100',
       action: async () => {
         try {
-          await fetch('http://localhost:5000/api/sensors/sample/eject', { method: 'POST' });
+          await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
           toast.success('Chamber rinsed: 0.000V baseline restored');
         } catch (e) {
           toast.success('Electrode offset zeroed (Local)');
@@ -116,12 +117,12 @@ export default function CommandPalette({ isOpen, onClose }) {
       action: async () => {
         toast.loading('Streaming Ashwagandha potentiostat vector...', { id: 'cmd' });
         try {
-          await fetch('http://localhost:5000/api/iot/demo-feed', {
+          await fetch(`${API_BASE_URL}/iot/demo-feed`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ specimenKey: 'ashwagandha' }),
           });
-          toast.success('Ashwagandha ingested: 99.8% purity verified', { id: 'cmd' });
+          toast.success('Ashwagandha ingested: Reference profile verified', { id: 'cmd' });
           navigate('/dashboard');
         } catch (e) {
           toast.dismiss('cmd');
@@ -138,12 +139,12 @@ export default function CommandPalette({ isOpen, onClose }) {
       action: async () => {
         toast.loading('Streaming Haritaki potentiostat vector...', { id: 'cmd' });
         try {
-          await fetch('http://localhost:5000/api/iot/demo-feed', {
+          await fetch(`${API_BASE_URL}/iot/demo-feed`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ specimenKey: 'haritaki' }),
           });
-          toast.success('Haritaki ingested: 96.4% purity verified', { id: 'cmd' });
+          toast.success('Haritaki ingested: Reference profile verified', { id: 'cmd' });
           navigate('/dashboard');
         } catch (e) {
           toast.dismiss('cmd');
@@ -160,7 +161,7 @@ export default function CommandPalette({ isOpen, onClose }) {
       action: async () => {
         toast.loading('Simulating adulterated specimen...', { id: 'cmd' });
         try {
-          await fetch('http://localhost:5000/api/iot/demo-feed', {
+          await fetch(`${API_BASE_URL}/iot/demo-feed`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ specimenKey: 'adulterated_dye' }),
