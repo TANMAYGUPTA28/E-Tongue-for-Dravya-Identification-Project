@@ -23,6 +23,8 @@ import { classifySample, SENSOR_INFO } from './services/randomForest.js';
 import { iotManager } from './services/iotSimulator.js';
 import { storage } from './services/storage.js';
 import { aiAgent } from './services/agentService.js';
+import { agentRouter } from './src/agent/router.js';
+import { startNightlyCronJob } from './src/jobs/nightlyRollup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +35,9 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Mount Autonomous Agentic SSE Router (/api/v1/agent/chat, /api/v1/agent/chat-sync)
+app.use('/api/v1/agent', agentRouter);
 
 // Request logger
 app.use((req, res, next) => {
@@ -279,6 +284,40 @@ app.post('/api/classify', async (req, res) => {
   await storage.addHistory(auditRecord);
 
   res.json(result);
+});
+
+// Alias for standard API contract: POST /api/predict -> { dravya, confidence, top3[] }
+app.post('/api/predict', async (req, res) => {
+  const { voltages, ph, tds, turbidity, temperature } = req.body;
+  let targetVoltages = voltages;
+
+  if (!targetVoltages || !Array.isArray(targetVoltages) || targetVoltages.length !== 6) {
+    targetVoltages = iotManager.getLiveReadings().voltages;
+  }
+
+  const result = classifySample(targetVoltages, req.body);
+  const confidenceNorm = result.confidence / 100;
+  const isLowConfidence = confidenceNorm < 0.60;
+  const finalVerdict = isLowConfidence ? 'inconclusive' : result.verdict;
+
+  res.json({
+    dravya: finalVerdict,
+    label: finalVerdict,
+    confidence: confidenceNorm,
+    confidencePercentage: `${result.confidence}%`,
+    status: isLowConfidence ? 'INCONCLUSIVE' : result.status,
+    botanicalName: result.botanicalName,
+    top3: result.probabilities?.slice(0, 3).map((p) => ({
+      label: p.label,
+      score: p.percentage / 100,
+    })) || [],
+    featureImportance: result.featureWeights?.map((f) => ({
+      feature: f.sensor,
+      weight: f.weight,
+    })) || [],
+    radarScores: result.radarScores,
+    modelVersion: 'v3.2-RandomForest-Ensemble',
+  });
 });
 
 app.post('/api/sample/select', (req, res) => {
@@ -567,6 +606,9 @@ async function boot() {
     console.log(`  Agent:    Dravya-GPT Copilot Online`);
     console.log(`=======================================================\n`);
   });
+
+  // Start Nightly Batch Job (node-cron at 00:00 Asia/Kolkata)
+  startNightlyCronJob();
 }
 
 if (process.env.NODE_ENV !== 'test') {
