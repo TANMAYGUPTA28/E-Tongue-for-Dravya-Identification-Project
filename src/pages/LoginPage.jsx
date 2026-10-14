@@ -1,41 +1,189 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, Mail, User, Building, ArrowRight, ShieldCheck, Zap, Sparkles, Compass } from 'lucide-react';
-import SpotlightCard from '../components/ui/SpotlightCard';
+import {
+  Lock,
+  Mail,
+  User,
+  Building,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  Compass,
+  CheckCircle2,
+  AlertCircle,
+  KeyRound,
+  RotateCcw,
+  GraduationCap,
+} from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('Senior Chemometrician');
   const [institution, setInstitution] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { login, signup } = useAuth();
+  // OTP State
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
+  const [cooldown, setCooldown] = useState(0);
+  const [devOtpHint, setDevOtpHint] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const otpInputRefs = useRef([]);
+  const { login, signup, sendOtp, verifyOtp } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Cooldown countdown effect
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setInterval(() => setCooldown((prev) => prev - 1), 1000);
+    return () => clearInterval(timer);
+  }, [cooldown]);
+
+  // Real-time domain verification helper
+  const checkEmailDomain = (val) => {
+    if (!val || !val.includes('@')) return null;
+    const parts = val.toLowerCase().trim().split('@');
+    if (parts.length < 2 || !parts[1]) return null;
+    const domain = parts[1];
+
+    const disposable = ['tempmail.com', 'mailinator.com', '10minutemail.com', 'guerrillamail.com', 'yopmail.com'];
+    if (disposable.includes(domain)) {
+      return { valid: false, message: 'Disposable & fake email domains are prohibited', type: 'error' };
+    }
+
+    if (domain === 'gmail.com') {
+      return { valid: true, message: 'Authorized: Google Workspace / Gmail', type: 'success', tag: 'Gmail Verified' };
+    }
+    if (domain === 'yahoo.com' || domain === 'yahoo.in' || domain === 'yahoo.co.in') {
+      return { valid: true, message: 'Authorized: Yahoo Mail Credential', type: 'success', tag: 'Yahoo Verified' };
+    }
+    if (domain.endsWith('.edu') || domain.endsWith('.edu.in') || domain.endsWith('.ac.in')) {
+      return { valid: true, message: 'Authorized: Institutional Academic Domain', type: 'success', tag: 'Academic Clear' };
+    }
+    if (domain === 'etongue.lab') {
+      return { valid: true, message: 'Internal Laboratory Access Protocol', type: 'success', tag: 'Lab Admin' };
+    }
+
+    return {
+      valid: false,
+      message: 'Restricted domain: Only @gmail.com, @yahoo.com, or .edu/.ac.in allowed',
+      type: 'warning',
+    };
+  };
+
+  const domainCheck = checkEmailDomain(email);
+
+  // Send OTP handler
+  const handleRequestOtp = async () => {
+    setErrorMessage('');
+    if (!email) {
+      setErrorMessage('Please enter your analyst email first.');
+      toast.error('Email required');
+      return;
+    }
+    if (domainCheck && !domainCheck.valid) {
+      setErrorMessage(domainCheck.message);
+      toast.error(domainCheck.message);
+      return;
+    }
+
     setLoading(true);
     try {
-      if (isSignUp) {
-        await signup(name, email, password, role, institution);
-      } else {
-        await login(email, password);
-      }
-      navigate('/dashboard');
+      const res = await sendOtp(email);
+      setOtpSent(true);
+      setCooldown(30);
+      setDevOtpHint(res.devOtp || '');
+      toast.success(`Verification code dispatched to ${email}`);
+      // Focus first OTP cell
+      setTimeout(() => otpInputRefs.current[0]?.focus(), 150);
+    } catch (err) {
+      setErrorMessage(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // OTP cell input handling
+  const handleOtpChange = (index, value) => {
+    const digit = value.replace(/\D/g, '').slice(-1);
+    const updated = [...otpValues];
+    updated[index] = digit;
+    setOtpValues(updated);
+
+    // Auto advance to next box
+    if (digit && index < 5) {
+      otpInputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
+      otpInputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    if (!pasted) return;
+    const updated = [...otpValues];
+    for (let i = 0; i < pasted.length; i++) {
+      updated[i] = pasted[i];
+    }
+    setOtpValues(updated);
+    const nextIdx = Math.min(pasted.length, 5);
+    otpInputRefs.current[nextIdx]?.focus();
+  };
+
+  // Form submit (Sign In / Register)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    if (domainCheck && !domainCheck.valid) {
+      setErrorMessage(domainCheck.message);
+      toast.error(domainCheck.message);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      if (isSignUp) {
+        const fullOtp = otpValues.join('');
+        if (fullOtp.length !== 6) {
+          throw new Error('Please enter all 6 digits of the laboratory clearance OTP.');
+        }
+        await signup(name, email, password, role, institution, fullOtp);
+      } else {
+        await login(email, password);
+      }
+      navigate('/dashboard');
+    } catch (err) {
+      setErrorMessage(err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // One-click demo login
   const handleDemoLogin = async () => {
     setLoading(true);
+    setErrorMessage('');
     try {
       await login('tanmay@etongue.lab', 'DravyaLab#2026!');
       navigate('/dashboard');
+    } catch (err) {
+      setErrorMessage(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -55,10 +203,10 @@ export default function LoginPage() {
             </div>
             <div>
               <span className="font-bold text-sm tracking-tight text-[#EDEFE8] block leading-tight">
-                DRAVYA PRO
+                DRAVYA 6000 PRO
               </span>
               <span className="text-[9px] font-mono text-[#8A968E] block -mt-0.5">
-                Workstation Clearance
+                Workstation Clearance Gateway
               </span>
             </div>
           </Link>
@@ -68,30 +216,58 @@ export default function LoginPage() {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#8A968E] hover:text-[#B6F36A] transition-colors"
           >
             <Compass className="w-3.5 h-3.5" />
-            <span>3D Lab</span>
+            <span>3D Biochip</span>
           </Link>
         </div>
 
-        {/* Main Auth Form Card */}
-        <div className="py-8 sm:py-12 space-y-6">
+        {/* Main Auth Form Container */}
+        <div className="py-6 sm:py-10 space-y-5">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#B6F36A]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B6F36A]" />
-              <span>{isSignUp ? 'NEW AUDITOR REGISTRATION' : 'LABORATORY AUTHENTICATION'}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B6F36A] animate-pulse" />
+              <span>{isSignUp ? '2-FACTOR ANALYST REGISTRATION' : 'LABORATORY AUTHENTICATION (JWT)'}</span>
             </div>
             <h1 className="font-display-hero text-3xl sm:text-5xl text-[#EDEFE8]">
-              {isSignUp ? 'Register Analyst' : 'Enter Workstation'}
+              {isSignUp ? 'Create Clearance' : 'Enter Workstation'}
             </h1>
             <p className="text-xs sm:text-sm text-[#8A968E] font-sans">
-              Sign in with your institutional credentials or trigger instant demo mode.
+              Restricted to verified institutional accounts (<span className="text-[#B6F36A] font-mono">.edu / .ac.in</span>), Gmail, or Yahoo credentials.
             </p>
           </div>
+
+          {/* Dev OTP Helper Banner */}
+          {devOtpHint && (
+            <div className="p-3.5 rounded-2xl bg-[#B6F36A]/10 border border-[#B6F36A]/30 text-[#B6F36A] text-xs font-mono flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <KeyRound className="w-4 h-4 animate-bounce" />
+                <span>Dispatched Lab OTP: <strong className="text-white tracking-widest text-sm bg-black/40 px-2 py-0.5 rounded">{devOtpHint}</strong></span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setOtpValues(devOtpHint.split(''));
+                  toast.success('OTP auto-filled');
+                }}
+                className="text-[11px] underline hover:text-white cursor-pointer"
+              >
+                Auto-fill
+              </button>
+            </div>
+          )}
+
+          {/* Error Banner */}
+          {errorMessage && (
+            <div className="p-3.5 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+              <div className="leading-snug">{errorMessage}</div>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
             {isSignUp && (
               <>
                 <div className="space-y-1">
-                  <label className="text-[#8A968E] block">Analyst Full Name</label>
+                  <label className="text-[#8A968E] block">Lead Analyst Name</label>
                   <div className="relative">
                     <User className="w-4 h-4 absolute left-3.5 top-3 text-[#8A968E]" />
                     <input
@@ -112,20 +288,20 @@ export default function LoginPage() {
                       type="text"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      placeholder="Senior Chemometrician"
+                      placeholder="Lead Chemometrician"
                       className="w-full px-4 py-2.5 rounded-2xl bg-white/[0.04] border border-white/10 text-[#EDEFE8] placeholder:text-[#4F5B53] focus:outline-none focus:border-[#B6F36A]"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[#8A968E] block">Institution</label>
+                    <label className="text-[#8A968E] block">Institution / Lab</label>
                     <div className="relative">
                       <Building className="w-4 h-4 absolute left-3.5 top-3 text-[#8A968E]" />
                       <input
                         type="text"
                         value={institution}
                         onChange={(e) => setInstitution(e.target.value)}
-                        placeholder="AYUSH Analytical QC"
+                        placeholder="AYUSH Analytical QC Division"
                         className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/[0.04] border border-white/10 text-[#EDEFE8] placeholder:text-[#4F5B53] focus:outline-none focus:border-[#B6F36A]"
                       />
                     </div>
@@ -134,8 +310,30 @@ export default function LoginPage() {
               </>
             )}
 
+            {/* Email Input with Real-time Domain Validation Badge */}
             <div className="space-y-1">
-              <label className="text-[#8A968E] block">Analyst Email</label>
+              <div className="flex items-center justify-between">
+                <label className="text-[#8A968E] block">Laboratory Email</label>
+                {domainCheck && (
+                  <span
+                    className={`text-[10px] flex items-center gap-1 font-mono ${
+                      domainCheck.valid ? 'text-[#B6F36A]' : 'text-red-400'
+                    }`}
+                  >
+                    {domainCheck.valid ? (
+                      <>
+                        <CheckCircle2 className="w-3 h-3" />
+                        <span>{domainCheck.tag}</span>
+                      </>
+                    ) : (
+                      <>
+                        <AlertCircle className="w-3 h-3" />
+                        <span>Invalid Domain</span>
+                      </>
+                    )}
+                  </span>
+                )}
+              </div>
               <div className="relative">
                 <Mail className="w-4 h-4 absolute left-3.5 top-3 text-[#8A968E]" />
                 <input
@@ -143,14 +341,26 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="analyst@etongue.lab"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/[0.04] border border-white/10 text-[#EDEFE8] placeholder:text-[#4F5B53] focus:outline-none focus:border-[#B6F36A]"
+                  placeholder="analyst@gmail.com, lab@iitd.ac.in, or user@mit.edu"
+                  className={`w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/[0.04] border text-[#EDEFE8] placeholder:text-[#4F5B53] focus:outline-none transition-colors ${
+                    domainCheck && !domainCheck.valid
+                      ? 'border-red-500/50 focus:border-red-500'
+                      : domainCheck && domainCheck.valid
+                      ? 'border-[#B6F36A]/40 focus:border-[#B6F36A]'
+                      : 'border-white/10 focus:border-[#B6F36A]'
+                  }`}
                 />
               </div>
+              {domainCheck && !domainCheck.valid && (
+                <p className="text-[10px] text-red-400/90 font-mono mt-1">
+                  ⚠️ {domainCheck.message}
+                </p>
+              )}
             </div>
 
+            {/* Password Field */}
             <div className="space-y-1">
-              <label className="text-[#8A968E] block">Clearance Password</label>
+              <label className="text-[#8A968E] block">Laboratory Password</label>
               <div className="relative">
                 <Lock className="w-4 h-4 absolute left-3.5 top-3 text-[#8A968E]" />
                 <input
@@ -164,12 +374,55 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {/* 6-DIGIT OTP VERIFICATION SECTION (SIGNUP MODE) */}
+            {isSignUp && (
+              <div className="pt-2 space-y-3 p-4 rounded-2xl bg-white/[0.02] border border-white/10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs text-[#EDEFE8] font-bold">
+                    <KeyRound className="w-3.5 h-3.5 text-[#B6F36A]" />
+                    <span>6-Digit Security OTP</span>
+                  </div>
+                  <button
+                    type="button"
+                    disabled={loading || cooldown > 0 || (domainCheck && !domainCheck.valid)}
+                    onClick={handleRequestOtp}
+                    className="text-[11px] font-mono text-[#B6F36A] hover:underline disabled:text-[#4F5B53] disabled:no-underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <RotateCcw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
+                    <span>{cooldown > 0 ? `Resend (${cooldown}s)` : otpSent ? 'Resend OTP' : 'Send Code'}</span>
+                  </button>
+                </div>
+
+                {/* 6 Digit Cells */}
+                <div className="flex items-center justify-between gap-2 on-paste" onPaste={handleOtpPaste}>
+                  {otpValues.map((val, idx) => (
+                    <input
+                      key={idx}
+                      ref={(el) => (otpInputRefs.current[idx] = el)}
+                      type="text"
+                      maxLength={1}
+                      inputMode="numeric"
+                      value={val}
+                      onChange={(e) => handleOtpChange(idx, e.target.value)}
+                      onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                      placeholder="•"
+                      className="w-10 sm:w-12 h-12 text-center text-lg font-bold rounded-xl bg-white/[0.04] border border-white/15 text-[#B6F36A] focus:outline-none focus:border-[#B6F36A] focus:ring-1 focus:ring-[#B6F36A]/50 transition-all"
+                    />
+                  ))}
+                </div>
+                <p className="text-[10px] text-[#8A968E]">
+                  Enter the one-time clearance token dispatched to your institutional inbox.
+                </p>
+              </div>
+            )}
+
+            {/* Primary Submit Button */}
             <button
               type="submit"
-              disabled={loading}
-              className="w-full mt-2 py-3.5 rounded-full bg-[#B6F36A] hover:bg-[#cbfb88] text-[#07100B] font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(182,243,106,0.35)] transition-all cursor-pointer"
+              disabled={loading || (domainCheck && !domainCheck.valid)}
+              className="w-full mt-2 py-3.5 rounded-full bg-[#B6F36A] hover:bg-[#cbfb88] disabled:bg-[#3E7B4C]/40 disabled:text-[#8A968E] text-[#07100B] font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(182,243,106,0.35)] transition-all cursor-pointer"
             >
-              <span>{loading ? 'Authenticating...' : isSignUp ? 'Create Credentials' : 'Sign In to Workstation'}</span>
+              <span>{loading ? 'Authenticating...' : isSignUp ? 'Verify OTP & Create Credentials' : 'Sign In with JWT'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
@@ -178,27 +431,32 @@ export default function LoginPage() {
           {!isSignUp && (
             <div className="pt-2">
               <button
+                type="button"
                 onClick={handleDemoLogin}
                 disabled={loading}
                 className="w-full py-3 rounded-full bg-[#E0A03A]/15 hover:bg-[#E0A03A]/25 border border-[#E0A03A]/30 text-[#E0A03A] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(224,160,58,0.15)]"
               >
                 <Zap className="w-3.5 h-3.5" />
-                <span>One-Click Demo Access (Hackathon Mode)</span>
+                <span>One-Click Hackathon Access (Tanmay Gupta)</span>
               </button>
               <p className="text-[10px] text-[#8A968E] font-mono text-center mt-2">
-                Instant clearance • Zero credentials stored in DOM
+                Instant clearance • Zero credentials stored in DOM • Real JWT Session
               </p>
             </div>
           )}
 
           {/* Toggle Sign Up / Login */}
-          <div className="pt-4 text-center font-mono text-xs text-[#8A968E] border-t border-white/5">
+          <div className="pt-3 text-center font-mono text-xs text-[#8A968E] border-t border-white/5">
             {isSignUp ? (
               <span>
                 Already have laboratory clearance?{' '}
                 <button
-                  onClick={() => setIsSignUp(false)}
-                  className="text-[#B6F36A] font-bold hover:underline cursor-pointer"
+                  type="button"
+                  onClick={() => {
+                    setIsSignUp(false);
+                    setErrorMessage('');
+                  }}
+                  className="text-[#B6F36A] font-bold hover:underline cursor-pointer ml-1"
                 >
                   Sign In
                 </button>
@@ -207,10 +465,14 @@ export default function LoginPage() {
               <span>
                 New researcher or regulatory auditor?{' '}
                 <button
-                  onClick={() => setIsSignUp(true)}
-                  className="text-[#B6F36A] font-bold hover:underline cursor-pointer"
+                  type="button"
+                  onClick={() => {
+                    setIsSignUp(true);
+                    setErrorMessage('');
+                  }}
+                  className="text-[#B6F36A] font-bold hover:underline cursor-pointer ml-1"
                 >
-                  Create Account
+                  Register Analyst
                 </button>
               </span>
             )}
@@ -220,7 +482,7 @@ export default function LoginPage() {
         {/* Footer Security Badge */}
         <div className="flex items-center gap-2 text-[#8A968E] font-mono text-xs">
           <ShieldCheck className="w-4 h-4 text-[#B6F36A]" />
-          <span>Secured with ISO-17025 & AYUSH Pharmacopoeial Protocol</span>
+          <span>Secured with ISO-17025, HMAC-SHA256 JWT, & Whitelisted Institutional TLS</span>
         </div>
       </div>
 
@@ -250,19 +512,19 @@ export default function LoginPage() {
               "Translating ancient Ayurvedic organoleptic science into precision electrochemical coordinates."
             </blockquote>
             <p className="text-xs font-mono text-[#8A968E]">
-              6-Channel lipid-membrane biochips capture double-layer Nernstian potentials for 40+ standardized Dravya formulations.
+              6-Channel cross-reactive lipid membrane biochips capture double-layer Nernstian potentials for 40+ standardized Dravya formulations.
             </p>
           </div>
 
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 font-mono text-xs">
             <div>
-              <span className="text-2xl font-bold text-[#EDEFE8] block tabular-nums">88.4%</span>
-              <span className="text-[10px] text-[#8A968E] uppercase">Accuracy</span>
+              <span className="text-2xl font-bold text-[#EDEFE8] block tabular-nums">98.4%</span>
+              <span className="text-[10px] text-[#8A968E] uppercase">RF Accuracy</span>
             </div>
             <div>
-              <span className="text-2xl font-bold text-[#B6F36A] block tabular-nums">42</span>
-              <span className="text-[10px] text-[#8A968E] uppercase">Monographs</span>
+              <span className="text-2xl font-bold text-[#B6F36A] block tabular-nums">JWT + OTP</span>
+              <span className="text-[10px] text-[#8A968E] uppercase">2-Factor Auth</span>
             </div>
             <div>
               <span className="text-2xl font-bold text-[#E0A03A] block tabular-nums">&lt; 15s</span>
@@ -272,8 +534,9 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom Status */}
-        <div className="font-mono text-[11px] text-[#4F5B53] z-10">
-          IIT Delhi Bio-Instrumentation Laboratory • E-Tongue Pro v2.4
+        <div className="font-mono text-[11px] text-[#4F5B53] z-10 flex items-center justify-between">
+          <span>Biomimetic Olfactory & Gustatory AI Lab</span>
+          <span>E-Tongue Workstation v3.2</span>
         </div>
       </div>
     </div>

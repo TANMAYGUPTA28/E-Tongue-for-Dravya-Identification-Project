@@ -25,6 +25,15 @@ import { storage } from './services/storage.js';
 import { aiAgent } from './services/agentService.js';
 import { agentRouter } from './src/agent/router.js';
 import { startNightlyCronJob } from './src/jobs/nightlyRollup.js';
+import {
+  validateAllowedEmail,
+  generateOTP,
+  verifyOTP,
+  isEmailVerified,
+  consumeEmailVerification,
+  signJWT,
+  verifyJWT,
+} from './services/authService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -417,52 +426,178 @@ app.get('/api/reference/species', (req, res) => {
 });
 
 // =========================================================================
-// 8. USER AUTHENTICATION
+// 8. USER AUTHENTICATION & JWT SECURITY
 // =========================================================================
 
+/**
+ * POST /api/auth/send-otp
+ * Restricts domains: @gmail.com, @yahoo.com, .edu, .ac.in
+ * Blocks fake / disposable email services
+ */
+app.post('/api/auth/send-otp', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: 'Email address is required' });
+  }
+
+  const validation = validateAllowedEmail(email);
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.message });
+  }
+
+  try {
+    const result = generateOTP(email);
+    res.json({
+      message: `Verification code sent to ${validation.cleanEmail}`,
+      domainType: result.domainType,
+      expiresInSeconds: result.expiresInSeconds,
+      devOtp: result.devOtp, // Convenient for instant testing & visual UI notification
+    });
+  } catch (err) {
+    res.status(429).json({ error: err.message });
+  }
+});
+
+/**
+ * POST /api/auth/verify-otp
+ * Validates 6-digit verification code with TTL and max attempts
+ */
+app.post('/api/auth/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  if (!email || !otp) {
+    return res.status(400).json({ error: 'Email and OTP code are required' });
+  }
+
+  const result = verifyOTP(email, otp);
+  if (!result.success) {
+    return res.status(400).json({ error: result.message });
+  }
+
+  res.json({
+    message: result.message,
+    verified: true,
+    email: result.email,
+  });
+});
+
+/**
+ * POST /api/auth/signup
+ * Requires valid email domain, OTP verification check, and returns cryptographically signed JWT
+ */
 app.post('/api/auth/signup', async (req, res) => {
-  const { name, email, password, role, institution } = req.body;
+  const { name, email, password, role, institution, otp } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Name, email, and password are required' });
   }
 
-  const existing = await storage.findUserByEmail(email);
+  const validation = validateAllowedEmail(email);
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.message });
+  }
+
+  // Verify OTP if provided or check if already verified
+  if (otp) {
+    const otpResult = verifyOTP(email, otp);
+    if (!otpResult.success) {
+      return res.status(400).json({ error: `OTP Verification failed: ${otpResult.message}` });
+    }
+  } else if (!isEmailVerified(email)) {
+    return res.status(400).json({ error: 'OTP verification is required before account creation. Please verify your email first.' });
+  }
+
+  const existing = await storage.findUserByEmail(validation.cleanEmail);
   if (existing) {
     return res.status(409).json({ error: 'An analyst account with this email already exists' });
   }
 
   const user = await storage.createUser({
-    name, email, password,
+    name: name.trim(),
+    email: validation.cleanEmail,
+    password,
     role: role || 'Junior Analytical Chemist',
-    institution: institution || 'AYUSH Quality Control Division',
+    institution: institution || (validation.domainType.includes('Institutional') ? 'Academic Research Institute' : 'AYUSH Quality Control Division'),
   });
 
+  consumeEmailVerification(validation.cleanEmail);
+
+  // Generate cryptographically signed JWT Token
+  const token = signJWT(user);
+
   res.status(201).json({
-    message: 'Analyst account created successfully',
-    user: { id: user.id || user._id, name: user.name, email: user.email, role: user.role, institution: user.institution },
-    token: `etongue_auth_${Date.now()}`,
+    message: 'Analyst workstation account created successfully',
+    user: {
+      id: user.id || user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      institution: user.institution
+    },
+    token,
   });
 });
 
+/**
+ * POST /api/auth/login
+ * Validates domain and credentials, returns signed JWT token
+ */
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
-  const user = await storage.findUserByEmail(email);
+  const validation = validateAllowedEmail(email);
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.message });
+  }
+
+  const user = await storage.findUserByEmail(validation.cleanEmail);
   if (!user || user.password !== password) {
     return res.status(401).json({ error: 'Invalid laboratory credentials or password' });
   }
 
+  // Generate cryptographically signed JWT Token
+  const token = signJWT(user);
+
   res.json({
-    message: 'Authentication successful',
-    user: { id: user.id || user._id, name: user.name, email: user.email, role: user.role, institution: user.institution || 'Biomimetic Lab' },
-    token: `etongue_auth_${Date.now()}`,
+    message: 'Laboratory authentication successful',
+    user: {
+      id: user.id || user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      institution: user.institution || 'Biomimetic Lab'
+    },
+    token,
   });
 });
 
+/**
+ * GET /api/auth/me
+ * Decodes and validates JWT token from Authorization header
+ */
 app.get('/api/auth/me', async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    const decoded = verifyJWT(token);
+    if (decoded.valid && decoded.payload) {
+      const user = await storage.findUserByEmail(decoded.payload.email);
+      if (user) {
+        return res.json({
+          user: {
+            id: user.id || user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            institution: user.institution,
+          },
+          tokenValid: true,
+        });
+      }
+    }
+  }
+
   const defaultUser = await storage.findUserByEmail('tanmay@etongue.lab');
   res.json({ user: defaultUser || { name: 'Tanmay Gupta', role: 'Lead ML Systems Engineer', email: 'tanmay@etongue.lab' } });
 });
