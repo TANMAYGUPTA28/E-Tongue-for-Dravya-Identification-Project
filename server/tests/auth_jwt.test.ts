@@ -5,6 +5,8 @@ import {
   verifyOTP,
   signJWT,
   verifyJWT,
+  hashPassword,
+  verifyPassword,
 } from '../services/authService.js';
 
 describe('Auth Service & Domain Restrictions', () => {
@@ -78,5 +80,26 @@ describe('Auth Service & Domain Restrictions', () => {
     expect(payload?.email).toBe('tanmay@iitd.ac.in');
     expect(payload?.role).toBe('Lead ML Engineer');
     expect(payload?.sub).toBe('usr_test_99');
+  });
+
+  it('securely hashes passwords with salt and verifies timing-safe scrypt match', () => {
+    const rawPass = 'SecretAyushLabPass#2026';
+    const hashed = hashPassword(rawPass);
+
+    expect(typeof hashed).toBe('string');
+    expect(hashed).toContain(':'); // salt:hash
+    const [salt, key] = hashed.split(':');
+    expect(salt.length).toBe(32); // 16 bytes hex
+    expect(key.length).toBe(128); // 64 bytes hex
+
+    // Correct password
+    expect(verifyPassword(rawPass, hashed)).toBe(true);
+
+    // Wrong password
+    expect(verifyPassword('WrongPass#999', hashed)).toBe(false);
+
+    // Backward compatibility with legacy plaintext passwords
+    expect(verifyPassword('LegacyPass', 'LegacyPass')).toBe(true);
+    expect(verifyPassword('WrongLegacy', 'LegacyPass')).toBe(false);
   });
 });

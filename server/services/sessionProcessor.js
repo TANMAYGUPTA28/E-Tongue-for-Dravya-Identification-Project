@@ -53,7 +53,23 @@ export const ReadingInputSchema = z.object({
 // Device Heartbeat & Baseline Storage
 const deviceHeartbeats = new Map();
 const deviceBaselines = new Map(); // deviceId -> [b1, b2, b3, b4, b5, b6]
-const processedPacketKeys = new Set(); // deviceId:sessionId:seq for idempotency
+
+// Time-windowed auto-evicting map for packet idempotency (5-minute TTL, max 2000 items)
+const processedPacketKeys = new Map();
+
+function isDuplicatePacket(packetKey) {
+  const now = Date.now();
+  if (processedPacketKeys.has(packetKey)) {
+    return true;
+  }
+  processedPacketKeys.set(packetKey, now + 300000); // 5 min TTL
+  if (processedPacketKeys.size > 2000) {
+    for (const [key, expiresAt] of processedPacketKeys.entries()) {
+      if (now > expiresAt) processedPacketKeys.delete(key);
+    }
+  }
+  return false;
+}
 
 export function recordDeviceHeartbeat(deviceId, metadata = {}) {
   deviceHeartbeats.set(deviceId, {
@@ -192,10 +208,10 @@ export const sessionProcessor = {
     const parsed = ReadingInputSchema.parse(payload);
     recordDeviceHeartbeat(parsed.deviceId, { activeSessionId: parsed.sessionId });
 
-    // 2. Idempotency Check (seq tracking)
+    // 2. Idempotency Check (seq tracking with 5-minute TTL bounded window)
     if (parsed.seq !== undefined) {
       const packetKey = `${parsed.deviceId}:${parsed.sessionId}:${parsed.seq}`;
-      if (processedPacketKeys.has(packetKey)) {
+      if (isDuplicatePacket(packetKey)) {
         const session = activeSessions.get(parsed.sessionId);
         return {
           accepted: true,
@@ -204,7 +220,6 @@ export const sessionProcessor = {
           session,
         };
       }
-      processedPacketKeys.add(packetKey);
     }
 
     let session = activeSessions.get(parsed.sessionId);

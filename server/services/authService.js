@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
 const JWT_SECRET = process.env.JWT_ACCESS_SECRET || 'etongue_ayurveda_dravya_sih2025_secure_key_98347';
 const OTP_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
@@ -203,3 +204,35 @@ export function verifyJWT(token) {
     };
   }
 }
+
+/**
+ * Hash password using standard scrypt cryptographic derivation with random salt
+ */
+export function hashPassword(password) {
+  if (!password || typeof password !== 'string') {
+    throw new Error('Password must be a non-empty string');
+  }
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+/**
+ * Verify password using timing-safe comparison
+ */
+export function verifyPassword(password, storedPassword) {
+  if (!password || !storedPassword) return false;
+  // Backward compatibility with initial seeded plaintext passwords
+  if (!storedPassword.includes(':')) {
+    return storedPassword === password;
+  }
+  try {
+    const [salt, key] = storedPassword.split(':');
+    const keyBuffer = Buffer.from(key, 'hex');
+    const derivedKey = crypto.scryptSync(password, salt, 64);
+    return crypto.timingSafeEqual(keyBuffer, derivedKey);
+  } catch {
+    return false;
+  }
+}
+

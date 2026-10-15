@@ -69,6 +69,8 @@ const analysisSchema = new mongoose.Schema({
   featureWeights: [{ sensor: String, target: String, weight: Number }],
 }, { timestamps: true });
 
+analysisSchema.index({ createdAt: -1 });
+
 /** Specimen Registry — botanical lots registered for testing */
 const specimenSchema = new mongoose.Schema({
   lotId:       { type: String, required: true, unique: true, index: true },
@@ -80,6 +82,8 @@ const specimenSchema = new mongoose.Schema({
   solvent:     String,
   status:      { type: String, default: 'LOGGED_UNTESTED' },
 }, { timestamps: true });
+
+specimenSchema.index({ createdAt: -1 });
 
 /** User — analyst authentication */
 const userSchema = new mongoose.Schema({

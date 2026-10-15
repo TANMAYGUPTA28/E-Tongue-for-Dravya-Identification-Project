@@ -43,6 +43,8 @@ import {
   consumeEmailVerification,
   signJWT,
   verifyJWT,
+  hashPassword,
+  verifyPassword,
 } from './services/authService.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -67,6 +69,35 @@ app.use(cors({
 
 // Body parser with size limit to prevent payload flooding
 app.use(express.json({ limit: '1mb' }));
+
+// Authentication & Role-Based Access Control Middlewares
+export function requireAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ success: false, error: 'Authentication required. Bearer token missing.' });
+  }
+  const token = authHeader.split(' ')[1];
+  const decoded = verifyJWT(token);
+  if (!decoded.valid || !decoded.payload) {
+    return res.status(401).json({ success: false, error: 'Invalid or expired authentication token.' });
+  }
+  req.user = decoded.payload;
+  next();
+}
+
+export function requireRole(...allowedRoles) {
+  return (req, res, next) => {
+    requireAuth(req, res, () => {
+      if (allowedRoles.length > 0 && !allowedRoles.includes(req.user.role)) {
+        return res.status(403).json({
+          success: false,
+          error: `Forbidden: Access requires ${allowedRoles.join(' or ')} clearance level.`,
+        });
+      }
+      next();
+    });
+  };
+}
 
 // Health and Readiness Check Endpoints
 app.get('/health', (req, res) => {
@@ -602,12 +633,15 @@ app.post('/api/specimens', async (req, res) => {
   res.status(201).json(newSpecimen);
 });
 
-app.delete('/api/specimens/:lotId', async (req, res) => {
-  const success = await storage.removeSpecimen(req.params.lotId);
-  if (success) {
-    res.json({ status: 'DELETED', lotId: req.params.lotId });
-  } else {
+app.delete('/api/specimens/:lotId', requireAuth, async (req, res, next) => {
+  try {
+    const success = await storage.removeSpecimen(req.params.lotId);
+    if (success) {
+      return res.json({ status: 'DELETED', lotId: req.params.lotId });
+    }
     res.status(404).json({ error: 'Specimen lot not found' });
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -716,7 +750,7 @@ app.post('/api/auth/signup', async (req, res) => {
   const user = await storage.createUser({
     name: name.trim(),
     email: validation.cleanEmail,
-    password,
+    password: hashPassword(password),
     role: role || 'Junior Analytical Chemist',
     institution: institution || (validation.domainType.includes('Institutional') ? 'Academic Research Institute' : 'AYUSH Quality Control Division'),
   });
@@ -755,7 +789,7 @@ app.post('/api/auth/login', async (req, res) => {
   }
 
   const user = await storage.findUserByEmail(validation.cleanEmail);
-  if (!user || user.password !== password) {
+  if (!user || !verifyPassword(password, user.password)) {
     return res.status(401).json({ error: 'Invalid laboratory credentials or password' });
   }
 
@@ -781,28 +815,31 @@ app.post('/api/auth/login', async (req, res) => {
  */
 app.get('/api/auth/me', async (req, res) => {
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.split(' ')[1];
-    const decoded = verifyJWT(token);
-    if (decoded.valid && decoded.payload) {
-      const user = await storage.findUserByEmail(decoded.payload.email);
-      if (user) {
-        return res.json({
-          user: {
-            id: user.id || user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            institution: user.institution,
-          },
-          tokenValid: true,
-        });
-      }
-    }
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ success: false, error: 'Authentication required. Authorization header missing or malformed.' });
   }
 
-  const defaultUser = await storage.findUserByEmail('tanmay@etongue.lab');
-  res.json({ user: defaultUser || { name: 'Tanmay Gupta', role: 'Lead ML Systems Engineer', email: 'tanmay@etongue.lab' } });
+  const token = authHeader.split(' ')[1];
+  const decoded = verifyJWT(token);
+  if (!decoded.valid || !decoded.payload) {
+    return res.status(401).json({ success: false, error: 'Invalid or expired laboratory session token.' });
+  }
+
+  const user = await storage.findUserByEmail(decoded.payload.email);
+  if (!user) {
+    return res.status(404).json({ success: false, error: 'Analyst account not found in registry.' });
+  }
+
+  res.json({
+    user: {
+      id: user.id || user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      institution: user.institution,
+    },
+    tokenValid: true,
+  });
 });
 
 // =========================================================================
