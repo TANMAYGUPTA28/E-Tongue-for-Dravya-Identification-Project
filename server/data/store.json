@@ -1,6 +1,4675 @@
 {
   "history": [
     {
+      "id": "SES-MV95HCRF-WZRL",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-301",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV95HCRF-WZRL",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-301",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV95HCQB-BS18",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-516",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV95HCQB-BS18",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-516",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV95HCPP-JUNC",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-462",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV95HCPP-JUNC",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-462",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV95HCOI-5SEO",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-221",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV95HCOI-5SEO",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-221",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV95HCNG-RUA6",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-160",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV95HCNG-RUA6",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-160",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV95HCM3-503W",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-785",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV95HCM3-503W",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-785",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV95HCKX-XKA1",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-869",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV95HCKX-XKA1",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-869",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV95HCJO-EZDD",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-672",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV95HCJO-EZDD",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-672",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV95HCIE-14U0",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-483",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV95HCIE-14U0",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-483",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV95HCH2-33M0",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-795",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV95HCH2-33M0",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-795",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV95HCFO-N81Q",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-900",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV95HCFO-N81Q",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-900",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV95HCEP-18DM",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-901",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV95HCEP-18DM",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-901",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV95HCCH-QE69",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-329",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Inconclusive",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV95HCCH-QE69",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-329",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Inconclusive",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "15 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8DXNFV-A6I0",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-429",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8DXNFV-A6I0",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-429",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8DXNE2-JF8I",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-553",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8DXNE2-JF8I",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-553",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8DXNCL-045N",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-227",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8DXNCL-045N",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-227",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8DXNBB-1UN4",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-906",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8DXNBB-1UN4",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-906",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8DXN9U-Q0OX",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-904",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8DXN9U-Q0OX",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-904",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8DXN8I-Z61F",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-309",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8DXN8I-Z61F",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-309",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8DXN79-KPIQ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-267",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8DXN79-KPIQ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-267",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8DXN5Z-1I89",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-765",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8DXN5Z-1I89",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-765",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8DXN4G-N2VX",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-307",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8DXN4G-N2VX",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-307",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8DXN33-SCLT",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-489",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8DXN33-SCLT",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-489",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8DXN1Y-JZ35",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-115",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8DXN1Y-JZ35",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-115",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8DXN03-ZUKB",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-279",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8DXN03-ZUKB",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-279",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8DXMX8-RJQL",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-652",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Inconclusive",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8DXMX8-RJQL",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-652",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Inconclusive",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8CWN9X-AKOJ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-770",
+      "category": "Potentiostat Assay",
+      "operator": "Hardware Simulator Test Runner",
+      "verdict": "Inconclusive",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.427,
+        0.585,
+        0.347,
+        2.224,
+        2.755,
+        1.725
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 9,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8CWN9X-AKOJ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-770",
+      "category": "Potentiostat Assay",
+      "operator": "Hardware Simulator Test Runner",
+      "verdict": "Inconclusive",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "UNSTABLE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.427,
+        0.585,
+        0.347,
+        2.224,
+        2.755,
+        1.725
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 9,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8COUID-5GE6",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-310",
+      "category": "Potentiostat Assay",
+      "operator": "Hardware Simulator Test Runner",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.427,
+        0.585,
+        0.347,
+        2.224,
+        2.755,
+        1.725
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 9,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8COCAE-BBR8",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-430",
+      "category": "Potentiostat Assay",
+      "operator": "Hardware Simulator Test Runner",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.821,
+        1.651,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8CNXXA-LAN8",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-722",
+      "category": "Potentiostat Assay",
+      "operator": "Hardware Simulator Test Runner",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.521,
+        0.361,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 13,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8CBEIK-QKX7",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-984",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8CBEIK-QKX7",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-984",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8CBEHD-P8K5",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-730",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8CBEHD-P8K5",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-730",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8CBEG9-9IEG",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-524",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8CBEG9-9IEG",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-524",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8CBEF7-PCHU",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-859",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8CBEF7-PCHU",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-859",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8CBEEE-SBRZ",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-783",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8CBEEE-SBRZ",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-783",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8CBEDW-DUE4",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-615",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8CBEDW-DUE4",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-615",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8CBECX-IJ28",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-713",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8CBECX-IJ28",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-713",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8CBEC2-XVIW",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-370",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8CBEC2-XVIW",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-370",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8CBEB6-FUPY",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-592",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8CBEB6-FUPY",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-592",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8CBEAE-9W37",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-445",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8CBEAE-9W37",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-445",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8CBE9H-Z2AJ",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-237",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8CBE9H-Z2AJ",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-237",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8CBE8S-1MBF",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-654",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8CBE8S-1MBF",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-654",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8CBE7N-C8OP",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-563",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8CBE7N-C8OP",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-563",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZL1S-73ZB",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-492",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BZL1S-73ZB",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-492",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BZL0J-IHPF",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-131",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BZL0J-IHPF",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-131",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BZKZA-FBA5",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-374",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BZKZA-FBA5",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-374",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BZKYJ-DKUC",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-962",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BZKYJ-DKUC",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-962",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BZKXS-5OUO",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-747",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BZKXS-5OUO",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-747",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BZKWS-AVWJ",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-649",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BZKWS-AVWJ",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-649",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BZKVN-EHEH",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-324",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BZKVN-EHEH",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-324",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BZKUK-9X5Y",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-507",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BZKUK-9X5Y",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-507",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BZKTO-LXUU",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-427",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BZKTO-LXUU",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-427",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BZKST-2CSV",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-221",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BZKST-2CSV",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-221",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BZKRY-QK9L",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-270",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZKRY-QK9L",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-270",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZKR3-DMAG",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-757",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BZKR3-DMAG",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-757",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BZKPV-JWQK",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-461",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZKPV-JWQK",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-461",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZ7GR-XFF9",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-759",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BZ7GR-XFF9",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-759",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BZ7FH-TGAM",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-558",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BZ7FH-TGAM",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-558",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BZ7EK-4ZWT",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-797",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BZ7EK-4ZWT",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-797",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BZ7DC-YBZ9",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-517",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BZ7DC-YBZ9",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-517",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BZ7CH-20G5",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-463",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BZ7CH-20G5",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-463",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BZ7BB-BUOQ",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-614",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BZ7BB-BUOQ",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-614",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BZ7AD-G8JQ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-370",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BZ7AD-G8JQ",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-370",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BZ79F-OMHF",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-961",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BZ79F-OMHF",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-961",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BZ78D-6D0N",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-332",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BZ78D-6D0N",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-332",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BZ76J-RD0C",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-744",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BZ76J-RD0C",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-744",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BZ759-35AI",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-419",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZ759-35AI",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-419",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZ74G-QS3C",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-276",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BZ74G-QS3C",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-276",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BZ73J-PQ5K",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-670",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BZ73J-PQ5K",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-670",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BXS1C-JA4Q",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-381",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BXS1C-JA4Q",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-381",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 53,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.35,
+        0.45,
+        0.25,
+        1.2,
+        0.85,
+        0.95
+      ],
+      "radarScores": {
+        "madhura": 8,
+        "amla": 11,
+        "lavana": 6,
+        "tikta": 26,
+        "katu": 20,
+        "kashaya": 21
+      }
+    },
+    {
+      "id": "SES-MV8BXS0Y-AGN9",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-602",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BXS0Y-AGN9",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-602",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 52,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.2,
+        0.4,
+        0.8,
+        0.4,
+        1.1
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 29,
+        "lavana": 10,
+        "tikta": 18,
+        "katu": 10,
+        "kashaya": 24
+      }
+    },
+    {
+      "id": "SES-MV8BXS07-REZV",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-132",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BXS07-REZV",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-132",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 56,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.15V",
+      "voltages": [
+        0.25,
+        0.2,
+        0.25,
+        1.15,
+        0.5,
+        0.9
+      ],
+      "radarScores": {
+        "madhura": 6,
+        "amla": 5,
+        "lavana": 6,
+        "tikta": 25,
+        "katu": 12,
+        "kashaya": 20
+      }
+    },
+    {
+      "id": "SES-MV8BXRYX-SE2C",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-256",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BXRYX-SE2C",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-256",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 22,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.20V",
+      "voltages": [
+        0.5,
+        1.1,
+        0.65,
+        1.05,
+        0.4,
+        1.2
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 26,
+        "lavana": 16,
+        "tikta": 23,
+        "katu": 10,
+        "kashaya": 26
+      }
+    },
+    {
+      "id": "SES-MV8BXRXS-Z1FL",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-458",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BXRXS-Z1FL",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-458",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 2,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "1.85V",
+      "voltages": [
+        1.85,
+        0.82,
+        1.65,
+        0.75,
+        0.45,
+        0.65
+      ],
+      "radarScores": {
+        "madhura": 41,
+        "amla": 20,
+        "lavana": 41,
+        "tikta": 17,
+        "katu": 11,
+        "kashaya": 14
+      }
+    },
+    {
+      "id": "SES-MV8BXRWR-CUBH",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-247",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BXRWR-CUBH",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-247",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 33,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.10V",
+      "voltages": [
+        0.45,
+        0.48,
+        3.1,
+        0.82,
+        0.95,
+        0.41
+      ],
+      "radarScores": {
+        "madhura": 10,
+        "amla": 12,
+        "lavana": 78,
+        "tikta": 18,
+        "katu": 23,
+        "kashaya": 9
+      }
+    },
+    {
+      "id": "SES-MV8BXRV5-LKZC",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-371",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BXRV5-LKZC",
+      "sampleName": "Tulsi (Holy Basil) (Ocimum sanctum L.)",
+      "batchNumber": "LOT-2026-TUL-371",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Ocimum sanctum L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.75V",
+      "voltages": [
+        0.42,
+        0.58,
+        0.32,
+        2.22,
+        2.75,
+        1.72
+      ],
+      "radarScores": {
+        "madhura": 9,
+        "amla": 14,
+        "lavana": 8,
+        "tikta": 49,
+        "katu": 66,
+        "kashaya": 38
+      }
+    },
+    {
+      "id": "SES-MV8BXRU3-5MO2",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-632",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BXRU3-5MO2",
+      "sampleName": "Amalaki (Amla) (Phyllanthus emblica L.)",
+      "batchNumber": "LOT-2026-AMA-632",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Phyllanthus emblica L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.55,
+        3.05,
+        0.22,
+        1.35,
+        0.62,
+        3
+      ],
+      "radarScores": {
+        "madhura": 12,
+        "amla": 73,
+        "lavana": 6,
+        "tikta": 30,
+        "katu": 15,
+        "kashaya": 66
+      }
+    },
+    {
+      "id": "SES-MV8BXRSU-Z1BY",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-425",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BXRSU-Z1BY",
+      "sampleName": "Guduchi (Giloy) (Tinospora cordifolia (Willd.))",
+      "batchNumber": "LOT-2026-GUD-425",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Tinospora cordifolia (Willd.)",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.32,
+        0.22,
+        0.28,
+        3.05,
+        0.98,
+        1.85
+      ],
+      "radarScores": {
+        "madhura": 7,
+        "amla": 5,
+        "lavana": 7,
+        "tikta": 67,
+        "katu": 24,
+        "kashaya": 41
+      }
+    },
+    {
+      "id": "SES-MV8BXRRQ-WOGP",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-934",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BXRRQ-WOGP",
+      "sampleName": "Haritaki (Terminalia chebula Retz.)",
+      "batchNumber": "LOT-2026-HAR-934",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Terminalia chebula Retz.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.22V",
+      "voltages": [
+        0.92,
+        2.85,
+        0.42,
+        2.18,
+        0.88,
+        3.22
+      ],
+      "radarScores": {
+        "madhura": 20,
+        "amla": 68,
+        "lavana": 11,
+        "tikta": 48,
+        "katu": 21,
+        "kashaya": 71
+      }
+    },
+    {
+      "id": "SES-MV8BXRQY-BTOP",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-378",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BXRQY-BTOP",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-378",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.78V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.78,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 61,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BXRQL-Z7TU",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-732",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BXRQL-Z7TU",
+      "sampleName": "Turmeric (Curcuma longa L.)",
+      "batchNumber": "LOT-2026-TUR-732",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Pass",
+      "botanicalName": "Curcuma longa L.",
+      "confidence": 100,
+      "status": "VERIFIED_PURE",
+      "date": "14 Oct 2026",
+      "sensorPeak": "3.05V",
+      "voltages": [
+        0.48,
+        0.52,
+        0.36,
+        2.45,
+        3.05,
+        1.55
+      ],
+      "radarScores": {
+        "madhura": 11,
+        "amla": 12,
+        "lavana": 9,
+        "tikta": 54,
+        "katu": 73,
+        "kashaya": 34
+      }
+    },
+    {
+      "id": "SES-MV8BXRP9-20A6",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-558",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.96V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.957,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 65,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
+      "id": "SES-MV8BXRP9-20A6",
+      "sampleName": "Ashwagandha (Withania somnifera (L.) Dunal)",
+      "batchNumber": "LOT-2026-ASH-558",
+      "category": "Potentiostat Assay",
+      "operator": "Analyst",
+      "verdict": "Fail",
+      "botanicalName": "Withania somnifera (L.) Dunal",
+      "confidence": 100,
+      "status": "ADULTERATION_FLAG",
+      "date": "14 Oct 2026",
+      "sensorPeak": "2.96V",
+      "voltages": [
+        0.72,
+        0.38,
+        0.45,
+        2.957,
+        1.15,
+        2.35
+      ],
+      "radarScores": {
+        "madhura": 16,
+        "amla": 9,
+        "lavana": 11,
+        "tikta": 65,
+        "katu": 28,
+        "kashaya": 52
+      }
+    },
+    {
       "id": "ET-338601",
       "sampleName": "Haritaki (Terminalia chebula)",
       "batchNumber": "BATCH-HAR-2026-A",

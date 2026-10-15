@@ -79,10 +79,10 @@ export class IoTHardwareManager {
     }
 
     this.packetsCount += 1;
-    // Micro-jitter only when active electrochemical reaction exists in liquid (±0.008V)
+    const isDemoMode = process.env.DEMO_MODE === 'true';
     const liveVoltages = this.currentVoltages.map((base, i) => {
-      const jitter = (Math.random() - 0.5) * 0.010;
-      const tared = Math.max(0.01, base - this.baselineTare[i] + jitter);
+      const jitter = isDemoMode ? (Math.random() - 0.5) * 0.008 : 0.0;
+      const tared = Math.max(0.0, base - this.baselineTare[i] + jitter);
       return parseFloat(tared.toFixed(3));
     });
 
@@ -105,7 +105,7 @@ export class IoTHardwareManager {
       },
       rawADC,
       currentMicroAmperes,
-      temperatureC: parseFloat((this.temperatureC + (Math.random() - 0.5) * 0.1).toFixed(1)),
+      temperatureC: isDemoMode ? parseFloat((this.temperatureC + (Math.random() - 0.5) * 0.05).toFixed(1)) : this.temperatureC,
       packetsCount: this.packetsCount,
       bufferStatus: 'ACTIVE_TRANSDUCTION',
     };

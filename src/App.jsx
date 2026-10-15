@@ -22,10 +22,12 @@ import ModelInsightsPage from './pages/ModelInsightsPage';
 import SystemStatusPage from './pages/SystemStatusPage';
 import AboutPage from './pages/AboutPage';
 import SpecimenRegistryPage from './pages/SpecimenRegistryPage';
-import SpatialWorkstationPage from './pages/SpatialWorkstationPage';
 import ApiConsolePage from './pages/ApiConsolePage';
 import CalibrationPage from './pages/CalibrationPage';
 import FeatureImportancePage from './pages/FeatureImportancePage';
+import SessionResultPage from './pages/SessionResultPage';
+import ErrorBoundary from './components/ui/ErrorBoundary';
+import NotFoundPage from './components/ui/NotFoundPage';
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,7 +35,6 @@ export default function App() {
   const location = useLocation();
 
   const isPublicPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup';
-  const isSpatialPage = location.pathname === '/3d' || location.pathname === '/spatial';
 
   // Global Keyboard Listener for Cmd+K and Ctrl+K
   useEffect(() => {
@@ -46,22 +47,6 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
-  // 1. Full-viewport 3D Scrollytelling Experience
-  if (isSpatialPage) {
-    return (
-      <SmoothScrollProvider>
-        <div className="w-full h-screen overflow-hidden bg-[#07100B]">
-          <CustomCursor />
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-          />
-          <SpatialWorkstationPage />
-        </div>
-      </SmoothScrollProvider>
-    );
-  }
 
   return (
     <SmoothScrollProvider>
@@ -94,8 +79,8 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<LoginPage />} />
-              <Route path="/3d" element={<SpatialWorkstationPage />} />
-              <Route path="/spatial" element={<SpatialWorkstationPage />} />
+              <Route path="/3d" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/spatial" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </main>
         ) : (
@@ -116,34 +101,39 @@ export default function App() {
 
               <main className="flex-1 overflow-y-auto px-4 py-6 lg:px-8">
                 <div key={location.pathname} className="animate-view-fade">
-                  <Routes>
-                    <Route
-                      path="/dashboard"
-                      element={<DashboardPage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
-                    />
-                    <Route path="/3d" element={<SpatialWorkstationPage />} />
-                    <Route path="/spatial" element={<SpatialWorkstationPage />} />
-                    <Route path="/agent" element={<AiAgentPage />} />
-                    <Route path="/ai-agent" element={<AiAgentPage />} />
-                    <Route path="/new-analysis" element={<NewAnalysisWizardPage />} />
-                    <Route path="/live-sensors" element={<LiveSensorsPage />} />
-                    <Route path="/results" element={<ResultRadarPage />} />
-                    <Route path="/history" element={<SampleHistoryPage />} />
-                    <Route path="/registry" element={<SpecimenRegistryPage />} />
-                    <Route path="/specimens" element={<SpecimenRegistryPage />} />
-                    <Route path="/analytics" element={<AnalyticsPage />} />
-                    <Route path="/model-insights" element={<ModelInsightsPage />} />
-                    <Route path="/system-status" element={<SystemStatusPage />} />
-                    <Route path="/calibration" element={<CalibrationPage />} />
-                    <Route path="/api-console" element={<ApiConsolePage />} />
-                    <Route path="/feature-importance" element={<FeatureImportancePage />} />
-                    <Route path="/about" element={<AboutPage />} />
+                  <ErrorBoundary>
+                    <Routes>
+                      <Route
+                        path="/dashboard"
+                        element={<DashboardPage onOpenCommandPalette={() => setCommandPaletteOpen(true)} />}
+                      />
+                      <Route path="/3d" element={<Navigate to="/dashboard" replace />} />
+                      <Route path="/spatial" element={<Navigate to="/dashboard" replace />} />
+                      <Route path="/agent" element={<AiAgentPage />} />
+                      <Route path="/ai-agent" element={<AiAgentPage />} />
+                      <Route path="/new-analysis" element={<NewAnalysisWizardPage />} />
+                      <Route path="/live-sensors" element={<LiveSensorsPage />} />
+                      <Route path="/result/:sessionId" element={<SessionResultPage />} />
+                      <Route path="/result" element={<SessionResultPage />} />
+                      <Route path="/results" element={<SessionResultPage />} />
+                      <Route path="/radar" element={<ResultRadarPage />} />
+                      <Route path="/history" element={<SampleHistoryPage />} />
+                      <Route path="/registry" element={<SpecimenRegistryPage />} />
+                      <Route path="/specimens" element={<SpecimenRegistryPage />} />
+                      <Route path="/analytics" element={<AnalyticsPage />} />
+                      <Route path="/model-insights" element={<ModelInsightsPage />} />
+                      <Route path="/system-status" element={<SystemStatusPage />} />
+                      <Route path="/calibration" element={<CalibrationPage />} />
+                      <Route path="/api-console" element={<ApiConsolePage />} />
+                      <Route path="/feature-importance" element={<FeatureImportancePage />} />
+                      <Route path="/about" element={<AboutPage />} />
 
-                    {/* Fallback & Aliases */}
-                    <Route path="/sensors" element={<Navigate to="/live-sensors" replace />} />
-                    <Route path="/model" element={<Navigate to="/model-insights" replace />} />
-                    <Route path="*" element={<Navigate to="/dashboard" replace />} />
-                  </Routes>
+                      {/* Aliases & Fallback */}
+                      <Route path="/sensors" element={<Navigate to="/live-sensors" replace />} />
+                      <Route path="/model" element={<Navigate to="/model-insights" replace />} />
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                  </ErrorBoundary>
                 </div>
               </main>
             </div>

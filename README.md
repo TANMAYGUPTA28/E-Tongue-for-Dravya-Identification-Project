@@ -47,11 +47,11 @@ npm run dev
 
 ## How It Works
 
-- **Data Source**: Calibrated potentiostat response dataset derived from Ayurvedic Pharmacopoeia of India (API) reference monographs and laboratory standards (n=240 reference profiles across 8 botanical classes).
-- **Features**: 6 cross-sensitive electrochemical potentiometric potentials (0.00V to 3.30V) mapped to Ayurvedic Shad-Rasa channels: S1 (Madhura / Lipid Membrane), S2 (Amla / Polyaniline), S3 (Lavana / Chitosan Matrix), S4 (Tikta / Phthalocyanine), S5 (Katu / Crown Ether), and S6 (Kashaya / Ruthenium Oxide).
-- **Algorithm**: Supervised Random Forest Classifier with ensemble bagging (24 estimators, maximum tree depth of 4, subspace feature selection $m = \sqrt{6} \approx 2$).
-- **Evaluation Method**: Stratified 75% train / 25% test split paired with 5-fold cross-validation. The held-out test evaluation achieved 100% test accuracy and a macro F1-score of 1.0 on calibrated reference standards, persisted to `server/data/metrics.json`.
-- **Limitations**: The current training dataset represents calibrated laboratory reference standards under controlled thermal conditions ($25^\circ\text{C}$). Extreme room temperature fluctuations or uncalibrated electrode drift will require automated zeroing (Tare) prior to sample insertion.
+- **Data Source & Reference Ranges**: Calibrated potentiostat response datasets derived from Ayurvedic Pharmacopoeia of India (API) monographs (`server/data/referenceRanges.json`) for 6 target specimens: Turmeric, Ashwagandha, Haritaki, Guduchi, Amalaki, and Tulsi.
+- **Sensors**: 6-channel cross-reactive potentiostat array measuring equilibrium potentials (0.00V to 3.30V) across biomimetic transducers: S1 (Lipid / Neutral Glycosides), S2 (Conductive PANI / Organic Acids), S3 (Chitosan / Electrolytes), S4 (Phthalocyanine / Alkaloids), S5 (Crown Ether / Volatiles), and S6 (Ruthenium Oxide / Tannins).
+- **Processing**: Test sessions ignore probe immersion settling time (first 3 samples), eliminate noise via Exponential Moving Average (EMA, $\alpha=0.35$), and filter spikes using Median Absolute Deviation (MAD, $3.0 \times 1.4826 \times \text{MAD}$). Baseline blank tare is subtracted per channel.
+- **Scoring**: Transparent range-overlap metric compares cleaned potentials against API reference bands, yielding Pass ($\ge 85\%$), Borderline ($70-84\%$), or Fail ($< 70\%$). Evaluated Random Forest ensemble models provide verified multi-class classification and transparent plain-English factors.
+- **Quality Flags & Limitations**: System flags "Sensor not connected" when all channels flatline, "Unstable reading, please retest" on excessive signal variance, and "Not enough data yet" if fewer than 8 post-warmup readings are recorded. Laboratory reference standards assume thermal equilibrium ($25^\circ\text{C}$).
 
 ---
 

@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const ELECTRODE_SPECS = [
-  { id: 'WE1', name: 'Lipid Bio-Membrane', rasa: 'Madhura (Sweet)', color: 0x14b8a6, colorHex: '#14B8A6', targetV: '0.722V', angle: 0 },
-  { id: 'WE2', name: 'Polyaniline (PANI)', rasa: 'Amla (Sour)', color: 0x0ea5e9, colorHex: '#0EA5E9', targetV: '0.384V', angle: 60 },
-  { id: 'WE3', name: 'Chitosan Hydrogel', rasa: 'Lavana (Salty)', color: 0x3b82f6, colorHex: '#3B82F6', targetV: '0.450V', angle: 120 },
-  { id: 'WE4', name: 'Phthalocyanine (Pc)', rasa: 'Tikta (Bitter)', color: 0xf59e0b, colorHex: '#F59E0B', targetV: '2.777V', angle: 180 },
-  { id: 'WE5', name: 'Crown Ether Cage', rasa: 'Katu (Pungent)', color: 0x8b5cf6, colorHex: '#8B5CF6', targetV: '1.151V', angle: 240 },
-  { id: 'WE6', name: 'Ruthenium Oxide (RuOx)', rasa: 'Kashaya (Astringent)', color: 0x10b981, colorHex: '#10B981', targetV: '2.352V', angle: 300 },
+  { id: 'WE1', name: 'Lipid Bio-Membrane', material: 'Lipid Bilayer / Au substrate', rasa: 'Madhura (Sweet)', color: 0x14b8a6, colorHex: '#14B8A6', targetV: '0.722V', angle: 0 },
+  { id: 'WE2', name: 'Polyaniline Composite', material: 'PANI Conducting Polymer', rasa: 'Amla (Sour)', color: 0x0ea5e9, colorHex: '#0EA5E9', targetV: '0.384V', angle: 60 },
+  { id: 'WE3', name: 'Chitosan Hydrogel', material: 'Cross-linked Chitosan Matrix', rasa: 'Lavana (Salty)', color: 0x3b82f6, colorHex: '#3B82F6', targetV: '0.450V', angle: 120 },
+  { id: 'WE4', name: 'Phthalocyanine Complex', material: 'Cobalt Phthalocyanine (CoPc)', rasa: 'Tikta (Bitter)', color: 0xf59e0b, colorHex: '#F59E0B', targetV: '2.777V', angle: 180 },
+  { id: 'WE5', name: 'Crown Ether Ionophore', material: '18-Crown-6 / PVC Matrix', rasa: 'Katu (Pungent)', color: 0x8b5cf6, colorHex: '#8B5CF6', targetV: '1.151V', angle: 240 },
+  { id: 'WE6', name: 'Ruthenium Oxide Micro-film', material: 'Hydrous RuOx / Glassy Carbon', rasa: 'Kashaya (Astringent)', color: 0x10b981, colorHex: '#10B981', targetV: '2.352V', angle: 300 },
 ];
 
 export default function ThreeSensorProbeStage({
@@ -42,18 +42,18 @@ export default function ThreeSensorProbeStage({
     if (!container) return;
 
     // =========================================================================
-    // 1. SCENE, CAMERA, RENDERER & ATMOSPHERIC FOG
+    // 1. SCENE, CAMERA & RENDERER (STUDIO CALIBER PBR PIPELINE)
     // =========================================================================
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020617, 0.015);
+    scene.fog = new THREE.FogExp2(0x060b0e, 0.012);
 
     const camera = new THREE.PerspectiveCamera(
-      42,
+      38,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 5, 28);
+    camera.position.set(0, 4, 25);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -64,517 +64,559 @@ export default function ThreeSensorProbeStage({
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 1.15;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
 
     // =========================================================================
-    // 2. PROCEDURAL HIGH-DYNAMIC-RANGE STUDIO ENVIRONMENT MAP
-    //    (Eliminates cartoon look: provides realistic metallic & glass reflections)
+    // 2. PROCEDURAL HIGH-RESOLUTION STUDIO ENVIRONMENT MAP
+    //    (Accurate metallic anistropic sheens and glass caustic reflections)
     // =========================================================================
     const envCanvas = document.createElement('canvas');
     envCanvas.width = 1024;
     envCanvas.height = 512;
     const envCtx = envCanvas.getContext('2d');
 
-    const envGrad = envCtx.createLinearGradient(0, 0, 0, 512);
-    envGrad.addColorStop(0, '#020617');
-    envGrad.addColorStop(0.3, '#0b1329');
-    envGrad.addColorStop(0.7, '#040915');
-    envGrad.addColorStop(1, '#020617');
-    envCtx.fillStyle = envGrad;
+    // Smooth deep charcoal gradient background
+    const bgGrad = envCtx.createLinearGradient(0, 0, 0, 512);
+    bgGrad.addColorStop(0, '#04070a');
+    bgGrad.addColorStop(0.3, '#0b1117');
+    bgGrad.addColorStop(0.7, '#070c10');
+    bgGrad.addColorStop(1, '#030508');
+    envCtx.fillStyle = bgGrad;
     envCtx.fillRect(0, 0, 1024, 512);
 
-    // Overhead high-contrast softbox light strip
+    // Overhead diffuse softbox panel (pure white 6500K)
     envCtx.fillStyle = '#ffffff';
-    envCtx.shadowColor = '#67e8f9';
-    envCtx.shadowBlur = 60;
-    envCtx.fillRect(250, 40, 200, 100);
+    envCtx.shadowColor = '#d1d5db';
+    envCtx.shadowBlur = 40;
+    envCtx.fillRect(280, 20, 220, 110);
 
-    // Cyan lateral laser strip
-    envCtx.fillStyle = '#38bdf8';
-    envCtx.shadowColor = '#2dd4bf';
-    envCtx.shadowBlur = 70;
-    envCtx.fillRect(700, 100, 90, 300);
-
-    // Warm amber counter-bounce strip
-    envCtx.fillStyle = '#f59e0b';
-    envCtx.shadowColor = '#d97706';
+    // Soft cold lateral strip light (laboratory rim highlight)
+    envCtx.fillStyle = '#e2e8f0';
+    envCtx.shadowColor = '#94a3b8';
     envCtx.shadowBlur = 50;
-    envCtx.fillRect(100, 260, 80, 180);
+    envCtx.fillRect(720, 60, 60, 260);
+
+    // Warm amber counter-bounce (representing herbal sample reflections)
+    envCtx.fillStyle = '#b45309';
+    envCtx.shadowColor = '#d97706';
+    envCtx.shadowBlur = 45;
+    envCtx.fillRect(80, 260, 90, 160);
 
     const envTexture = new THREE.CanvasTexture(envCanvas);
     envTexture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = envTexture;
 
     // =========================================================================
-    // 3. SCIENTIFIC STUDIO LIGHTING RIG
+    // 3. LABORATORY 3-POINT STUDIO LIGHTING
     // =========================================================================
-    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.2);
+    const ambientLight = new THREE.AmbientLight(0x0e171f, 1.4);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0x38bdf8, 3.5);
-    keyLight.position.set(16, 24, 18);
+    // Key Light: Crisp directional daylight
+    const keyLight = new THREE.DirectionalLight(0xf8fafc, 3.2);
+    keyLight.position.set(12, 18, 14);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.bias = -0.0001;
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x2dd4bf, 2.8);
-    rimLight.position.set(-18, -6, -16);
+    // Fill Light: Soft neutral fill
+    const fillLight = new THREE.DirectionalLight(0x94a3b8, 1.2);
+    fillLight.position.set(-14, 8, 12);
+    scene.add(fillLight);
+
+    // Rim Light: Cool blue-gray edge separator
+    const rimLight = new THREE.DirectionalLight(0x38bdf8, 2.0);
+    rimLight.position.set(0, -6, -14);
     scene.add(rimLight);
 
-    const bottomWarmFill = new THREE.PointLight(0xf59e0b, 2.0, 30);
-    bottomWarmFill.position.set(0, -10, 10);
-    scene.add(bottomWarmFill);
-
-    // Central levitation plasma point light
-    const plasmaLight = new THREE.PointLight(0x2dd4bf, 4.0, 18);
-    plasmaLight.position.set(0, 2, 0);
-    scene.add(plasmaLight);
+    // Sample Internal Caustic Light
+    const sampleGlow = new THREE.PointLight(0xd97706, 1.8, 16);
+    sampleGlow.position.set(0, -5, 0);
+    scene.add(sampleGlow);
 
     // =========================================================================
-    // 4. HOLOGRAPHIC LABORATORY FLOOR & ROTATING RADAR GRID
+    // 4. MASTER PBR MATERIAL REPOSITORY (REAL METROHM / GAMRY HARDWARE AESTHETIC)
     // =========================================================================
-    const floorGroup = new THREE.Group();
-    floorGroup.position.y = -12;
-    scene.add(floorGroup);
-
-    // Circular Holographic Radar Ring Grid
-    const radarDiscGeom = new THREE.RingGeometry(0.1, 14, 64, 4);
-    const radarDiscMat = new THREE.MeshBasicMaterial({
-      color: 0x0e7490,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.22,
-      side: THREE.DoubleSide,
-    });
-    const radarDisc = new THREE.Mesh(radarDiscGeom, radarDiscMat);
-    radarDisc.rotation.x = -Math.PI / 2;
-    floorGroup.add(radarDisc);
-
-    // Concentric coordinate rings
-    [4, 8, 12].forEach((r) => {
-      const ringG = new THREE.TorusGeometry(r, 0.04, 8, 64);
-      const ringM = new THREE.MeshBasicMaterial({
-        color: 0x38bdf8,
-        transparent: true,
-        opacity: 0.4,
-      });
-      const ring = new THREE.Mesh(ringG, ringM);
-      ring.rotation.x = Math.PI / 2;
-      floorGroup.add(ring);
+    const darkTitaniumMat = new THREE.MeshStandardMaterial({
+      color: 0x151a21,
+      metalness: 0.92,
+      roughness: 0.22,
     });
 
-    // Holographic radar sweep beam line
-    const sweepGeom = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(0, 0.05, 0),
-      new THREE.Vector3(14, 0.05, 0),
-    ]);
-    const sweepMat = new THREE.LineBasicMaterial({
-      color: 0x2dd4bf,
-      transparent: true,
-      opacity: 0.7,
+    const brushedChromeMat = new THREE.MeshStandardMaterial({
+      color: 0xd8e0ea,
+      metalness: 0.98,
+      roughness: 0.12,
     });
-    const sweepLine = new THREE.Line(sweepGeom, sweepMat);
-    floorGroup.add(sweepLine);
+
+    const knurledSteelMat = new THREE.MeshStandardMaterial({
+      color: 0x94a3b8,
+      metalness: 0.95,
+      roughness: 0.38,
+    });
+
+    const aerospaceGoldMat = new THREE.MeshStandardMaterial({
+      color: 0xd4af37,
+      metalness: 0.96,
+      roughness: 0.16,
+    });
+
+    const glassyCarbonMat = new THREE.MeshStandardMaterial({
+      color: 0x080a0c,
+      metalness: 0.85,
+      roughness: 0.06,
+    });
+
+    const teflonHeadMat = new THREE.MeshStandardMaterial({
+      color: 0x1f252d,
+      metalness: 0.15,
+      roughness: 0.42,
+    });
+
+    const labBenchMat = new THREE.MeshStandardMaterial({
+      color: 0x070c10,
+      metalness: 0.4,
+      roughness: 0.6,
+    });
 
     // =========================================================================
-    // 5. INTERACTIVE LIVE OLED SCREEN TEXTURE ON PROBE SHAFT
-    //    (Procedural dynamic canvas displaying live waveform & potentiostat data)
+    // 5. LABORATORY RETORT STAND & MICROMETER ELEVATION CLAMP
     // =========================================================================
-    const screenCanvas = document.createElement('canvas');
-    screenCanvas.width = 512;
-    screenCanvas.height = 256;
-    const screenCtx = screenCanvas.getContext('2d');
-    const screenTexture = new THREE.CanvasTexture(screenCanvas);
-    screenTexture.wrapS = THREE.ClampToEdgeWrapping;
-    screenTexture.wrapT = THREE.ClampToEdgeWrapping;
+    const standGroup = new THREE.Group();
+    scene.add(standGroup);
+
+    // Heavy Cast Laboratory Bench Base Plate
+    const basePlateGeom = new THREE.BoxGeometry(16, 0.7, 13);
+    const basePlate = new THREE.Mesh(basePlateGeom, darkTitaniumMat);
+    basePlate.position.set(0, -11.5, 0);
+    basePlate.receiveShadow = true;
+    standGroup.add(basePlate);
+
+    // Inset Anodized Work Area Pad
+    const padGeom = new THREE.BoxGeometry(14.8, 0.05, 11.8);
+    const pad = new THREE.Mesh(padGeom, labBenchMat);
+    pad.position.set(0, -11.12, 0);
+    pad.receiveShadow = true;
+    standGroup.add(pad);
+
+    // Beveled Rubber Foot Pads
+    [[-7, -5], [7, -5], [-7, 5], [7, 5]].forEach(([x, z]) => {
+      const footG = new THREE.CylinderGeometry(0.6, 0.7, 0.25, 24);
+      const footM = new THREE.MeshStandardMaterial({ color: 0x020406, roughness: 0.9 });
+      const foot = new THREE.Mesh(footG, footM);
+      foot.position.set(x, -11.95, z);
+      standGroup.add(foot);
+    });
+
+    // Precision Vertical Support Pillar (Polished Chrome)
+    const pillarGeom = new THREE.CylinderGeometry(0.38, 0.38, 24, 32);
+    const pillarMesh = new THREE.Mesh(pillarGeom, brushedChromeMat);
+    pillarMesh.position.set(0, 0.5, -5.2);
+    pillarMesh.castShadow = true;
+    standGroup.add(pillarMesh);
+
+    // Heavy Mounting Boss-Head Collar on Pillar
+    const bossHeadGeom = new THREE.CylinderGeometry(0.7, 0.7, 2.2, 32);
+    const bossHead = new THREE.Mesh(bossHeadGeom, darkTitaniumMat);
+    bossHead.position.set(0, 4.5, -5.2);
+    standGroup.add(bossHead);
+
+    // Knurled Locking Thumb Screw on Boss Head
+    const thumbScrewGeom = new THREE.CylinderGeometry(0.5, 0.5, 0.4, 24);
+    const thumbScrew = new THREE.Mesh(thumbScrewGeom, knurledSteelMat);
+    thumbScrew.rotation.x = Math.PI / 2;
+    thumbScrew.position.set(0, 4.5, -4.2);
+    standGroup.add(thumbScrew);
+
+    // Horizontal Stainless Steel Extension Arm holding the probe
+    const armGeom = new THREE.CylinderGeometry(0.24, 0.24, 5.4, 24);
+    const armMesh = new THREE.Mesh(armGeom, brushedChromeMat);
+    armMesh.rotation.x = Math.PI / 2;
+    armMesh.position.set(0, 4.5, -2.5);
+    standGroup.add(armMesh);
+
+    // Precision Clamp Collar gripping the probe
+    const probeClampGeom = new THREE.CylinderGeometry(1.65, 1.65, 1.4, 32);
+    const probeClamp = new THREE.Mesh(probeClampGeom, darkTitaniumMat);
+    probeClamp.position.set(0, 4.5, 0);
+    standGroup.add(probeClamp);
+
+    // Clamp adjustment thumb knobs
+    const knobG = new THREE.CylinderGeometry(0.35, 0.35, 0.5, 24);
+    const knob1 = new THREE.Mesh(knobG, knurledSteelMat);
+    knob1.rotation.z = Math.PI / 2;
+    knob1.position.set(1.9, 4.5, 0);
+    standGroup.add(knob1);
 
     // =========================================================================
-    // 6. PRECISION AEROSPACE SENSOR PROBE ASSEMBLY (ANTIGRAVITY CORE)
+    // 6. PRECISION SENSOR PROBE ASSEMBLY (DRAVYA 6000 ELECTROCHEMISTRY HEAD)
     // =========================================================================
     const probeMaster = new THREE.Group();
     scene.add(probeMaster);
 
-    // --- Sub-assembly A: Main Obsidian Titanium Chassis ---
-    const chassisMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      metalness: 0.94,
-      roughness: 0.18,
-    });
+    // Procedural High-Definition Laboratory OLED Display Texture
+    const oledCanvas = document.createElement('canvas');
+    oledCanvas.width = 512;
+    oledCanvas.height = 256;
+    const oledCtx = oledCanvas.getContext('2d');
+    const oledTexture = new THREE.CanvasTexture(oledCanvas);
 
-    const brushedChromeMat = new THREE.MeshStandardMaterial({
-      color: 0xe2e8f0,
-      metalness: 0.98,
-      roughness: 0.12,
+    // Braided Carbon Umbilical Signal Cable exiting top of probe
+    const cableCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 9.8, 0),
+      new THREE.Vector3(0.4, 11.2, -0.6),
+      new THREE.Vector3(0.2, 12.8, -2.4),
+      new THREE.Vector3(0, 13.5, -4.8),
+      new THREE.Vector3(0, 12.0, -5.2),
+    ]);
+    const cableGeom = new THREE.TubeGeometry(cableCurve, 32, 0.16, 12, false);
+    const cableMat = new THREE.MeshStandardMaterial({
+      color: 0x11161d,
+      roughness: 0.6,
+      metalness: 0.2,
     });
+    const cableMesh = new THREE.Mesh(cableGeom, cableMat);
+    probeMaster.add(cableMesh);
 
-    const aerospaceGoldMat = new THREE.MeshStandardMaterial({
-      color: 0xf59e0b,
-      metalness: 0.96,
-      roughness: 0.14,
-    });
+    // Top Strain Relief Cable Gland
+    const glandGeom = new THREE.CylinderGeometry(0.45, 0.7, 1.0, 32);
+    const glandMesh = new THREE.Mesh(glandGeom, knurledSteelMat);
+    glandMesh.position.set(0, 9.5, 0);
+    probeMaster.add(glandMesh);
 
-    // Main Cylindrical Housing Body
-    const bodyGeom = new THREE.CylinderGeometry(1.4, 1.4, 9, 48);
-    const bodyMesh = new THREE.Mesh(bodyGeom, chassisMat);
-    bodyMesh.position.y = 5.5;
+    // Upper Anodized Beveled Probe Cap
+    const capGeom = new THREE.CylinderGeometry(0.75, 1.4, 0.8, 48);
+    const capMesh = new THREE.Mesh(capGeom, brushedChromeMat);
+    capMesh.position.set(0, 8.8, 0);
+    probeMaster.add(capMesh);
+
+    // Upper Fine-Knurled Adjustment Ring
+    const knurlTopGeom = new THREE.CylinderGeometry(1.44, 1.44, 0.75, 48);
+    const knurlTop = new THREE.Mesh(knurlTopGeom, knurledSteelMat);
+    knurlTop.position.set(0, 8.1, 0);
+    probeMaster.add(knurlTop);
+
+    // Main Cylindrical Aerospace Titanium Body
+    const bodyGeom = new THREE.CylinderGeometry(1.38, 1.38, 5.8, 48);
+    const bodyMesh = new THREE.Mesh(bodyGeom, darkTitaniumMat);
+    bodyMesh.position.set(0, 4.8, 0);
+    bodyMesh.castShadow = true;
     probeMaster.add(bodyMesh);
 
-    // Vertical Titanium Heat-Sink / Cooling Fins (8 ribs)
-    for (let i = 0; i < 8; i++) {
-      const angle = (i * Math.PI * 2) / 8;
-      const finGeom = new THREE.BoxGeometry(0.08, 6.5, 0.4);
-      const finMesh = new THREE.Mesh(finGeom, brushedChromeMat);
-      finMesh.position.set(Math.cos(angle) * 1.55, 6, Math.sin(angle) * 1.55);
-      finMesh.rotation.y = -angle;
-      probeMaster.add(finMesh);
-    }
-
-    // High-Tech Curved OLED Display Panel
-    const oledGeom = new THREE.CylinderGeometry(1.43, 1.43, 3.2, 48, 1, true, -Math.PI / 3, (2 * Math.PI) / 3);
-    const oledMat = new THREE.MeshBasicMaterial({
-      map: screenTexture,
+    // Laser-Engraved Identification Badge on Probe Body
+    const badgeGeom = new THREE.CylinderGeometry(1.39, 1.39, 1.2, 48, 1, true, -Math.PI / 4, Math.PI / 2);
+    const badgeCanvas = document.createElement('canvas');
+    badgeCanvas.width = 512;
+    badgeCanvas.height = 128;
+    const bCtx = badgeCanvas.getContext('2d');
+    bCtx.fillStyle = '#151a21';
+    bCtx.fillRect(0, 0, 512, 128);
+    bCtx.fillStyle = '#94a3b8';
+    bCtx.font = 'bold 26px monospace';
+    bCtx.fillText('DRAVYA 6000 // ISO 17025', 28, 48);
+    bCtx.font = '18px monospace';
+    bCtx.fillStyle = '#64748b';
+    bCtx.fillText('6-CH VOLTAMMETRIC ELECTRODE HEAD', 28, 86);
+    const badgeTexture = new THREE.CanvasTexture(badgeCanvas);
+    const badgeMat = new THREE.MeshBasicMaterial({
+      map: badgeTexture,
       transparent: true,
-      opacity: 0.95,
+      side: THREE.DoubleSide,
+    });
+    const badgeMesh = new THREE.Mesh(badgeGeom, badgeMat);
+    badgeMesh.position.set(0, 6.6, 0);
+    probeMaster.add(badgeMesh);
+
+    // High-Precision Integrated OLED Diagnostic Display Bezel
+    const oledGeom = new THREE.CylinderGeometry(1.405, 1.405, 2.4, 48, 1, true, -Math.PI / 3, (2 * Math.PI) / 3);
+    const oledMat = new THREE.MeshBasicMaterial({
+      map: oledTexture,
+      transparent: true,
+      opacity: 0.98,
       side: THREE.DoubleSide,
     });
     const oledMesh = new THREE.Mesh(oledGeom, oledMat);
-    oledMesh.position.y = 5.5;
+    oledMesh.position.set(0, 4.5, 0);
     probeMaster.add(oledMesh);
 
-    // Upper Quantum Levitation Magnetic Cap
-    const capGeom = new THREE.CylinderGeometry(0.9, 1.45, 1.5, 32);
-    const capMesh = new THREE.Mesh(capGeom, brushedChromeMat);
-    capMesh.position.y = 10.75;
-    probeMaster.add(capMesh);
+    // Lower Knurled Grip Ring
+    const knurlBottomGeom = new THREE.CylinderGeometry(1.44, 1.44, 0.75, 48);
+    const knurlBottom = new THREE.Mesh(knurlBottomGeom, knurledSteelMat);
+    knurlBottom.position.set(0, 1.5, 0);
+    probeMaster.add(knurlBottom);
 
-    // Pulsating Levitation Plasma Emitter Orb at Top
-    const orbG = new THREE.SphereGeometry(0.7, 32, 32);
-    const orbM = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.85,
-    });
-    const topPlasmaOrb = new THREE.Mesh(orbG, orbM);
-    topPlasmaOrb.position.y = 11.5;
-    probeMaster.add(topPlasmaOrb);
-
-    // Glowing Fiber-Optic Cyan Halo Ring
-    const haloGeom = new THREE.TorusGeometry(1.5, 0.08, 16, 64);
-    const haloMat = new THREE.MeshBasicMaterial({
-      color: 0x2dd4bf,
-      transparent: true,
-      opacity: 0.95,
-    });
-    const haloRing = new THREE.Mesh(haloGeom, haloMat);
-    haloRing.rotation.x = Math.PI / 2;
-    haloRing.position.y = 1.6;
-    probeMaster.add(haloRing);
-
-    // Lower Gold-Plated Potentiostat Knurled Collar
-    const collarGeom = new THREE.CylinderGeometry(1.42, 1.25, 2.2, 32);
+    // Gold-Plated Potentiostat Transition Collar
+    const collarGeom = new THREE.CylinderGeometry(1.38, 1.15, 1.0, 48);
     const collarMesh = new THREE.Mesh(collarGeom, aerospaceGoldMat);
-    collarMesh.position.y = 0.5;
+    collarMesh.position.set(0, 0.65, 0);
     probeMaster.add(collarMesh);
 
-    // Beveled Hexagonal Working Electrode Mount Head
-    const hexGeom = new THREE.CylinderGeometry(1.2, 0.9, 1.2, 6);
-    const hexMesh = new THREE.Mesh(hexGeom, chassisMat);
-    hexMesh.position.y = -1.1;
-    probeMaster.add(hexMesh);
+    // Tapered Chemically-Resistant PEEK Sensor Cartridge Head
+    const cartridgeGeom = new THREE.CylinderGeometry(1.15, 0.95, 1.4, 48);
+    const cartridgeMesh = new THREE.Mesh(cartridgeGeom, teflonHeadMat);
+    cartridgeMesh.position.set(0, -0.55, 0);
+    probeMaster.add(cartridgeMesh);
 
-    // --- Sub-assembly B: 6 Iridescent Working Electrode Pins with Laser Tips ---
+    // Planar Ceramic Electrode Faceplate Disc
+    const faceplateGeom = new THREE.CylinderGeometry(0.95, 0.95, 0.25, 48);
+    const faceplateMesh = new THREE.Mesh(faceplateGeom, darkTitaniumMat);
+    faceplateMesh.position.set(0, -1.35, 0);
+    probeMaster.add(faceplateMesh);
+
+    // =========================================================================
+    // 7. PRECISION 6-CHANNEL MICRO-DISC ELECTRODE ARRAY + REFERENCE PIN
+    // =========================================================================
     const pins = [];
-    const pinGuideRays = [];
-    const pinRadius = 0.78;
+    const electrodeRadius = 0.58;
+
+    // Central Silver / Silver-Chloride (Ag/AgCl) Reference Electrode with ceramic frit
+    const refCollarG = new THREE.CylinderGeometry(0.16, 0.16, 0.35, 24);
+    const refCollarM = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.95, roughness: 0.1 });
+    const refCollar = new THREE.Mesh(refCollarG, refCollarM);
+    refCollar.position.set(0, -1.5, 0);
+    probeMaster.add(refCollar);
+
+    const refTipG = new THREE.CylinderGeometry(0.1, 0.1, 0.45, 24);
+    const refTipM = new THREE.MeshStandardMaterial({ color: 0x93c5fd, metalness: 0.4, roughness: 0.3 });
+    const refTip = new THREE.Mesh(refTipG, refTipM);
+    refTip.position.set(0, -1.7, 0);
+    probeMaster.add(refTip);
 
     ELECTRODE_SPECS.forEach((spec, i) => {
       const angle = (i * Math.PI * 2) / 6;
-      const x = Math.cos(angle) * pinRadius;
-      const z = Math.sin(angle) * pinRadius;
+      const x = Math.cos(angle) * electrodeRadius;
+      const z = Math.sin(angle) * electrodeRadius;
 
-      // Pin Needle Body (Aerospace Gold + Titanium)
-      const pinGeom = new THREE.CylinderGeometry(0.08, 0.05, 1.8, 16);
-      const pinMat = new THREE.MeshStandardMaterial({
-        color: spec.color,
-        emissive: spec.color,
-        emissiveIntensity: 0.6,
+      // Outer Gold Contact Collar
+      const collarG = new THREE.CylinderGeometry(0.15, 0.15, 0.3, 20);
+      const collarM = new THREE.MeshStandardMaterial({
+        color: 0xd4af37,
         metalness: 0.95,
-        roughness: 0.15,
+        roughness: 0.18,
       });
-      const pinMesh = new THREE.Mesh(pinGeom, pinMat);
-      pinMesh.position.set(x, -2.4, z);
-      pinMesh.userData = { index: i, spec };
-      probeMaster.add(pinMesh);
+      const collar = new THREE.Mesh(collarG, collarM);
+      collar.position.set(x, -1.48, z);
+      probeMaster.add(collar);
 
-      // Iridescent Sapphire Prism Contact Tip (Octahedron crystal)
-      const tipGeom = new THREE.OctahedronGeometry(0.14, 0);
-      const tipMat = new THREE.MeshBasicMaterial({ color: spec.color });
-      const tipMesh = new THREE.Mesh(tipGeom, tipMat);
-      tipMesh.position.set(x, -3.3, z);
-      probeMaster.add(tipMesh);
+      // Micro-Disc Active Surface
+      const discG = new THREE.CylinderGeometry(0.11, 0.11, 0.35, 20);
+      let discMat;
+      if (spec.id === 'WE1') {
+        // Lipid bio-membrane: iridescent emerald sheen
+        discMat = new THREE.MeshStandardMaterial({ color: 0x14b8a6, metalness: 0.6, roughness: 0.2 });
+      } else if (spec.id === 'WE2') {
+        // Polyaniline: conductive polymer deep blue
+        discMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.5, roughness: 0.3 });
+      } else if (spec.id === 'WE3') {
+        // Chitosan: translucent hydrogel
+        discMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6, metalness: 0.4, roughness: 0.25 });
+      } else if (spec.id === 'WE4') {
+        // Phthalocyanine: deep amber/copper
+        discMat = new THREE.MeshStandardMaterial({ color: 0xd97706, metalness: 0.9, roughness: 0.2 });
+      } else if (spec.id === 'WE5') {
+        // Crown ether: purple ion-selective
+        discMat = new THREE.MeshStandardMaterial({ color: 0x7c3aed, metalness: 0.5, roughness: 0.3 });
+      } else {
+        // Ruthenium oxide: deep lustrous glassy carbon
+        discMat = glassyCarbonMat;
+      }
 
-      // Laser Guide Line shooting down into solution
-      const rayGeom = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(x, -3.3, z),
-        new THREE.Vector3(x, -6.5, z),
-      ]);
-      const rayMat = new THREE.LineBasicMaterial({
-        color: spec.color,
-        transparent: true,
-        opacity: 0.45,
-      });
-      const rayLine = new THREE.Line(rayGeom, rayMat);
-      probeMaster.add(rayLine);
-      pinGuideRays.push(rayLine);
-
-      pins.push(pinMesh);
+      const discMesh = new THREE.Mesh(discG, discMat);
+      discMesh.position.set(x, -1.55, z);
+      discMesh.userData = { index: i, spec };
+      probeMaster.add(discMesh);
+      pins.push(discMesh);
     });
 
-    // =========================================================================
-    // 7. TRI-RING ANTIGRAVITY GYROSCOPIC LEVITATION FIELD
-    //    (Three concentric metallic rings rotating counter to each other)
-    // =========================================================================
-    const gyroGroup = new THREE.Group();
-    gyroGroup.position.y = 2.5;
-    probeMaster.add(gyroGroup);
-
-    // Ring 1 (Inner Cyan Ring with laser emitters)
-    const gyro1Geom = new THREE.TorusGeometry(2.2, 0.07, 16, 64);
-    const gyro1Mat = new THREE.MeshStandardMaterial({
+    // Subtle Micro-Luminescent Double-Layer Aura at electrode interface (activates on dip)
+    const auraGeom = new THREE.RingGeometry(0.1, 0.9, 32);
+    const auraMat = new THREE.MeshBasicMaterial({
       color: 0x38bdf8,
-      emissive: 0x0284c7,
-      emissiveIntensity: 0.4,
-      metalness: 0.96,
-      roughness: 0.1,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
     });
-    const gyro1 = new THREE.Mesh(gyro1Geom, gyro1Mat);
-    gyroGroup.add(gyro1);
-
-    // Ring 2 (Middle Titanium Gimbal Ring)
-    const gyro2Geom = new THREE.TorusGeometry(2.7, 0.08, 16, 64);
-    const gyro2Mat = new THREE.MeshStandardMaterial({
-      color: 0x94a3b8,
-      metalness: 0.98,
-      roughness: 0.15,
-    });
-    const gyro2 = new THREE.Mesh(gyro2Geom, gyro2Mat);
-    gyroGroup.add(gyro2);
-
-    // Ring 3 (Outer Gold-Infused Stabilization Ring)
-    const gyro3Geom = new THREE.TorusGeometry(3.3, 0.06, 16, 64);
-    const gyro3Mat = new THREE.MeshStandardMaterial({
-      color: 0xf59e0b,
-      emissive: 0xd97706,
-      emissiveIntensity: 0.35,
-      metalness: 0.95,
-      roughness: 0.12,
-    });
-    const gyro3 = new THREE.Mesh(gyro3Geom, gyro3Mat);
-    gyroGroup.add(gyro3);
+    const auraRing = new THREE.Mesh(auraGeom, auraMat);
+    auraRing.rotation.x = Math.PI / 2;
+    auraRing.position.set(0, -1.65, 0);
+    probeMaster.add(auraRing);
 
     // =========================================================================
-    // 8. DIELECTRIC GLASS BEAKER & HERBAL FLUID VOLUME
+    // 8. BOROSILICATE GLASS LABORATORY BEAKER & DRAVYA FLUID
     // =========================================================================
     const beakerGroup = new THREE.Group();
-    beakerGroup.position.set(0, -6.5, 0);
+    beakerGroup.position.set(0, -6.8, 0);
     scene.add(beakerGroup);
 
-    // High-Precision Lab Glass Cylinder (Dielectric Glass Shader)
-    const beakerGeom = new THREE.CylinderGeometry(4.2, 4.2, 8.5, 48, 1, true);
-    const beakerMat = new THREE.MeshPhysicalMaterial({
+    // Accurate Glass Beaker Geometry (Cylinder with wall thickness & rounded lip)
+    const beakerOuterGeom = new THREE.CylinderGeometry(4.2, 4.0, 8.8, 64, 1, true);
+    const glassMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xffffff,
-      transmission: 0.94,
+      transmission: 0.96,
       opacity: 0.4,
       transparent: true,
-      roughness: 0.06,
-      ior: 1.54,
-      metalness: 0.05,
-      reflectivity: 0.9,
+      roughness: 0.05,
+      ior: 1.52,
+      thickness: 1.4,
+      reflectivity: 0.92,
+      specularIntensity: 1.0,
     });
-    const beakerMesh = new THREE.Mesh(beakerGeom, beakerMat);
+    const beakerMesh = new THREE.Mesh(beakerOuterGeom, glassMaterial);
     beakerGroup.add(beakerMesh);
 
-    // Beaker Lip Spout Rim
-    const rimGeom = new THREE.TorusGeometry(4.2, 0.12, 16, 64);
-    const rimMesh = new THREE.Mesh(rimGeom, brushedChromeMat);
+    // Beaker Thick Glass Bottom Base
+    const beakerBaseGeom = new THREE.CylinderGeometry(4.0, 4.0, 0.4, 64);
+    const beakerBase = new THREE.Mesh(beakerBaseGeom, glassMaterial);
+    beakerBase.position.y = -4.2;
+    beakerGroup.add(beakerBase);
+
+    // Beaker Curved Top Pour Lip Rim
+    const rimGeom = new THREE.TorusGeometry(4.2, 0.09, 16, 64);
+    const rimMesh = new THREE.Mesh(rimGeom, glassMaterial);
     rimMesh.rotation.x = Math.PI / 2;
-    rimMesh.position.y = 4.25;
+    rimMesh.position.y = 4.4;
     beakerGroup.add(rimMesh);
 
-    // Beaker Volumetric Scale Markings (Etched glass tick rings)
-    [-1.5, 0.5, 2.5].forEach((y) => {
-      const tickGeom = new THREE.TorusGeometry(4.21, 0.025, 8, 48, Math.PI / 2);
-      const tickMat = new THREE.MeshBasicMaterial({
-        color: 0x94a3b8,
-        transparent: true,
-        opacity: 0.6,
-      });
-      const tick = new THREE.Mesh(tickGeom, tickMat);
-      tick.rotation.x = Math.PI / 2;
-      tick.rotation.z = -Math.PI / 4;
-      tick.position.y = y;
-      beakerGroup.add(tick);
+    // Beaker White Ceramic Graduation Marks (50mL, 100mL, 150mL, 200mL, 250mL)
+    const graduationsCanvas = document.createElement('canvas');
+    graduationsCanvas.width = 512;
+    graduationsCanvas.height = 512;
+    const gCtx = graduationsCanvas.getContext('2d');
+    gCtx.clearRect(0, 0, 512, 512);
+    gCtx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+    gCtx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    gCtx.lineWidth = 3;
+    gCtx.font = 'bold 22px sans-serif';
+
+    const graduationLevels = [
+      { y: 390, ml: '50 mL' },
+      { y: 310, ml: '100 mL' },
+      { y: 230, ml: '150 mL' },
+      { y: 150, ml: '200 mL' },
+      { y: 70, ml: '250 mL' },
+    ];
+    graduationLevels.forEach(({ y, ml }) => {
+      gCtx.beginPath();
+      gCtx.moveTo(40, y);
+      gCtx.lineTo(95, y);
+      gCtx.stroke();
+      gCtx.fillText(ml, 110, y + 7);
     });
 
-    // Herbal Dravya Liquid Core (Deep Golden-Amber / Emerald Green)
-    const liquidGeom = new THREE.CylinderGeometry(4.02, 4.02, 6.2, 48);
-    const liquidMat = new THREE.MeshPhysicalMaterial({
-      color: 0x059669,
-      emissive: 0x047857,
-      emissiveIntensity: 0.35,
+    const gradTexture = new THREE.CanvasTexture(graduationsCanvas);
+    const gradGeom = new THREE.CylinderGeometry(4.21, 4.01, 8.7, 64, 1, true, -Math.PI / 6, Math.PI / 2.5);
+    const gradMat = new THREE.MeshBasicMaterial({
+      map: gradTexture,
       transparent: true,
-      opacity: 0.72,
-      roughness: 0.12,
-      transmission: 0.65,
-      ior: 1.38,
+      side: THREE.DoubleSide,
+    });
+    const gradMesh = new THREE.Mesh(gradGeom, gradMat);
+    beakerGroup.add(gradMesh);
+
+    // Authentic Herbal Extract Solution (Rich Golden-Amber Decoction / Kashayam)
+    const liquidGeom = new THREE.CylinderGeometry(4.08, 3.92, 6.4, 48);
+    const liquidMat = new THREE.MeshPhysicalMaterial({
+      color: 0xc2781a,
+      emissive: 0x78350f,
+      emissiveIntensity: 0.15,
+      transparent: true,
+      opacity: 0.88,
+      roughness: 0.1,
+      transmission: 0.76,
+      ior: 1.34,
     });
     const liquidMesh = new THREE.Mesh(liquidGeom, liquidMat);
-    liquidMesh.position.y = -1.1;
+    liquidMesh.position.y = -0.9;
     beakerGroup.add(liquidMesh);
 
-    // Liquid Surface Meniscus Disk with Ripples
-    const meniscusGeom = new THREE.CircleGeometry(3.98, 48);
+    // Realistic Fluid Surface Meniscus Disk
+    const meniscusGeom = new THREE.RingGeometry(0.1, 4.05, 48);
     const meniscusMat = new THREE.MeshStandardMaterial({
-      color: 0x2dd4bf,
-      emissive: 0x10b981,
-      emissiveIntensity: 0.45,
+      color: 0xd97706,
+      roughness: 0.08,
+      metalness: 0.2,
       transparent: true,
       opacity: 0.82,
-      roughness: 0.08,
-      metalness: 0.3,
+      side: THREE.DoubleSide,
     });
     const meniscusMesh = new THREE.Mesh(meniscusGeom, meniscusMat);
     meniscusMesh.rotation.x = -Math.PI / 2;
-    meniscusMesh.position.y = 2.0;
+    meniscusMesh.position.y = 2.25;
     beakerGroup.add(meniscusMesh);
 
-    // Volumetric Laser Scan Plane Sheet (Sweeps down through liquid)
-    const scanPlaneGeom = new THREE.RingGeometry(0.1, 3.95, 32);
-    const scanPlaneMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.35,
-      side: THREE.DoubleSide,
-    });
-    const scanPlane = new THREE.Mesh(scanPlaneGeom, scanPlaneMat);
-    scanPlane.rotation.x = -Math.PI / 2;
-    scanPlane.position.y = 1.9;
-    beakerGroup.add(scanPlane);
-
     // =========================================================================
-    // 9. ANTIGRAVITY QUANTUM ION PARTICLES (1,000 levitating particles)
-    // =========================================================================
-    const particleCount = 1000;
-    const particleGeom = new THREE.BufferGeometry();
-    const particlePos = new Float32Array(particleCount * 3);
-    const particleColors = new Float32Array(particleCount * 3);
-    const particleSpeeds = new Float32Array(particleCount);
-
-    const ionColorPalette = [
-      new THREE.Color(0x2dd4bf),
-      new THREE.Color(0x38bdf8),
-      new THREE.Color(0xf59e0b),
-      new THREE.Color(0xa855f7),
-      new THREE.Color(0x10b981),
-    ];
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const r = Math.random() * 3.6;
-      particlePos[i * 3] = Math.cos(angle) * r;
-      particlePos[i * 3 + 1] = (Math.random() - 0.5) * 6;
-      particlePos[i * 3 + 2] = Math.sin(angle) * r;
-
-      const c = ionColorPalette[i % ionColorPalette.length];
-      particleColors[i * 3] = c.r;
-      particleColors[i * 3 + 1] = c.g;
-      particleColors[i * 3 + 2] = c.b;
-
-      particleSpeeds[i] = 0.015 + Math.random() * 0.04;
-    }
-
-    particleGeom.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
-    particleGeom.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
-
-    const particleMat = new THREE.PointsMaterial({
-      size: 0.24,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.85,
-      blending: THREE.AdditiveBlending,
-    });
-    const particleSwarm = new THREE.Points(particleGeom, particleMat);
-    beakerGroup.add(particleSwarm);
-
-    // =========================================================================
-    // 10. SECTION 4: HOLOGRAPHIC 6D RADAR SPIDER CAGE
+    // 9. SECTION 4: CALIBRATED 6-AXIS CHEMOMETRIC VOLTAMMETRIC RADAR
+    //    (Replaces the cartoon spider cage with a true analytical radar grid)
     // =========================================================================
     const radar3DGroup = new THREE.Group();
     radar3DGroup.position.set(0, 0, 0);
     radar3DGroup.visible = false;
     scene.add(radar3DGroup);
 
-    // 6 Spatial Radiating Laser Axis Rods
-    const axisNodes = [];
+    // Concentric Calibration Rings (0.5V, 1.0V, 2.0V, 3.0V scale)
+    [2.2, 4.4, 6.6, 8.5].forEach((r, idx) => {
+      const ringG = new THREE.RingGeometry(r - 0.02, r + 0.02, 64);
+      const ringM = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: idx === 3 ? 0.45 : 0.2,
+        side: THREE.DoubleSide,
+      });
+      const ring = new THREE.Mesh(ringG, ringM);
+      radar3DGroup.add(ring);
+    });
+
+    // 6 Spatial Radiating Calibrated Measurement Axes
+    const radarLines = [];
     ELECTRODE_SPECS.forEach((spec, i) => {
       const angle = (i * Math.PI * 2) / 6;
-      const x = Math.cos(angle) * 7.5;
-      const y = Math.sin(i * 1.05) * 2.2;
-      const z = Math.sin(angle) * 7.5;
+      const x = Math.cos(angle) * 8.5;
+      const y = Math.sin(angle) * 8.5;
 
-      const lineGeom = new THREE.BufferGeometry().setFromPoints([
+      const axisGeom = new THREE.BufferGeometry().setFromPoints([
         new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(x, y, z),
+        new THREE.Vector3(x, y, 0),
       ]);
-      const lineMat = new THREE.LineBasicMaterial({
+      const axisMat = new THREE.LineBasicMaterial({
         color: spec.color,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.75,
       });
-      const line = new THREE.Line(lineGeom, lineMat);
-      radar3DGroup.add(line);
+      const axisLine = new THREE.Line(axisGeom, axisMat);
+      radar3DGroup.add(axisLine);
 
-      // Node Diamond Crystal at axis extremity
-      const nodeG = new THREE.OctahedronGeometry(0.35, 0);
+      // Precision Calibrated Axis Node (Spherical Jewel Bead)
+      const nodeG = new THREE.SphereGeometry(0.24, 24, 24);
       const nodeM = new THREE.MeshStandardMaterial({
         color: spec.color,
         emissive: spec.color,
-        emissiveIntensity: 0.8,
+        emissiveIntensity: 0.6,
         metalness: 0.9,
       });
       const node = new THREE.Mesh(nodeG, nodeM);
-      node.position.set(x, y, z);
+      node.position.set(x, y, 0);
       radar3DGroup.add(node);
-      axisNodes.push(node);
+      radarLines.push(node);
     });
 
-    // Holographic Translucent Radar Spider Cage
-    const spiderGeom = new THREE.IcosahedronGeometry(5.8, 1);
-    const spiderMat = new THREE.MeshStandardMaterial({
-      color: 0x38bdf8,
-      emissive: 0x0284c7,
-      emissiveIntensity: 0.45,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6,
-    });
-    const spiderMesh = new THREE.Mesh(spiderGeom, spiderMat);
-    radar3DGroup.add(spiderMesh);
-
-    // Inner Quantum Core Orb
-    const coreGeom = new THREE.SphereGeometry(2.4, 32, 32);
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x2dd4bf,
-      wireframe: true,
+    // Voltammetric Fingerprint Polygon (Connecting current potential points)
+    const radarPolyGeom = new THREE.BufferGeometry();
+    const radarPolyMat = new THREE.MeshBasicMaterial({
+      color: 0x10b981,
       transparent: true,
       opacity: 0.35,
+      side: THREE.DoubleSide,
     });
-    const coreMesh = new THREE.Mesh(coreGeom, coreMat);
-    radar3DGroup.add(coreMesh);
+    const radarPoly = new THREE.Mesh(radarPolyGeom, radarPolyMat);
+    radar3DGroup.add(radarPoly);
 
     // =========================================================================
-    // 11. MOUSE PARALLAX & RAYCASTING INTERACTION
+    // 10. MOUSE INTERACTION & ORBIT CONTROL
     // =========================================================================
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2(-100, -100);
@@ -587,13 +629,12 @@ export default function ThreeSensorProbeStage({
       const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
       mouse.x = nx;
       mouse.y = ny;
-      targetParallax.x = nx * 3.5;
-      targetParallax.y = ny * 2.0;
+      targetParallax.x = nx * 2.8;
+      targetParallax.y = ny * 1.6;
     };
 
     container.addEventListener('mousemove', onPointerMove);
 
-    // 360-degree Drag Rotation for Section 4 Radar
     let isDragging = false;
     let prevMouseX = 0;
     let prevMouseY = 0;
@@ -611,8 +652,10 @@ export default function ThreeSensorProbeStage({
       prevMouseX = e.clientX;
       prevMouseY = e.clientY;
       if (radar3DGroup.visible) {
-        radar3DGroup.rotation.y += deltaX * 0.01;
-        radar3DGroup.rotation.x += deltaY * 0.01;
+        radar3DGroup.rotation.y += deltaX * 0.008;
+        radar3DGroup.rotation.x += deltaY * 0.008;
+      } else {
+        probeMaster.rotation.y += deltaX * 0.008;
       }
     };
 
@@ -629,189 +672,180 @@ export default function ThreeSensorProbeStage({
     window.addEventListener('resize', onResize);
 
     // =========================================================================
-    // 12. 60 FPS CHOREOGRAPHY LOOP & PROCEDURAL SCREEN PAINTER
+    // 11. OLED DIAGNOSTIC SCREEN PAINTER
+    // =========================================================================
+    const drawOledScreen = (time, activeSection) => {
+      oledCtx.fillStyle = '#0a0e14';
+      oledCtx.fillRect(0, 0, 512, 256);
+
+      // Fine oscilloscope background grid
+      oledCtx.strokeStyle = 'rgba(74, 222, 128, 0.1)';
+      oledCtx.lineWidth = 1;
+      for (let x = 0; x < 512; x += 32) {
+        oledCtx.beginPath();
+        oledCtx.moveTo(x, 0);
+        oledCtx.lineTo(x, 256);
+        oledCtx.stroke();
+      }
+      for (let y = 0; y < 256; y += 32) {
+        oledCtx.beginPath();
+        oledCtx.moveTo(0, y);
+        oledCtx.lineTo(512, y);
+        oledCtx.stroke();
+      }
+
+      // Diagnostic Title & Status
+      oledCtx.fillStyle = '#10b981';
+      oledCtx.font = 'bold 20px monospace';
+      oledCtx.fillText('DRAVYA 6000 POTENTIOSTAT', 24, 38);
+
+      oledCtx.fillStyle = '#94a3b8';
+      oledCtx.font = '14px monospace';
+      oledCtx.fillText(`T = 24.6°C (COMP ON) | 250 S/s`, 24, 64);
+
+      // Live Cyclic Voltammetric / Transient Potential Curve
+      oledCtx.beginPath();
+      oledCtx.strokeStyle = '#38bdf8';
+      oledCtx.lineWidth = 2.5;
+      for (let x = 0; x < 512; x += 4) {
+        const decay = Math.exp(-x / 300);
+        const wave =
+          Math.sin(x * 0.05 + time * 5) * 22 * decay +
+          Math.cos(x * 0.02 - time * 2) * 10;
+        const y = 145 + wave;
+        if (x === 0) oledCtx.moveTo(x, y);
+        else oledCtx.lineTo(x, y);
+      }
+      oledCtx.stroke();
+
+      // Channel Readouts
+      oledCtx.fillStyle = '#f59e0b';
+      oledCtx.font = 'bold 15px monospace';
+      oledCtx.fillText('WE1: 0.722V  WE2: 0.384V  WE4: 2.777V', 24, 210);
+
+      oledCtx.fillStyle = '#10b981';
+      oledCtx.font = '13px monospace';
+      oledCtx.fillText(
+        `STATUS: ${activeSection === 1 ? 'IMMERSION / DOUBLE-LAYER EQUILIBRIUM' : activeSection === 3 ? '6-AXIS RASA RADAR VIEW' : 'READY // STANDBY INSPECTION'}`,
+        24,
+        236
+      );
+
+      oledTexture.needsUpdate = true;
+    };
+
+    // =========================================================================
+    // 12. 60 FPS RENDER LOOP & LABORATORY CHOREOGRAPHY
     // =========================================================================
     let animationId;
     const clock = new THREE.Clock();
-
-    const drawOledScreen = (time, activeSection) => {
-      screenCtx.fillStyle = '#020617';
-      screenCtx.fillRect(0, 0, 512, 256);
-
-      // Cyan grid lines
-      screenCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)';
-      screenCtx.lineWidth = 1;
-      for (let x = 0; x < 512; x += 32) {
-        screenCtx.beginPath();
-        screenCtx.moveTo(x, 0);
-        screenCtx.lineTo(x, 256);
-        screenCtx.stroke();
-      }
-      for (let y = 0; y < 256; y += 32) {
-        screenCtx.beginPath();
-        screenCtx.moveTo(0, y);
-        screenCtx.lineTo(512, y);
-        screenCtx.stroke();
-      }
-
-      // Live Telemetry Header
-      screenCtx.fillStyle = '#38bdf8';
-      screenCtx.font = 'bold 20px monospace';
-      screenCtx.fillText('E-TONGUE PRO // QUANTUM CORE', 24, 38);
-
-      screenCtx.fillStyle = '#94a3b8';
-      screenCtx.font = '14px monospace';
-      screenCtx.fillText('AFE POTENTIOSTAT: ACTIVE (250 S/s)', 24, 64);
-
-      // Live Electrochemical Waveform
-      screenCtx.beginPath();
-      screenCtx.strokeStyle = '#2dd4bf';
-      screenCtx.lineWidth = 3;
-      for (let x = 0; x < 512; x += 4) {
-        const wave =
-          Math.sin(x * 0.04 + time * 6) * 28 +
-          Math.sin(x * 0.08 - time * 3) * 12;
-        const y = 140 + wave;
-        if (x === 0) screenCtx.moveTo(x, y);
-        else screenCtx.lineTo(x, y);
-      }
-      screenCtx.stroke();
-
-      // Channel Pills at bottom
-      screenCtx.fillStyle = '#f59e0b';
-      screenCtx.font = 'bold 15px monospace';
-      screenCtx.fillText('WE1: 0.722V   WE4: 2.777V', 24, 210);
-
-      screenCtx.fillStyle = '#10b981';
-      screenCtx.fillText(`MODE: ${activeSection === 1 ? 'IMMERSION DIP' : activeSection === 3 ? '3D RADAR' : 'ANTIGRAVITY LEVITATING'}`, 24, 235);
-
-      screenTexture.needsUpdate = true;
-    };
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
       const time = clock.getElapsedTime();
       const { activeSection, isDipping } = stateRef.current;
 
-      // Update OLED screen
       drawOledScreen(time, activeSection);
 
-      // Parallax smoothing
       currentParallax.x += (targetParallax.x - currentParallax.x) * 0.05;
       currentParallax.y += (targetParallax.y - currentParallax.y) * 0.05;
 
-      // Antigravity Tri-Ring Gyroscope Counter-Rotations
-      gyro1.rotation.x = time * 1.2;
-      gyro1.rotation.y = time * 0.8;
-      gyro2.rotation.y = -time * 1.0;
-      gyro2.rotation.z = time * 0.6;
-      gyro3.rotation.x = Math.sin(time * 0.9) * 0.8;
-      gyro3.rotation.z = -time * 0.5;
-
-      // Plasma emitter pulse
-      const pulse = 1 + Math.sin(time * 4) * 0.25;
-      topPlasmaOrb.scale.set(pulse, pulse, pulse);
-      plasmaLight.intensity = 3.5 + Math.sin(time * 4) * 1.5;
-
-      // Holographic floor radar sweep
-      sweepLine.rotation.y = time * 1.5;
-
-      // Volumetric laser scan sheet sweep
-      scanPlane.position.y = 0.5 + Math.sin(time * 2.5) * 1.8;
-
-      // Antigravity ion particle levitation
-      const pPos = particleGeom.attributes.position.array;
-      for (let i = 0; i < particleCount; i++) {
-        pPos[i * 3 + 1] += particleSpeeds[i] * (activeSection === 1 ? 2.5 : 1.0);
-        // Particle reset on reaching ceiling
-        if (pPos[i * 3 + 1] > 4.5) {
-          pPos[i * 3 + 1] = -4.5;
-        }
-      }
-      particleGeom.attributes.position.needsUpdate = true;
-
-      // Section-based Scrollytelling Choreography
+      // Section-based Stage Choreography
       if (activeSection === 0) {
-        // Section 1: Antigravity Floating Hero Probe
+        // Section 1: Standby / Hero Inspection
         probeMaster.visible = true;
         beakerGroup.visible = true;
         radar3DGroup.visible = false;
+        standGroup.visible = true;
 
-        // Higher physical levitation hovering above beaker rim
-        const levitateY = (isDipping ? -1.8 : 4.2) + Math.sin(time * 1.8) * 0.35;
-        probeMaster.position.y += (levitateY - probeMaster.position.y) * 0.08;
-        probeMaster.rotation.y += 0.007;
-        probeMaster.rotation.z = Math.sin(time * 1.2) * 0.03;
+        // Realistic hovering height above liquid meniscus
+        const targetY = isDipping ? -3.4 : 1.2;
+        probeMaster.position.y += (targetY - probeMaster.position.y) * 0.08;
+        if (!isDragging) {
+          probeMaster.rotation.y = Math.sin(time * 0.4) * 0.12;
+        }
+
+        auraMat.opacity = Math.max(0, auraMat.opacity - 0.05);
 
         camera.position.x += (currentParallax.x - camera.position.x) * 0.05;
-        camera.position.y += (4.5 + currentParallax.y - camera.position.y) * 0.05;
-        camera.position.z += (27.5 - camera.position.z) * 0.05;
-        camera.lookAt(0, 0.5, 0);
+        camera.position.y += (3.5 + currentParallax.y - camera.position.y) * 0.05;
+        camera.position.z += (25.0 - camera.position.z) * 0.05;
+        camera.lookAt(0, -0.5, 0);
 
       } else if (activeSection === 1) {
-        // Section 2: Sensor Immersion Dip Sequence
+        // Section 2: Precision Immersion Dip
         probeMaster.visible = true;
         beakerGroup.visible = true;
         radar3DGroup.visible = false;
+        standGroup.visible = true;
 
-        // Plunge probe deep into extract
-        const dipTargetY = -2.6;
+        // Submerge electrodes 20mm beneath liquid surface
+        const dipTargetY = -3.8;
         probeMaster.position.y += (dipTargetY - probeMaster.position.y) * 0.08;
-        probeMaster.rotation.y += 0.004;
 
-        // Liquid surface ripples and agitation
-        meniscusMesh.position.y = 2.0 + Math.sin(time * 8) * 0.12;
+        // Gentle surface tension ripple
+        meniscusMesh.position.y = 2.25 + Math.sin(time * 6) * 0.04;
 
-        // Camera zooms in close to electrode fluid interface
-        camera.position.x += (currentParallax.x * 0.5 + 2.5 - camera.position.x) * 0.05;
-        camera.position.y += (-1.2 + currentParallax.y * 0.5 - camera.position.y) * 0.05;
-        camera.position.z += (16.5 - camera.position.z) * 0.05;
-        camera.lookAt(0, -2.5, 0);
+        // Soft electrochemical double-layer ionic diffusion aura
+        auraMat.opacity = 0.45 + Math.sin(time * 4) * 0.15;
+
+        // Close-up inspection camera view of electrode-fluid interface
+        camera.position.x += (currentParallax.x * 0.5 + 2.0 - camera.position.x) * 0.05;
+        camera.position.y += (-2.5 + currentParallax.y * 0.5 - camera.position.y) * 0.05;
+        camera.position.z += (15.0 - camera.position.z) * 0.05;
+        camera.lookAt(0, -3.2, 0);
 
       } else if (activeSection === 2) {
-        // Section 3: Multi-Agent Swarm Orbit
+        // Section 3: Voltammetric Assay Acquisition
         probeMaster.visible = true;
         beakerGroup.visible = true;
         radar3DGroup.visible = false;
+        standGroup.visible = true;
 
-        probeMaster.position.y += (-1.8 - probeMaster.position.y) * 0.08;
-        probeMaster.rotation.y = time * 0.3;
+        probeMaster.position.y += (-3.6 - probeMaster.position.y) * 0.08;
+        if (!isDragging) {
+          probeMaster.rotation.y = time * 0.15;
+        }
 
-        // Dynamic 45-degree isometric orbit
-        const camOrbitX = Math.cos(time * 0.25) * 18;
-        const camOrbitZ = Math.sin(time * 0.25) * 18;
+        auraMat.opacity = 0.6 + Math.sin(time * 5) * 0.2;
+
+        // Smooth 45-degree laboratory orbit
+        const camOrbitX = Math.cos(time * 0.2) * 19;
+        const camOrbitZ = Math.sin(time * 0.2) * 19;
         camera.position.x += (camOrbitX - camera.position.x) * 0.05;
-        camera.position.y += (5.0 - camera.position.y) * 0.05;
+        camera.position.y += (4.0 - camera.position.y) * 0.05;
         camera.position.z += (camOrbitZ - camera.position.z) * 0.05;
-        camera.lookAt(0, 0, 0);
+        camera.lookAt(0, -1.0, 0);
 
       } else if (activeSection === 3) {
-        // Section 4: 3D Holographic Radar Spider Cage
+        // Section 4: 6-Axis Chemometric Radar
         probeMaster.visible = false;
         beakerGroup.visible = false;
         radar3DGroup.visible = true;
+        standGroup.visible = false;
 
         if (!isDragging) {
-          radar3DGroup.rotation.y += 0.012;
-          radar3DGroup.rotation.x = Math.sin(time * 0.6) * 0.2;
+          radar3DGroup.rotation.y += 0.008;
+          radar3DGroup.rotation.x = Math.sin(time * 0.5) * 0.1;
         }
 
-        spiderMesh.rotation.z = time * 0.08;
-        coreMesh.rotation.y = -time * 0.15;
-
-        // Node crystals oscillate along their axis
-        axisNodes.forEach((node, idx) => {
-          const s = 1 + Math.sin(time * 3 + idx) * 0.25;
-          node.scale.set(s, s, s);
+        // Dynamic update of radar polygon based on live potentials
+        const polyPoints = [];
+        ELECTRODE_SPECS.forEach((spec, idx) => {
+          const angle = (idx * Math.PI * 2) / 6;
+          const v = [0.72, 0.38, 0.45, 2.78, 1.15, 2.35][idx] || 1.5;
+          const r = (v / 3.3) * 8.0;
+          polyPoints.push(new THREE.Vector3(Math.cos(angle) * r, Math.sin(angle) * r, 0));
         });
+        radarPolyGeom.setFromPoints(polyPoints);
 
         camera.position.x += (currentParallax.x * 0.5 - camera.position.x) * 0.05;
         camera.position.y += (currentParallax.y * 0.5 - camera.position.y) * 0.05;
-        camera.position.z += (21.0 - camera.position.z) * 0.05;
+        camera.position.z += (20.0 - camera.position.z) * 0.05;
         camera.lookAt(0, 0, 0);
       }
 
-      // Raycasting for Pin Hover Interaction
+      // Micro-electrode raycasting for interactive hover details
       if (probeMaster.visible) {
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(pins);

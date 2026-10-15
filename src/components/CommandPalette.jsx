@@ -36,15 +36,6 @@ export default function CommandPalette({ isOpen, onClose }) {
   const COMMAND_ITEMS = [
     // Navigation
     {
-      id: 'nav-3d',
-      category: 'Navigation',
-      title: '3D Interactive Spatial Workstation',
-      subtitle: 'Photorealistic titanium probe, fluid beaker, ion swarm & 3D radar spider',
-      icon: Compass,
-      color: 'text-teal-600 bg-teal-50',
-      action: () => navigate('/3d'),
-    },
-    {
       id: 'nav-dashboard',
       category: 'Navigation',
       title: 'Control Center Dashboard',

@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import {
   Search,
   Download,
-  Filter,
   Eye,
   X,
   Play,
@@ -11,35 +10,39 @@ import {
   CheckCircle2,
   AlertTriangle,
   RotateCcw,
-  FileText,
   ChevronLeft,
   ChevronRight,
-  RefreshCw,
   Sparkles,
-  Info
+  SlidersHorizontal,
+  FileSpreadsheet
 } from 'lucide-react';
 import { api, SENSOR_SPECS } from '../services/api';
 import toast from 'react-hot-toast';
+import Badge from '../components/ui/ds/Badge';
+import DetailDrawer from '../components/ui/ds/DetailDrawer';
+import EmptyState from '../components/ui/ds/EmptyState';
+import ErrorState from '../components/ui/ds/ErrorState';
 
 export default function SampleHistoryPage() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
 
-  // Search and Debounce
+  // Search & Filter
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL'); // 'ALL' | 'PURE' | 'ADULTERATED'
+  const [density, setDensity] = useState('comfortable'); // 'comfortable' | 'compact'
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = density === 'compact' ? 12 : 8;
 
-  // Selected sample for modal inspection
+  // Selected sample for drawer inspection
   const [selectedSample, setSelectedSample] = useState(null);
 
-  // Real-time oscilloscope feed parameters
-  const [samplingRate, setSamplingRate] = useState(5); // 1Hz to 10Hz
+  // Oscilloscope state
+  const [samplingRate, setSamplingRate] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
   const [packetCount, setPacketCount] = useState(42890);
   const canvasRef = useRef(null);
@@ -63,7 +66,7 @@ export default function SampleHistoryPage() {
     return () => clearInterval(interval);
   }, [isPaused, samplingRate]);
 
-  // Fetch assay history
+  // Load history
   const loadHistory = async () => {
     setLoading(true);
     setFetchError(null);
@@ -71,7 +74,7 @@ export default function SampleHistoryPage() {
       const records = await api.getSampleHistory();
       setHistory(Array.isArray(records) ? records : []);
     } catch (err) {
-      setFetchError('Unable to load laboratory assay history. Please check your connection.');
+      setFetchError('Unable to load laboratory assay ledger. Please verify server connection.');
     } finally {
       setLoading(false);
     }
@@ -81,7 +84,7 @@ export default function SampleHistoryPage() {
     loadHistory();
   }, []);
 
-  // Oscilloscope canvas rendering
+  // Oscilloscope canvas rendering (Clean Dark Phosphor)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -96,11 +99,12 @@ export default function SampleHistoryPage() {
       const width = canvas.width;
       const height = canvas.height;
 
-      ctx.fillStyle = '#FFFFFF';
+      // Dark background
+      ctx.fillStyle = '#060A08';
       ctx.fillRect(0, 0, width, height);
 
-      // Grid Lines
-      ctx.strokeStyle = '#F1F5F9';
+      // Grid
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.06)';
       ctx.lineWidth = 1;
       for (let x = 0; x < width; x += 35) {
         ctx.beginPath();
@@ -116,15 +120,18 @@ export default function SampleHistoryPage() {
       }
 
       // Draw primary active stream
-      ctx.strokeStyle = '#0D9488';
-      ctx.lineWidth = 1.6;
+      ctx.strokeStyle = '#10B981';
+      ctx.lineWidth = 1.8;
+      ctx.shadowColor = '#10B981';
+      ctx.shadowBlur = 6;
       ctx.beginPath();
       for (let x = 0; x < width; x += 2) {
-        const y = height / 2 - Math.sin((x * 0.02) + phase) * 35 - (Math.random() - 0.5) * 2;
+        const y = height / 2 - Math.sin(x * 0.02 + phase) * 35;
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
       ctx.stroke();
+      ctx.shadowBlur = 0;
 
       animationFrame = requestAnimationFrame(render);
     };
@@ -133,7 +140,7 @@ export default function SampleHistoryPage() {
     return () => cancelAnimationFrame(animationFrame);
   }, [isPaused, samplingRate]);
 
-  // Filtering logic
+  // Filtering
   const filtered = (Array.isArray(history) ? history : []).filter((h) => {
     const term = debouncedSearch.toLowerCase().trim();
     const matchesTerm =
@@ -152,7 +159,6 @@ export default function SampleHistoryPage() {
     return matchesTerm && matchesStatus;
   });
 
-  // Pagination calculation
   const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
   const paginatedRows = filtered.slice(
     (currentPage - 1) * itemsPerPage,
@@ -173,179 +179,183 @@ export default function SampleHistoryPage() {
     toast.success('Assay Ledger CSV Exported');
   };
 
-  // Helper to extract or generate human "Why this?" factor explanations
   const getWhyFactors = (sample) => {
     if (sample.whyFactors && Array.isArray(sample.whyFactors) && sample.whyFactors.length > 0) {
       return sample.whyFactors;
     }
-    const factors = [];
     const isPure = (sample.status || '').toUpperCase().includes('PURE');
     if (isPure) {
-      factors.push(`Electrochemical potentiostat fingerprint matches authentic ${sample.verdict || sample.sampleName} reference baseline.`);
-      factors.push('All 6 Shad-Rasa sensor channels remain within certified ±8% pharmacopoeial tolerance limits.');
-      factors.push('No anomalous ionic conductivity or synthetic colorant peaks observed.');
-    } else {
-      factors.push(`Sensor voltage deviation exceeds certified purity threshold for ${sample.sampleName}.`);
-      factors.push('Anomalous conductive response detected on salt/halide channels indicating potential bulking or dye.');
-      factors.push('Natural organoleptic tannin/curcuminoid marker response is significantly suppressed.');
+      return [
+        `Electrochemical potentiostat curve matches authentic ${sample.verdict || sample.sampleName} reference baseline.`,
+        'All 6 Shad-Rasa sensor channels remain within certified ±8% pharmacopoeial tolerance bounds.',
+        'No anomalous ionic conductivity or synthetic colorant peaks observed on S3 halide channel.',
+      ];
     }
-    return factors;
+    return [
+      `Sensor voltage response deviates significantly from authentic reference standard for ${sample.sampleName}.`,
+      'Anomalous conductive peak detected on S3 electrode indicating synthetic colorant / halide bulking.',
+      'Natural organoleptic tannin and curcuminoid marker response is suppressed below pharmacopoeial limits.',
+    ];
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 pb-20 font-sans">
-      {/* 1. Real-Time Oscilloscope Feed & Packet Counter */}
-      <div className="lab-card p-5 space-y-3">
+    <div className="max-w-7xl mx-auto space-y-6 pb-20 font-sans text-[#EDEFE8]">
+      {/* 1. Oscilloscope Telemetry Card */}
+      <div className="lab-card p-6 space-y-3">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 text-[10px] font-mono font-bold border border-teal-200 flex items-center gap-1">
-                <Activity className="w-3 h-3 animate-pulse text-teal-600" />
-                <span>CHAMBER OSCILLOSCOPE</span>
-              </span>
-              <span className="text-xs text-slate-500 font-mono">
+              <Badge variant="success">CHAMBER OSCILLOSCOPE</Badge>
+              <span className="text-xs text-[#8E9B93] font-mono">
                 Hardware Synchronized Ingestion Stream
               </span>
             </div>
-            <h2 className="text-sm font-semibold text-slate-900 mt-1">
+            <h3 className="text-sm font-semibold text-[#EDEFE8] mt-1.5">
               Live Potentiostat Signal Monitoring
-            </h2>
+            </h3>
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-xs">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-50 border border-slate-200">
-              <span className="text-slate-500">PACKETS:</span>
-              <span className="font-bold text-slate-800 tabular-nums">{packetCount.toLocaleString()}</span>
+          <div className="flex items-center gap-2.5 font-mono text-xs">
+            <div className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#8E9B93]">
+              <span>PACKETS: </span>
+              <span className="font-bold text-[#EDEFE8] tabular-nums">{packetCount.toLocaleString()}</span>
             </div>
 
-            {/* Sampling Rate Selector (1Hz - 10Hz) */}
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-50 border border-slate-200">
-              <span className="text-slate-500">RATE:</span>
+            {/* Rate */}
+            <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#8E9B93]">
+              <span>RATE:</span>
               <select
                 value={samplingRate}
                 onChange={(e) => setSamplingRate(parseInt(e.target.value))}
-                className="bg-transparent text-slate-800 font-bold focus:outline-none cursor-pointer"
-                aria-label="Sensor Sampling Rate"
+                className="bg-transparent text-[#EDEFE8] font-bold focus:outline-none cursor-pointer"
               >
-                <option value={1}>1 Hz</option>
-                <option value={2}>2 Hz</option>
-                <option value={5}>5 Hz</option>
-                <option value={10}>10 Hz</option>
+                <option value={1} className="bg-[#0B100D]">1 Hz</option>
+                <option value={2} className="bg-[#0B100D]">2 Hz</option>
+                <option value={5} className="bg-[#0B100D]">5 Hz</option>
+                <option value={10} className="bg-[#0B100D]">10 Hz</option>
               </select>
             </div>
 
             <button
               onClick={() => setIsPaused(!isPaused)}
-              className="px-2.5 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-1 cursor-pointer transition-colors"
-              aria-label={isPaused ? 'Resume oscilloscope stream' : 'Pause oscilloscope stream'}
+              className="lab-btn-secondary text-xs"
             >
-              {isPaused ? <Play className="w-3 h-3 text-emerald-600" /> : <Pause className="w-3 h-3 text-amber-600" />}
+              {isPaused ? <Play className="w-3.5 h-3.5 text-[#10B981]" /> : <Pause className="w-3.5 h-3.5 text-[#F59E0B]" />}
               <span>{isPaused ? 'Resume' : 'Freeze'}</span>
             </button>
           </div>
         </div>
 
-        <div className="border border-slate-200 rounded-lg overflow-hidden bg-white">
+        <div className="border border-white/[0.08] rounded-xl overflow-hidden bg-[#060A08]">
           <canvas
             ref={canvasRef}
             width={800}
-            height={110}
+            height={100}
             className="w-full h-24 block"
           />
         </div>
       </div>
 
-      {/* 2. Filterable, Searchable Data Table */}
-      <div className="lab-card p-5 space-y-4">
-        {/* Header & Controls */}
+      {/* 2. Filterable Audit Ledger Table Card */}
+      <div className="lab-card p-6 space-y-4">
+        {/* Top Controls */}
         <div className="flex items-center justify-between flex-wrap gap-3">
+          {/* Search */}
           <div className="relative flex-1 min-w-[260px]">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#8E9B93] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               placeholder="Search by specimen name, batch ID, or verdict..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-8 py-2 text-xs font-mono text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500"
-              aria-label="Search specimen records"
+              className="lab-input w-full pl-9 pr-8 py-2 text-xs font-mono"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
-                aria-label="Clear search input"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8E9B93] hover:text-[#EDEFE8] p-0.5"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
 
-          {/* Filter Status Buttons */}
-          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg border border-slate-200 text-xs font-medium">
+          {/* Status Filter Buttons */}
+          <div className="flex items-center gap-1.5 p-1 bg-white/[0.03] rounded-xl border border-white/[0.08] text-xs font-medium">
             <button
               onClick={() => { setStatusFilter('ALL'); setCurrentPage(1); }}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
                 statusFilter === 'ALL'
-                  ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#10B981] text-[#061209] font-bold shadow-xs'
+                  : 'text-[#8E9B93] hover:text-[#EDEFE8]'
               }`}
             >
               All Assays
             </button>
             <button
               onClick={() => { setStatusFilter('PURE'); setCurrentPage(1); }}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
                 statusFilter === 'PURE'
-                  ? 'bg-white text-emerald-700 font-bold shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#10B981] text-[#061209] font-bold shadow-xs'
+                  : 'text-[#8E9B93] hover:text-[#EDEFE8]'
               }`}
             >
               Pure Only
             </button>
             <button
               onClick={() => { setStatusFilter('ADULTERATED'); setCurrentPage(1); }}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
                 statusFilter === 'ADULTERATED'
-                  ? 'bg-white text-rose-700 font-bold shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#F43F5E] text-white font-bold shadow-xs'
+                  : 'text-[#8E9B93] hover:text-[#EDEFE8]'
               }`}
             >
               Flagged Only
             </button>
           </div>
 
-          <button
-            onClick={exportCSV}
-            className="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-mono text-xs flex items-center gap-2 transition-colors shadow-2xs cursor-pointer"
-          >
-            <Download className="w-3.5 h-3.5 text-teal-600" />
-            <span>Export CSV</span>
-          </button>
+          {/* Density Toggle & Export */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}
+              className="lab-btn-secondary text-xs"
+              title="Toggle Row Density"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5 text-[#8E9B93]" />
+              <span className="capitalize">{density}</span>
+            </button>
+
+            <button
+              onClick={exportCSV}
+              className="lab-btn-secondary text-xs"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5 text-[#10B981]" />
+              <span>Export CSV</span>
+            </button>
+          </div>
         </div>
 
         {/* Removable Active Filter Chips */}
         {(debouncedSearch || statusFilter !== 'ALL') && (
           <div className="flex items-center gap-2 flex-wrap pt-1 text-xs">
-            <span className="text-slate-400 font-mono text-[11px]">Active Filters:</span>
+            <span className="text-[#5A675F] font-mono text-[11px]">Applied Filters:</span>
             {debouncedSearch && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[11px]">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-[#EDEFE8] font-mono text-[11px]">
                 Search: "{debouncedSearch}"
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="hover:text-rose-600 cursor-pointer"
-                  aria-label="Remove search filter"
+                  className="hover:text-[#F43F5E] cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
               </span>
             )}
             {statusFilter !== 'ALL' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 font-mono text-[11px]">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-[#10B981] font-mono text-[11px]">
                 Status: {statusFilter === 'PURE' ? 'Pure Standards' : 'Flagged Adulterations'}
                 <button
                   onClick={() => setStatusFilter('ALL')}
-                  className="hover:text-rose-600 cursor-pointer"
-                  aria-label="Remove status filter"
+                  className="hover:text-[#F43F5E] cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -353,111 +363,94 @@ export default function SampleHistoryPage() {
             )}
             <button
               onClick={() => { setSearchTerm(''); setStatusFilter('ALL'); }}
-              className="text-xs text-teal-700 hover:underline font-mono"
+              className="text-xs text-[#10B981] hover:underline font-mono"
             >
               Reset all filters
             </button>
           </div>
         )}
 
-        {/* Error State with Retry */}
+        {/* Error State */}
         {fetchError && (
-          <div className="p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0" />
-              <span>{fetchError}</span>
-            </div>
-            <button
-              onClick={loadHistory}
-              className="px-3 py-1 rounded bg-rose-600 text-white font-medium hover:bg-rose-700 transition-colors cursor-pointer"
-            >
-              Retry
-            </button>
-          </div>
+          <ErrorState message={fetchError} onRetry={loadHistory} />
         )}
 
         {/* Table Container */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="border border-white/[0.08] rounded-xl overflow-hidden bg-[#0A0E0C]">
           <div className="overflow-x-auto">
             <table className="w-full text-left font-mono text-xs">
-              <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 text-[11px]">
+              <thead className="bg-white/[0.03] border-b border-white/[0.08] text-[#8E9B93] text-[11px] sticky top-0">
                 <tr>
-                  <th className="p-3">ASSAY ID</th>
-                  <th className="p-3">SPECIMEN NAME</th>
-                  <th className="p-3">BATCH LOT</th>
-                  <th className="p-3">VERDICT</th>
-                  <th className="p-3">CONFIDENCE</th>
-                  <th className="p-3">STATUS</th>
-                  <th className="p-3">TIMESTAMP</th>
-                  <th className="p-3 text-right">ACTION</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>ASSAY ID</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>SPECIMEN NAME</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>BATCH LOT</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>VERDICT</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>CONFIDENCE</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>STATUS</th>
+                  <th className={density === 'compact' ? 'p-2' : 'p-3.5'}>TIMESTAMP</th>
+                  <th className={`text-right ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-700 bg-white">
+              <tbody className="divide-y divide-white/[0.04] text-[#8E9B93]">
                 {loading ? (
-                  // Loading Skeletons
-                  Array.from({ length: 5 }).map((_, i) => (
+                  Array.from({ length: 6 }).map((_, i) => (
                     <tr key={i} className="animate-pulse">
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-16"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-36"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-24"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-28"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-12"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-20"></div></td>
-                      <td className="p-3"><div className="h-4 bg-slate-200 rounded w-24"></div></td>
-                      <td className="p-3 text-right"><div className="h-4 bg-slate-200 rounded w-16 ml-auto"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-16"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-36"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-24"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-28"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-12"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-20"></div></td>
+                      <td className="p-3"><div className="h-4 bg-white/[0.05] rounded w-24"></div></td>
+                      <td className="p-3 text-right"><div className="h-4 bg-white/[0.05] rounded w-16 ml-auto"></div></td>
                     </tr>
                   ))
                 ) : paginatedRows.length === 0 ? (
-                  // Empty State
                   <tr>
-                    <td colSpan={8} className="p-10 text-center">
-                      <div className="max-w-sm mx-auto space-y-2">
-                        <p className="text-slate-800 font-semibold text-sm">No matching assay records found</p>
-                        <p className="text-xs text-slate-500">
-                          No specimens matched your search query. Try broadening your terms or clear the active filters.
-                        </p>
-                        {(debouncedSearch || statusFilter !== 'ALL') && (
-                          <div className="pt-2">
-                            <button
-                              onClick={() => { setSearchTerm(''); setStatusFilter('ALL'); }}
-                              className="px-3 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold hover:bg-teal-100 transition-colors"
-                            >
-                              Clear filters & view all assays
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                    <td colSpan={8} className="p-8 text-center">
+                      <EmptyState
+                        title="No matching assay records"
+                        description="Try adjusting your search terms or clear active filters to see all recorded specimens."
+                        actionLabel="Clear all filters"
+                        onAction={() => { setSearchTerm(''); setStatusFilter('ALL'); }}
+                      />
                     </td>
                   </tr>
                 ) : (
                   paginatedRows.map((row) => (
-                    <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="p-3 font-bold text-teal-700">{row.id}</td>
-                      <td className="p-3 font-semibold text-slate-900 font-sans">{row.sampleName}</td>
-                      <td className="p-3 text-slate-500">{row.batchNumber}</td>
-                      <td className="p-3 font-medium text-slate-800">{row.verdict}</td>
-                      <td className="p-3 font-bold text-slate-900">
+                    <tr
+                      key={row.id}
+                      onClick={() => setSelectedSample(row)}
+                      className="hover:bg-white/[0.03] transition-colors cursor-pointer group"
+                    >
+                      <td className={`font-bold text-[#10B981] ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>
+                        {row.id}
+                      </td>
+                      <td className={`font-semibold text-[#EDEFE8] font-sans ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>
+                        {row.sampleName}
+                      </td>
+                      <td className={density === 'compact' ? 'p-2' : 'p-3.5'}>{row.batchNumber}</td>
+                      <td className={`text-[#EDEFE8] ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>{row.verdict}</td>
+                      <td className={`font-bold text-[#EDEFE8] tabular-nums ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>
                         {typeof row.confidence === 'number' ? `${row.confidence}%` : row.confidence}
                       </td>
-                      <td className="p-3">
-                        <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            (row.status || '').toUpperCase().includes('PURE')
-                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                              : 'bg-rose-50 text-rose-800 border border-rose-200'
-                          }`}
+                      <td className={density === 'compact' ? 'p-2' : 'p-3.5'}>
+                        <Badge
+                          variant={(row.status || '').toUpperCase().includes('PURE') ? 'success' : 'danger'}
                         >
-                          {(row.status || 'UNVERIFIED').replace('_', ' ')}
-                        </span>
+                          {(row.status || 'VERIFIED').replace('_', ' ')}
+                        </Badge>
                       </td>
-                      <td className="p-3 text-slate-500 text-[11px]">{row.date}</td>
-                      <td className="p-3 text-right">
+                      <td className={`text-[11px] ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>{row.date}</td>
+                      <td className={`text-right ${density === 'compact' ? 'p-2' : 'p-3.5'}`}>
                         <button
-                          onClick={() => setSelectedSample(row)}
-                          className="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-sans font-medium inline-flex items-center gap-1 transition-colors cursor-pointer"
-                          aria-label={`Inspect ${row.sampleName}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedSample(row);
+                          }}
+                          className="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8E9B93] group-hover:text-[#EDEFE8] text-xs font-sans inline-flex items-center gap-1 transition-colors"
                         >
-                          <Eye className="w-3 h-3 text-slate-500" />
+                          <Eye className="w-3 h-3 text-[#10B981]" />
                           <span>Inspect</span>
                         </button>
                       </td>
@@ -471,31 +464,31 @@ export default function SampleHistoryPage() {
 
         {/* Pagination Bar */}
         {!loading && filtered.length > 0 && (
-          <div className="flex items-center justify-between pt-2 text-xs font-mono text-slate-500">
+          <div className="flex items-center justify-between pt-2 text-xs font-mono text-[#8E9B93]">
             <div>
-              Showing <span className="font-bold text-slate-800">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-              <span className="font-bold text-slate-800">
+              Showing <span className="font-bold text-[#EDEFE8]">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+              <span className="font-bold text-[#EDEFE8]">
                 {Math.min(currentPage * itemsPerPage, filtered.length)}
               </span>{' '}
-              of <span className="font-bold text-slate-800">{filtered.length}</span> assays
+              of <span className="font-bold text-[#EDEFE8]">{filtered.length}</span> assays
             </div>
 
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="p-1.5 rounded border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 cursor-pointer"
+                className="p-1.5 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] disabled:opacity-30 disabled:cursor-not-allowed text-[#EDEFE8] cursor-pointer"
                 aria-label="Previous page"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 text-slate-700 font-semibold">
+              <span className="px-2 text-[#EDEFE8] font-semibold">
                 Page {currentPage} of {totalPages}
               </span>
               <button
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="p-1.5 rounded border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 cursor-pointer"
+                className="p-1.5 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] disabled:opacity-30 disabled:cursor-not-allowed text-[#EDEFE8] cursor-pointer"
                 aria-label="Next page"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -505,61 +498,45 @@ export default function SampleHistoryPage() {
         )}
       </div>
 
-      {/* 3. Individual Sample Inspection Modal with "Why this?" Explanation */}
+      {/* 3. Detail Drawer (Slide-over Inspector) */}
       {selectedSample && (
-        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl border border-slate-200 max-w-2xl w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-50 text-teal-800 border border-teal-200 font-bold">
-                    SPECIMEN INSPECTION DOSSIER
-                  </span>
-                  <span className="text-xs font-mono text-slate-500">ID: {selectedSample.id}</span>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mt-1">
-                  {selectedSample.sampleName}
-                </h3>
-              </div>
-              <button
-                onClick={() => setSelectedSample(null)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
+        <DetailDrawer
+          isOpen={Boolean(selectedSample)}
+          onClose={() => setSelectedSample(null)}
+          title={selectedSample.sampleName}
+          subtitle={`Ledger ID: ${selectedSample.id} • Batch: ${selectedSample.batchNumber}`}
+        >
+          <div className="space-y-6 text-xs">
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-              <div className="p-2.5 rounded bg-slate-50 border border-slate-200">
-                <span className="text-slate-400 text-[10px] block">BATCH</span>
-                <span className="font-bold text-slate-800">{selectedSample.batchNumber}</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 font-mono">
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                <span className="text-[10px] text-[#8E9B93] block">BATCH</span>
+                <span className="font-bold text-[#EDEFE8] block mt-0.5">{selectedSample.batchNumber}</span>
               </div>
-              <div className="p-2.5 rounded bg-slate-50 border border-slate-200">
-                <span className="text-slate-400 text-[10px] block">CONFIDENCE</span>
-                <span className="font-bold text-emerald-700">
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                <span className="text-[10px] text-[#8E9B93] block">CONFIDENCE</span>
+                <span className="font-bold text-[#10B981] block mt-0.5">
                   {typeof selectedSample.confidence === 'number' ? `${selectedSample.confidence}%` : selectedSample.confidence}
                 </span>
               </div>
-              <div className="p-2.5 rounded bg-slate-50 border border-slate-200">
-                <span className="text-slate-400 text-[10px] block">OPERATOR</span>
-                <span className="font-bold text-slate-800">{selectedSample.operator || 'Analytical Chemist'}</span>
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                <span className="text-[10px] text-[#8E9B93] block">OPERATOR</span>
+                <span className="font-bold text-[#EDEFE8] block mt-0.5 truncate">{selectedSample.operator || 'Analyst'}</span>
               </div>
-              <div className="p-2.5 rounded bg-slate-50 border border-slate-200">
-                <span className="text-slate-400 text-[10px] block">PEAK CHANNEL</span>
-                <span className="font-bold text-teal-700">{selectedSample.sensorPeak || 'S4: 2.78V'}</span>
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                <span className="text-[10px] text-[#8E9B93] block">PEAK CHANNEL</span>
+                <span className="font-bold text-[#10B981] block mt-0.5">{selectedSample.sensorPeak || 'S4: 2.78V'}</span>
               </div>
             </div>
 
             {/* 6 Sensor Voltages */}
-            <div className="space-y-2 font-mono text-xs">
-              <span className="font-semibold text-slate-700 block">6-Channel Recorded Potentials (Volts):</span>
+            <div className="space-y-2 font-mono">
+              <span className="font-semibold text-[#EDEFE8] block">6-Channel Recorded Potentials (Volts):</span>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {SENSOR_SPECS.map((s, idx) => (
-                  <div key={s.id} className="p-2 rounded bg-slate-50 border border-slate-200 text-center">
-                    <span className="text-[10px] text-slate-500 block">{s.id} ({s.name.split(' ')[0]})</span>
-                    <span className="font-bold text-slate-900 block mt-0.5">
+                  <div key={s.id} className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] text-center">
+                    <span className="text-[10px] text-[#8E9B93] block">{s.id}</span>
+                    <span className="font-bold text-[#EDEFE8] block mt-0.5">
                       {selectedSample.voltages && selectedSample.voltages[idx] !== undefined
                         ? `${Number(selectedSample.voltages[idx]).toFixed(2)}V`
                         : '1.20V'}
@@ -569,32 +546,23 @@ export default function SampleHistoryPage() {
               </div>
             </div>
 
-            {/* "Why this?" Human-Readable Explanation Factors (Phase 4 requirement) */}
-            <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-200/80 space-y-2">
-              <div className="flex items-center gap-1.5 text-teal-900 font-semibold text-xs">
-                <Sparkles className="w-3.5 h-3.5 text-teal-700" />
+            {/* "Why this result?" Plain-English Explanation */}
+            <div className="p-4 rounded-xl bg-[#10B981]/10 border border-[#10B981]/25 space-y-2">
+              <div className="flex items-center gap-1.5 text-[#10B981] font-semibold text-xs">
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Why this classification result?</span>
               </div>
-              <ul className="space-y-1.5 text-xs text-slate-700">
+              <ul className="space-y-1.5 text-xs text-[#EDEFE8]/90">
                 {getWhyFactors(selectedSample).map((factor, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-1.5 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] mt-1.5 shrink-0" />
                     <span>{factor}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            <div className="pt-3 border-t border-slate-200 flex justify-end">
-              <button
-                onClick={() => setSelectedSample(null)}
-                className="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-medium hover:bg-slate-800 cursor-pointer"
-              >
-                Close Inspection
-              </button>
-            </div>
           </div>
-        </div>
+        </DetailDrawer>
       )}
     </div>
   );

@@ -212,11 +212,10 @@ export default function LoginPage() {
           </Link>
 
           <Link
-            to="/3d"
+            to="/"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#8A968E] hover:text-[#B6F36A] transition-colors"
           >
-            <Compass className="w-3.5 h-3.5" />
-            <span>3D Biochip</span>
+            <span>Back to Home</span>
           </Link>
         </div>
 
@@ -401,7 +400,7 @@ export default function LoginPage() {
                   ))}
                 </div>
                 <p className="text-[10px] text-[#8A968E]">
-                  Enter the one-time clearance token dispatched to your institutional inbox.
+                  Enter the 6-digit verification code sent to your institutional email.
                 </p>
               </div>
             )}

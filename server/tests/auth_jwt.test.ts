@@ -74,8 +74,9 @@ describe('Auth Service & Domain Restrictions', () => {
 
     const verified = verifyJWT(token);
     expect(verified.valid).toBe(true);
-    expect(verified.payload.email).toBe('tanmay@iitd.ac.in');
-    expect(verified.payload.role).toBe('Lead ML Engineer');
-    expect(verified.payload.sub).toBe('usr_test_99');
+    const payload = verified.payload as any;
+    expect(payload?.email).toBe('tanmay@iitd.ac.in');
+    expect(payload?.role).toBe('Lead ML Engineer');
+    expect(payload?.sub).toBe('usr_test_99');
   });
 });

@@ -35,7 +35,7 @@ export default function LandingFooter() {
           <div className="space-y-3 font-mono text-xs">
             <span className="font-bold text-[#EDEFE8] block uppercase">Platform</span>
             <ul className="space-y-2 text-[#8A968E]">
-              <li><Link to="/3d" className="hover:text-[#B6F36A] transition-colors">3D Spatial Lab</Link></li>
+              <li><Link to="/agent" className="hover:text-[#B6F36A] transition-colors">Dravya AI Agent</Link></li>
               <li><Link to="/dashboard" className="hover:text-[#B6F36A] transition-colors">Control Center</Link></li>
               <li><Link to="/new-analysis" className="hover:text-[#B6F36A] transition-colors">Guided Wizard</Link></li>
               <li><Link to="/live-sensors" className="hover:text-[#B6F36A] transition-colors">Oscilloscope</Link></li>

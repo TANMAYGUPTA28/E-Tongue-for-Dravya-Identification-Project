@@ -79,13 +79,13 @@ export default function HeroSection({ onStartAnalysis }) {
             transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-wrap items-center gap-4 pt-2"
           >
-            <a
-              href="#demo"
+            <Link
+              to="/new-analysis"
               className="group relative px-6 py-3.5 rounded-full bg-[#B6F36A] hover:bg-[#cbfb88] text-[#07100B] font-bold text-xs uppercase tracking-wider font-mono flex items-center gap-2.5 shadow-[0_0_30px_rgba(182,243,106,0.35)] hover:shadow-[0_0_45px_rgba(182,243,106,0.55)] hover:scale-105 transition-all duration-300"
             >
               <span>Start Analysis</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
 
             <button
               onClick={() => setDemoVideoOpen(true)}
@@ -216,11 +216,11 @@ export default function HeroSection({ onStartAnalysis }) {
                 ESP32 6-Channel Working Electrode array submerged in Haritaki herbal decoction. Potentials sampled at 250 S/s and transferred to Random Forest classifier.
               </p>
               <Link
-                to="/3d"
+                to="/dashboard"
                 onClick={() => setDemoVideoOpen(false)}
                 className="px-5 py-2.5 rounded-full bg-[#B6F36A] text-[#07100B] font-mono font-bold text-xs uppercase"
               >
-                Open 3D Spatial Instrument
+                Open Analytical Control Center
               </Link>
             </div>
           </div>

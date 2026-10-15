@@ -131,13 +131,13 @@ export default function IslandNavbar({ onOpenCommandPalette }) {
               {isLightMode ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
             </button>
 
-            {/* 3D Spatial Lab Shortcut */}
+            {/* Live Oscilloscope Shortcut */}
             <Link
-              to="/3d"
+              to="/live-sensors"
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#3E7B4C]/20 hover:bg-[#3E7B4C]/35 border border-[#3E7B4C]/40 text-[#B6F36A] text-xs font-mono font-medium transition-all shadow-[0_0_15px_rgba(182,243,106,0.15)]"
             >
-              <Compass className="w-3.5 h-3.5 animate-spin-slow" />
-              <span>3D Lab</span>
+              <Activity className="w-3.5 h-3.5 text-[#B6F36A]" />
+              <span>Sensors</span>
             </Link>
 
             {/* Launch App / Dashboard CTA */}
@@ -181,12 +181,12 @@ export default function IslandNavbar({ onOpenCommandPalette }) {
             ))}
             <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
               <Link
-                to="/3d"
+                to="/live-sensors"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 px-3 rounded-xl bg-[#3E7B4C]/20 border border-[#3E7B4C]/40 text-[#B6F36A] flex items-center justify-between"
               >
-                <span>3D Spatial Workstation</span>
-                <Compass className="w-4 h-4" />
+                <span>Live Oscilloscope</span>
+                <Activity className="w-4 h-4" />
               </Link>
               <Link
                 to="/dashboard"

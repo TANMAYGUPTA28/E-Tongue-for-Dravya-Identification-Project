@@ -204,3 +204,96 @@ body {
   background-size: 300% 300%;
   animation: aurora 12s ease infinite;
 }
+
+/* =========================================================================
+   LINEAR / STRIPE CLEAN SAAS DESIGN TOKENS & UTILITIES
+   ========================================================================= */
+.lab-card, .bento-card {
+  background-color: #0F1511;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: #EDEFE8;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lab-card:hover, .bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.lab-input {
+  background-color: #090D0B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #EDEFE8;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  transition: all 0.15s ease;
+}
+
+.lab-input::placeholder {
+  color: #5A675F;
+}
+
+.lab-input:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.18);
+  background-color: #0B100D;
+}
+
+.lab-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #EDEFE8;
+  border-radius: 10px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.lab-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+}
+
+.lab-btn-primary {
+  background-color: #10B981;
+  color: #061209;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  border-radius: 10px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.lab-btn-primary:hover {
+  background-color: #34D399;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}

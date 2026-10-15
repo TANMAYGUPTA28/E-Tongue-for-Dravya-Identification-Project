@@ -25,6 +25,16 @@ import { storage } from './services/storage.js';
 import { aiAgent } from './services/agentService.js';
 import { agentRouter } from './src/agent/router.js';
 import { startNightlyCronJob } from './src/jobs/nightlyRollup.js';
+import helmet from 'helmet';
+import {
+  sessionProcessor,
+  recordDeviceHeartbeat,
+  getDeviceStatus,
+  setDeviceBaseline,
+  getDeviceBaseline,
+  VALID_SAMPLES,
+  ReadingInputSchema,
+} from './services/sessionProcessor.js';
 import {
   validateAllowedEmail,
   generateOTP,
@@ -42,14 +52,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+// Security & Hardening Middleware
+app.use(helmet({
+  contentSecurityPolicy: false, // Disabled for local dev and API communication
+  crossOriginEmbedderPolicy: false,
+}));
+
+// CORS Configuration
 const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({
   origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
   credentials: true,
 }));
-app.use(express.json());
 
-// Health check endpoints (root and API prefixed)
+// Body parser with size limit to prevent payload flooding
+app.use(express.json({ limit: '1mb' }));
+
+// Health and Readiness Check Endpoints
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
@@ -64,6 +83,24 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'DRAVYA 6000 Chemometrics Workstation',
+  });
+});
+
+app.get('/ready', (req, res) => {
+  res.json({
+    status: 'ready',
+    timestamp: new Date().toISOString(),
+    database: storage.getDBStatus()?.connected ? 'connected' : 'offline_mode',
+    ready: true,
+  });
+});
+
+app.get('/api/ready', (req, res) => {
+  res.json({
+    status: 'ready',
+    timestamp: new Date().toISOString(),
+    database: storage.getDBStatus()?.connected ? 'connected' : 'offline_mode',
+    ready: true,
   });
 });
 
@@ -267,6 +304,158 @@ app.get('/api/iot/telemetry/history', async (req, res) => {
   const limit = parseInt(req.query.limit) || 100;
   const records = await storage.getTelemetryHistory(limit);
   res.json({ totalRecords: records.length, records });
+});
+
+// =========================================================================
+// 3B. TEST SESSIONS & STANDARDIZED SENSOR READINGS PIPELINE
+// =========================================================================
+
+// Start a new test session for a chosen sample
+app.post('/api/sessions/start', (req, res, next) => {
+  try {
+    const { sampleId, deviceId, operator, batchNumber } = req.body || {};
+    if (!sampleId) {
+      return res.status(400).json({ error: 'sampleId is required to initiate test session.' });
+    }
+    const session = sessionProcessor.startSession({
+      sampleId,
+      deviceId: deviceId || 'ESP32-S3',
+      operator: operator || 'Laboratory Analyst',
+      batchNumber,
+    });
+    res.status(201).json({ success: true, session });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Device sends a raw sensor reading packet
+app.post('/api/readings', async (req, res, next) => {
+  try {
+    const result = await sessionProcessor.ingestReading(req.body);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    if (err.name === 'ZodError') {
+      const issues = err.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join(', ');
+      return res.status(400).json({ error: `Sensor reading validation rejected: ${issues}` });
+    }
+    next(err);
+  }
+});
+
+// Get session state and live progress
+app.get('/api/sessions/:sessionId', (req, res, next) => {
+  try {
+    const session = sessionProcessor.getSession(req.params.sessionId);
+    if (!session) {
+      return res.status(404).json({ error: `Test session "${req.params.sessionId}" not found.` });
+    }
+    res.json({ success: true, session });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Finalize session (or trigger early finalization)
+app.post('/api/sessions/:sessionId/finalize', async (req, res, next) => {
+  try {
+    const result = await sessionProcessor.finalizeSession(req.params.sessionId);
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Cancel active session
+app.post('/api/sessions/:sessionId/cancel', (req, res, next) => {
+  try {
+    const success = sessionProcessor.cancelSession(req.params.sessionId);
+    res.json({ success, message: success ? 'Session cancelled.' : 'Session not found.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Alias for starting session: POST /api/sessions
+app.post('/api/sessions', (req, res, next) => {
+  try {
+    const { sampleId, deviceId, operator, batchNumber } = req.body || {};
+    if (!sampleId) {
+      return res.status(400).json({ error: 'sampleId is required to initiate test session.' });
+    }
+    const session = sessionProcessor.startSession({
+      sampleId,
+      deviceId: deviceId || 'ESP32-S3',
+      operator: operator || 'Laboratory Analyst',
+      batchNumber,
+    });
+    res.status(201).json({ success: true, session });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Store calibrated device air/blank baseline
+app.post('/api/device/baseline', (req, res) => {
+  const { deviceId = 'ESP32-S3', baseline } = req.body || {};
+  if (!Array.isArray(baseline) || baseline.length !== 6) {
+    return res.status(400).json({ error: 'baseline must be an array of 6 voltages' });
+  }
+  setDeviceBaseline(deviceId, baseline);
+  res.json({ success: true, deviceId, baseline, recordedAt: new Date().toISOString() });
+});
+
+app.get('/api/device/baseline', (req, res) => {
+  const deviceId = req.query.deviceId || 'ESP32-S3';
+  const baseline = getDeviceBaseline(deviceId);
+  res.json({ success: true, deviceId, baseline });
+});
+
+// SSE Live stream for a specific session's progress
+app.get('/api/sessions/:sessionId/stream', (req, res) => {
+  const { sessionId } = req.params;
+  const session = sessionProcessor.getSession(sessionId);
+  if (!session) {
+    return res.status(404).json({ error: `Session "${sessionId}" not found.` });
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders();
+
+  res.write(`data: ${JSON.stringify({
+    sessionId,
+    status: session.status,
+    readingsCount: session.rawReadings.length,
+    smoothedVoltages: session.smoothedVoltages,
+  })}\n\n`);
+
+  sessionProcessor.addListener(sessionId, res);
+
+  req.on('close', () => {
+    sessionProcessor.removeListener(sessionId, res);
+    res.end();
+  });
+});
+
+// Hardware heartbeat endpoint
+app.post('/api/device/heartbeat', (req, res) => {
+  const { deviceId = 'ESP32-S3', metadata } = req.body || {};
+  recordDeviceHeartbeat(deviceId, metadata);
+  res.json({ success: true, status: 'Recorded', timestamp: new Date().toISOString() });
+});
+
+// Device health status (Connected vs Offline)
+app.get('/api/device/status', (req, res) => {
+  const deviceId = req.query.deviceId || 'ESP32-S3';
+  const health = getDeviceStatus(deviceId);
+  res.json({ success: true, ...health });
+});
+
+// List of supported Ayurvedic test samples
+app.get('/api/samples/supported', (req, res) => {
+  res.json({ success: true, samples: VALID_SAMPLES });
 });
 
 // =========================================================================
@@ -733,6 +922,20 @@ if (fs.existsSync(distPath)) {
     res.sendFile(path.join(distPath, 'index.html'));
   });
 }
+
+// Central User-Friendly Error Handler (Hides technical stack traces, logs details to console)
+app.use((err, req, res, next) => {
+  console.error(`[SERVER ERROR] ${req.method} ${req.path}:`, err);
+  const status = err.status || err.statusCode || 500;
+  const userMessage = err.userFriendly
+    ? err.message
+    : (status === 404 ? 'The requested resource was not found.' : 'An error occurred during laboratory assay processing. Please verify hardware connection and retry.');
+  res.status(status).json({
+    success: false,
+    error: userMessage,
+    timestamp: new Date().toISOString(),
+  });
+});
 
 // =========================================================================
 // 12. SERVER BOOTSTRAP

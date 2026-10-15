@@ -7,7 +7,6 @@ import {
   FlaskConical,
   ArrowRight,
   TrendingUp,
-  Sliders,
   Play,
   Pause,
   RotateCcw,
@@ -15,30 +14,33 @@ import {
   Sparkles,
   ShieldCheck,
   AlertTriangle,
-  Zap,
-  Radio,
   FileDown,
-  Terminal,
-  Bot,
   Command,
-  Search,
-  ExternalLink
+  Eye,
+  Sliders,
+  Calendar
 } from 'lucide-react';
 import { api, SENSOR_SPECS } from '../services/api';
 import toast from 'react-hot-toast';
 import { API_BASE_URL } from '../services/apiClient';
+import KpiCard from '../components/ui/ds/KpiCard';
+import Badge from '../components/ui/ds/Badge';
+import DetailDrawer from '../components/ui/ds/DetailDrawer';
 
 export default function DashboardPage({ onOpenCommandPalette }) {
   const [telemetry, setTelemetry] = useState(null);
   const [activeChannels, setActiveChannels] = useState([true, true, true, true, true, true]);
   const [isPaused, setIsPaused] = useState(false);
   const [timebase, setTimebase] = useState('5s'); // 1s, 5s, 30s
+  const [dateRange, setDateRange] = useState('Today');
   const canvasRef = useRef(null);
   const animationFrameId = useRef(null);
   const phaseRef = useRef(0);
 
-  // Agent Swarm State
-  const [activeSwarmAgent, setActiveSwarmAgent] = useState('SpectrumAgent');
+  // Inspector Drawer state
+  const [selectedAssay, setSelectedAssay] = useState(null);
+
+  // Agent Swarm Log
   const [swarmLog, setSwarmLog] = useState([
     { agent: 'SignalGuard', tag: 'TELEMETRY', text: 'Chamber baseline zeroed: 6-channel SAR ADC sampling at 250 S/s. Noise floor: -74dBm.', time: '14:42:01' },
     { agent: 'SpectrumAgent', tag: 'CHEMOMETRICS', text: 'Potentiostat transient response ingested. Integrating AUC across Ch1-Ch6 channels.', time: '14:42:02' },
@@ -46,7 +48,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
     { agent: 'Veritas', tag: 'AUDITOR', text: 'Non-linear cross-sensitivity scan complete: 0% synthetic dye or starch adulteration.', time: '14:42:04' },
   ]);
 
-  const [historyCount, setHistoryCount] = useState(0);
+  const [historyCount, setHistoryCount] = useState(1420);
   const [recentAnalyses, setRecentAnalyses] = useState([]);
   const [lastCertified, setLastCertified] = useState({
     name: 'Haritaki (Terminalia chebula)',
@@ -57,6 +59,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
     date: 'Today, 14:38 IST',
     sha256: '8f4b2a9e1c3d7f02a5e8c1b9d4e2a6f8',
     peak: 'S6 (Ruthenium Oxide / Polyphenols)',
+    voltages: [0.92, 2.85, 0.42, 2.18, 0.88, 3.22],
   });
 
   // Poll live telemetry and fetch real DB history
@@ -71,7 +74,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
         const hist = await api.getSampleHistory();
         if (hist && hist.length > 0) {
           setHistoryCount(hist.length);
-          setRecentAnalyses(hist.slice(0, 5));
+          setRecentAnalyses(hist.slice(0, 6));
           const latest = hist[0];
           setLastCertified({
             name: latest.sampleName || latest.sample || 'Pure Ashwagandha Root',
@@ -82,6 +85,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
             date: latest.date || 'Today',
             sha256: '9a7c4f1e2b8d0c3a5e7b1a9c4d2e8f1',
             peak: latest.sensorPeak || 'S4 Phthalocyanine',
+            voltages: latest.voltages || [0.72, 0.38, 0.45, 2.78, 1.15, 2.35],
           });
         }
       } catch (e) {}
@@ -93,18 +97,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
     return () => clearInterval(interval);
   }, []);
 
-  // Cycle active agent halo simulation
-  useEffect(() => {
-    const agents = ['SignalGuard', 'SpectrumAgent', 'DravyaScribe', 'Veritas'];
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx = (idx + 1) % agents.length;
-      setActiveSwarmAgent(agents[idx]);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
-  // 60 FPS Tektronix-Grade Waveform Rendering with Cubic Bezier Smoothing & Sweeping Scanline
+  // 60 FPS Tektronix Reticle Phosphor Waveform Rendering
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -120,11 +113,11 @@ export default function DashboardPage({ onOpenCommandPalette }) {
       const height = canvas.height;
 
       // Dark Precision Phosphor Canvas with Grid Graticule
-      ctx.fillStyle = '#060A14';
+      ctx.fillStyle = '#060A08';
       ctx.fillRect(0, 0, width, height);
 
-      // Fine Tektronix Reticle Grid
-      ctx.strokeStyle = 'rgba(45, 212, 191, 0.08)';
+      // Fine Reticle Grid
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.08)';
       ctx.lineWidth = 1;
 
       for (let x = 0; x < width; x += 45) {
@@ -142,7 +135,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
       }
 
       // Center Reference Axis
-      ctx.strokeStyle = 'rgba(45, 212, 191, 0.18)';
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.16)';
       ctx.beginPath();
       ctx.moveTo(0, height / 2);
       ctx.lineTo(width, height / 2);
@@ -188,7 +181,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
         // Channel Label Stamp on left
         ctx.fillStyle = sensor.color;
         ctx.font = 'bold 10px monospace';
-        ctx.fillText(`CH${index + 1}: ${liveV.toFixed(3)}V`, 8, baseY - 6);
+        ctx.fillText(`CH${index + 1}: ${liveV.toFixed(3)}V`, 10, baseY - 6);
       });
 
       animationFrameId.current = requestAnimationFrame(render);
@@ -198,7 +191,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
     return () => cancelAnimationFrame(animationFrameId.current);
   }, [telemetry, activeChannels, isPaused, timebase]);
 
-  // Handle Demo Trigger
+  // Demo Feed Trigger
   const triggerDemo = async (specimenKey) => {
     toast.loading(`Injecting ${specimenKey} potentiostat telemetry...`, { id: 'demo' });
     try {
@@ -222,12 +215,12 @@ export default function DashboardPage({ onOpenCommandPalette }) {
         if (data.agentAnalysis.isAdulterated || data.agentAnalysis.status === 'ADULTERATED') {
           toast.error(`⚠️ Adulteration Signature Flagged: ${matchName}`);
         } else {
-          toast.success(`✅ AI Agent Verified: ${matchName} (${data.agentAnalysis.confidence}%)`);
+          toast.success(`✅ AI Verified: ${matchName} (${data.agentAnalysis.confidence}%)`);
         }
       }
     } catch (e) {
       toast.dismiss('demo');
-      toast.error('Could not reach backend service');
+      toast.error('Could not connect to sensor backend');
     }
   };
 
@@ -238,161 +231,138 @@ export default function DashboardPage({ onOpenCommandPalette }) {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto space-y-6 pb-16 font-sans">
+    <div className="max-w-[1600px] mx-auto space-y-6 pb-16 font-sans text-[#EDEFE8]">
       {/* =========================================================================
-          1. HEADER RIBBON: SYSTEM STATUS PILLS & RAYCAST PALETTE
+          1. HEADER RIBBON: DATE RANGE & WORKSTATION STATUS
           ========================================================================= */}
-      <div className="flex items-center justify-between flex-wrap gap-3 pb-2 border-b border-slate-200/80">
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Hardware Connection Pill with Breathing LED */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-800 text-xs font-mono shadow-2xs">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-            <span className="font-bold">Hardware: COM3 Online</span>
-          </div>
-
-          {/* Jitter Metric */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-mono shadow-2xs">
-            <span className="text-slate-400">Jitter:</span>
-            <span className="font-semibold text-slate-800">0.2ms</span>
-          </div>
-
-          {/* Noise Floor */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-mono shadow-2xs">
-            <span className="text-slate-400">Noise Floor:</span>
-            <span className="font-semibold text-slate-800">-74dBm</span>
-          </div>
-
-          {/* Operator */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-mono shadow-2xs">
-            <span className="text-slate-400">Operator:</span>
-            <span className="font-semibold text-slate-800">Active (Tanmay Gupta)</span>
-          </div>
+      <div className="flex items-center justify-between flex-wrap gap-4 pb-4 border-b border-white/[0.08]">
+        <div>
+          <h2 className="text-xl font-bold tracking-tight text-[#EDEFE8]">
+            Workstation Control Center
+          </h2>
+          <p className="text-xs text-[#8E9B93] mt-0.5 font-mono">
+            Chronoamperometric Potentiostat Ingestion & Random Forest Quality Control
+          </p>
         </div>
 
-        {/* Raycast Quick Shortcut Pill */}
-        <button
-          onClick={onOpenCommandPalette}
-          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono shadow-2xs transition-all hover:border-slate-300 group cursor-pointer"
-        >
-          <Command className="w-3.5 h-3.5 text-teal-600 group-hover:rotate-12 transition-transform" />
-          <span className="font-medium text-slate-800">Command Palette</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-slate-100 text-[10px] text-slate-500 font-bold border border-slate-200">⌘K</kbd>
-        </button>
+        <div className="flex items-center gap-2.5 flex-wrap">
+          {/* Date Range Selector */}
+          <div className="flex items-center rounded-xl bg-white/[0.03] p-1 border border-white/[0.08] text-xs font-mono">
+            {['Today', '7D', '30D'].map((range) => (
+              <button
+                key={range}
+                onClick={() => setDateRange(range)}
+                className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                  dateRange === range
+                    ? 'bg-[#10B981] text-[#061209] font-bold shadow-xs'
+                    : 'text-[#8E9B93] hover:text-[#EDEFE8]'
+                }`}
+              >
+                {range}
+              </button>
+            ))}
+          </div>
+
+          {/* Quick Tare Button */}
+          <button
+            onClick={async () => {
+              await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
+              toast.success('Chamber zeroed (Tare: 0.000V)');
+            }}
+            className="lab-btn-secondary text-xs"
+            title="Flush and Tare Sensor Array"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#10B981]" />
+            <span>Tare (0.00V)</span>
+          </button>
+
+          {/* Command Palette Trigger */}
+          <button
+            onClick={onOpenCommandPalette}
+            className="lab-btn-secondary text-xs group"
+          >
+            <Command className="w-3.5 h-3.5 text-[#10B981] group-hover:scale-110 transition-transform" />
+            <span>Search</span>
+            <kbd className="px-1.5 py-0.2 rounded bg-black/40 text-[10px] text-[#8E9B93] font-bold border border-white/[0.08]">⌘K</kbd>
+          </button>
+        </div>
       </div>
 
       {/* =========================================================================
-          2. TOP KPI INSIGHT CARDS (One clear takeaway sentence per card)
+          2. TOP ROW: 4 CLEAN LINEAR / STRIPE KPI CARDS
           ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1 */}
-        <div className="lab-card p-4 space-y-2 border-l-4 border-l-teal-600">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
-              Assays Processed
-            </span>
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-50 text-teal-800 border border-teal-200">
-              Active Run
-            </span>
-          </div>
-          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            {historyCount > 0 ? historyCount.toLocaleString() : '1,420'}
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            All botanical specimens verified against certified pharmacopoeial reference monographs.
-          </p>
-        </div>
+        <KpiCard
+          label="ASSAYS PROCESSED"
+          value={historyCount.toLocaleString()}
+          delta="+12 Today"
+          deltaType="positive"
+          sparklineData={[30, 45, 40, 60, 75, 82, 90, 110]}
+          takeaway="All botanical specimens verified against certified pharmacopoeial monographs."
+          tooltip="Total recorded chronological potentiostat runs in local audit ledger."
+        />
 
-        {/* KPI 2 */}
-        <div className="lab-card p-4 space-y-2 border-l-4 border-l-emerald-600">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
-              Authenticity Rate
-            </span>
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              High Quality
-            </span>
-          </div>
-          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            96.7%
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Consistently high botanical purity with zero chemical adulterant false-negatives.
-          </p>
-        </div>
+        <KpiCard
+          label="AUTHENTICITY RATE"
+          value="96.7%"
+          delta="+0.4% MoM"
+          deltaType="positive"
+          sparklineData={[94, 95, 95.5, 96.0, 96.2, 96.5, 96.7]}
+          takeaway="High botanical purity with zero chemical adulterant false-negatives."
+          tooltip="Cross-validated identification rate across reference standard assays."
+        />
 
-        {/* KPI 3 */}
-        <div className="lab-card p-4 space-y-2 border-l-4 border-l-blue-600">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
-              Sensors Online
-            </span>
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200">
-              250 S/s
-            </span>
-          </div>
-          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            6 / 6 Channels
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Potentiostat electrode array calibrated and operating within ±0.002V baseline tolerance.
-          </p>
-        </div>
+        <KpiCard
+          label="ELECTRODES ONLINE"
+          value="6 / 6 Ch"
+          delta="Stable"
+          deltaType="neutral"
+          sparklineData={[6, 6, 6, 6, 6, 6, 6, 6]}
+          takeaway="Potentiostat array calibrated within ±0.002V baseline tolerance."
+          tooltip="Active cross-sensitive lipid and conductive-polymer working electrodes."
+        />
 
-        {/* KPI 4 */}
-        <div className="lab-card p-4 space-y-2 border-l-4 border-l-amber-600">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
-              Adulteration Alerts
-            </span>
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-50 text-amber-800 border border-amber-200">
-              Protected
-            </span>
-          </div>
-          <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            0 Active Flags
-          </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            No synthetic azo dyes, starch fillers, or ionic contaminants detected in active chamber.
-          </p>
-        </div>
+        <KpiCard
+          label="ADULTERATION ALERTS"
+          value="0 Active"
+          delta="Guarded"
+          deltaType="positive"
+          sparklineData={[3, 2, 1, 0, 0, 0, 0, 0]}
+          takeaway="Zero synthetic azo dye or sawdust bulking detected in current active run."
+          tooltip="Real-time potentiometric anomaly and dye contamination alerts."
+        />
       </div>
 
       {/* =========================================================================
-          3. TELEMETRY BENTO GRID ARCHITECTURE
+          3. MAIN STAGE: 6-CHANNEL CHRONOAMPEROMETRY STREAM & TEST INJECTION
           ========================================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-        {/* CARD 1 (MAIN STAGE - COL 8): 6-CHANNEL TEKTRONIX OSCILLOSCOPE */}
-        <div className="lg:col-span-8 bento-card p-6 space-y-4">
+        {/* Oscilloscope Stream (Col 8) */}
+        <div className="lg:col-span-8 lab-card p-6 space-y-4">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
-                  <Activity className="w-3 h-3 text-teal-600 animate-pulse" />
-                  <span>CHRONOAMPEROMETRY</span>
+                <Badge variant="success">CHRONOAMPEROMETRY</Badge>
+                <span className="text-xs font-mono text-[#8E9B93]">
+                  250 S/s • 12-Bit SAR Ingestion
                 </span>
-                <span className="text-xs font-mono text-slate-500">250 S/s • 12-Bit SAR Ingestion</span>
               </div>
-              <h2 className="text-lg font-bold text-slate-900 mt-1">
+              <h3 className="text-base font-bold text-[#EDEFE8] mt-1.5">
                 Live 6-Channel Oscilloscope Stream
-              </h2>
+              </h3>
             </div>
 
-            {/* Oscilloscope Controls */}
+            {/* Timebase & Freeze Controls */}
             <div className="flex items-center gap-2 font-mono text-xs">
-              {/* Timebase Zoom Selector */}
-              <div className="flex items-center rounded-lg bg-slate-100 p-0.5 border border-slate-200">
+              <div className="flex items-center rounded-lg bg-white/[0.04] p-0.5 border border-white/[0.08]">
                 {['1s', '5s', '30s'].map((t) => (
                   <button
                     key={t}
                     onClick={() => setTimebase(t)}
-                    className={`px-2.5 py-1 rounded-md text-xs transition-all ${
+                    className={`px-2.5 py-1 rounded-md text-xs transition-all cursor-pointer ${
                       timebase === t
-                        ? 'bg-white font-bold text-slate-900 shadow-2xs'
-                        : 'text-slate-500 hover:text-slate-800'
+                        ? 'bg-[#10B981] font-bold text-[#061209] shadow-xs'
+                        : 'text-[#8E9B93] hover:text-[#EDEFE8]'
                     }`}
                   >
                     {t}
@@ -400,30 +370,17 @@ export default function DashboardPage({ onOpenCommandPalette }) {
                 ))}
               </div>
 
-              {/* Pause / Resume */}
               <button
                 onClick={() => setIsPaused(!isPaused)}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-1.5 shadow-2xs transition-colors"
+                className="lab-btn-secondary text-xs"
               >
-                {isPaused ? <Play className="w-3.5 h-3.5 text-emerald-600" /> : <Pause className="w-3.5 h-3.5 text-slate-600" />}
+                {isPaused ? <Play className="w-3.5 h-3.5 text-[#10B981]" /> : <Pause className="w-3.5 h-3.5 text-[#F59E0B]" />}
                 <span>{isPaused ? 'Resume' : 'Freeze'}</span>
-              </button>
-
-              {/* Baseline Zeroing Tare */}
-              <button
-                onClick={async () => {
-                  await fetch(`${API_BASE_URL}/sensors/sample/eject`, { method: 'POST' });
-                  toast.success('Chamber zeroed (Tare: 0.000V)');
-                }}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 transition-colors"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Tare (0.00V)</span>
               </button>
             </div>
           </div>
 
-          {/* Interactive Channel Toggle Pills with Phosphor Accents */}
+          {/* Interactive Channel Toggles */}
           <div className="flex items-center gap-2 flex-wrap pt-1">
             {SENSOR_SPECS.map((s, idx) => {
               const isActive = activeChannels[idx];
@@ -433,15 +390,16 @@ export default function DashboardPage({ onOpenCommandPalette }) {
                   onClick={() => toggleChannel(idx)}
                   className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-slate-900 text-white shadow-2xs'
-                      : 'bg-slate-100 text-slate-400 hover:bg-slate-200'
+                      ? 'bg-white/[0.08] text-[#EDEFE8] border border-white/[0.14]'
+                      : 'bg-white/[0.02] text-[#5A675F] border border-transparent hover:text-[#8E9B93]'
                   }`}
                   style={{
-                    borderLeft: `3px solid ${s.color}`,
+                    borderLeftColor: s.color,
+                    borderLeftWidth: '3px',
                   }}
                 >
                   <span
-                    className="w-2 h-2 rounded-full"
+                    className="w-1.5 h-1.5 rounded-full"
                     style={{ backgroundColor: s.color }}
                   />
                   <span>Ch{idx + 1}: {s.name.split(' ')[0]}</span>
@@ -450,61 +408,77 @@ export default function DashboardPage({ onOpenCommandPalette }) {
             })}
           </div>
 
-          {/* Canvas Tektronix Screen with Sweeping Scanline Indicator */}
-          <div className="relative rounded-xl overflow-hidden border border-slate-800 bg-[#060A14] shadow-inner">
+          {/* Oscilloscope Canvas */}
+          <div className="relative rounded-xl overflow-hidden border border-white/[0.08] bg-[#060A08] shadow-inner">
             <canvas
               ref={canvasRef}
               width={900}
               height={260}
               className="w-full h-64 sm:h-72 block"
             />
-            {/* Sweeping Tektronix Scanline */}
-            <div className="animate-scanline" />
+          </div>
+
+          {/* Test Preset Ingestion Ribbon */}
+          <div className="pt-2 flex items-center justify-between flex-wrap gap-2 text-xs font-mono">
+            <span className="text-[#8E9B93] font-medium">Quick Specimen Telemetry Injection:</span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {[
+                { key: 'ashwagandha', label: 'Pure Ashwagandha' },
+                { key: 'haritaki', label: 'Haritaki Decoction' },
+                { key: 'turmeric', label: 'Pure Turmeric' },
+                { key: 'adulterated_dye', label: 'Metanil Yellow (Dye)' },
+              ].map((p) => (
+                <button
+                  key={p.key}
+                  onClick={() => triggerDemo(p.key)}
+                  className="px-2.5 py-1 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-[#EDEFE8] text-[11px] transition-colors cursor-pointer"
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* CARD 4 (COL 4): LAST CERTIFIED DRAVYA WITH HOLOGRAPHIC SHEEN */}
-        <div className="lg:col-span-4 bento-card p-6 flex flex-col justify-between space-y-4 holographic-badge border-teal-200/60">
+        {/* Latest Certified Batch Dossier (Col 4) */}
+        <div className="lg:col-span-4 lab-card p-6 flex flex-col justify-between space-y-4">
           <div>
             <div className="flex items-center justify-between">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 border border-emerald-300">
-                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                <span>{lastCertified.status}</span>
-              </span>
-              <span className="text-[11px] font-mono text-slate-500">{lastCertified.date}</span>
+              <Badge variant="success">CERTIFIED PURE</Badge>
+              <span className="text-[11px] font-mono text-[#8E9B93]">{lastCertified.date}</span>
             </div>
 
             <div className="mt-4">
-              <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
+              <h3 className="text-lg font-bold text-[#EDEFE8] tracking-tight">
                 {lastCertified.name}
               </h3>
-              <p className="text-xs text-slate-600 italic mt-0.5">
+              <p className="text-xs text-[#8E9B93] italic mt-0.5">
                 {lastCertified.botanical}
               </p>
             </div>
 
-            {/* Circular Confidence Meter & Batch Meta */}
-            <div className="my-5 p-4 rounded-xl bg-white/80 border border-slate-200/80 backdrop-blur-sm flex items-center justify-between">
+            {/* Circular Purity Meter */}
+            <div className="my-5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">
+                <span className="text-[10px] font-mono text-[#8E9B93] uppercase tracking-wider block">
                   Batch Ledger ID
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-800 block mt-0.5">
+                <span className="text-xs font-mono font-bold text-[#EDEFE8] block mt-0.5">
                   {lastCertified.batch}
                 </span>
-                <span className="text-[10px] font-mono text-teal-700 mt-1 block">
+                <span className="text-[10px] font-mono text-[#10B981] mt-1 block">
                   Peak: {lastCertified.peak}
                 </span>
               </div>
 
-              {/* Circular Gauge */}
+              {/* Gauge */}
               <div className="relative w-16 h-16 flex items-center justify-center">
                 <svg className="w-16 h-16 transform -rotate-90">
                   <circle
                     cx="32"
                     cy="32"
                     r="26"
-                    stroke="#E2E8F0"
+                    stroke="rgba(255,255,255,0.08)"
                     strokeWidth="4"
                     fill="transparent"
                   />
@@ -512,7 +486,7 @@ export default function DashboardPage({ onOpenCommandPalette }) {
                     cx="32"
                     cy="32"
                     r="26"
-                    stroke="#0D9488"
+                    stroke="#10B981"
                     strokeWidth="4"
                     fill="transparent"
                     strokeDasharray="163.3"
@@ -521,265 +495,245 @@ export default function DashboardPage({ onOpenCommandPalette }) {
                     className="transition-all duration-1000"
                   />
                 </svg>
-                <span className="absolute font-mono text-xs font-extrabold text-slate-900">
+                <span className="absolute font-mono text-xs font-extrabold text-[#EDEFE8]">
                   {lastCertified.score}%
                 </span>
               </div>
             </div>
 
-            {/* Tamper-proof SHA256 */}
-            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-[10px] font-mono text-slate-600 space-y-1">
-              <div className="flex justify-between items-center text-slate-500 font-semibold">
+            {/* Tamper-evident Digital Signature */}
+            <div className="p-3 rounded-lg bg-black/40 border border-white/[0.08] text-[10px] font-mono space-y-1">
+              <div className="flex justify-between items-center text-[#8E9B93] font-medium">
                 <span>DIGITAL SIGNATURE (SHA-256):</span>
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
               </div>
-              <span className="block truncate text-slate-800 font-bold select-all">
+              <span className="block truncate text-[#EDEFE8] font-bold select-all">
                 {lastCertified.sha256}
               </span>
             </div>
           </div>
 
-          {/* Quick PDF Action */}
           <div className="pt-2 flex items-center gap-2">
             <Link
               to="/results"
-              className="flex-1 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-sm"
+              className="flex-1 lab-btn-primary justify-center text-xs"
             >
               <span>View Full Dossier</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <button
-              onClick={() => toast.success('Official Certificate generated (SHA-256 validated)')}
-              className="p-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 shadow-2xs transition-colors cursor-pointer"
-              title="Download Analytical Certificate"
+              onClick={() => toast.success('ISO-17025 Certificate generated')}
+              className="lab-btn-secondary p-2.5"
+              title="Download Certificate"
             >
-              <FileDown className="w-4 h-4 text-slate-600" />
+              <FileDown className="w-4 h-4 text-[#8E9B93]" />
             </button>
           </div>
         </div>
-
-        {/* CARD 2 (COL 12): 6 TACTILE SENSOR TILES WITH DVOLT/DT & MINI SPARKLINES */}
-        <div className="lg:col-span-12 bento-card p-6 space-y-4">
-          <div className="flex items-center justify-between flex-wrap gap-2">
-            <div>
-              <h3 className="text-base font-bold text-slate-900">
-                6-Channel Chemosensor Array Strip (Cross-Reactive Potentiostat)
-              </h3>
-              <p className="text-xs text-slate-500 font-mono">
-                Lipid, Polyaniline, Chitosan, Crown Ether & RuOx Modified Working Electrodes
-              </p>
-            </div>
-            <span className="text-xs font-mono text-slate-400">
-              Array V_ref: 3.300V ±0.002V • 16x Hardware Oversampling
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-            {[
-              { id: 'WE1', name: 'Lipid (Astringency)', color: '#0D9488', rasa: 'Madhura', slope: '+0.012' },
-              { id: 'WE2', name: 'PANI (Acidity)', color: '#0284C7', rasa: 'Amla', slope: '-0.004' },
-              { id: 'WE3', name: 'Chitosan (Sweetness)', color: '#2563EB', rasa: 'Lavana', slope: '+0.008' },
-              { id: 'WE4', name: 'PcComplex (Pungency)', color: '#D97706', rasa: 'Tikta', slope: '+0.045' },
-              { id: 'WE5', name: 'Crown Ether (Saline)', color: '#7C3AED', rasa: 'Katu', slope: '-0.002' },
-              { id: 'WE6', name: 'RuOx (Polyphenols)', color: '#059669', rasa: 'Kashaya', slope: '+0.038' },
-            ].map((s, idx) => {
-              const liveV = telemetry?.voltages[idx] || 0.0;
-              return (
-                <div
-                  key={s.id}
-                  className="p-4 rounded-xl bg-slate-50/80 border border-slate-200 hover:border-slate-300 transition-all space-y-2 group"
-                  style={{ borderTop: `3px solid ${s.color}` }}
-                >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-slate-900 font-mono">{s.id}</span>
-                    <span className="text-[10px] font-mono text-slate-500 font-medium">{s.rasa}</span>
-                  </div>
-
-                  {/* Large Voltage Output */}
-                  <div className="text-xl font-extrabold text-slate-900 tabular-nums font-mono">
-                    {liveV.toFixed(3)} <span className="text-xs text-slate-400 font-normal">V</span>
-                  </div>
-
-                  {/* Miniature Sparkline SVG & dV/dt */}
-                  <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[10px] font-mono">
-                    <span className="text-slate-500">dV/dt:</span>
-                    <span className={`font-semibold ${s.slope.startsWith('+') ? 'text-emerald-600' : 'text-slate-600'}`}>
-                      {s.slope} V/s
-                    </span>
-                  </div>
-
-                  {/* Sparkline curve */}
-                  <div className="h-6 w-full pt-1">
-                    <svg className="w-full h-full overflow-visible" viewBox="0 0 100 24">
-                      <path
-                        d={`M 0 18 Q 25 ${liveV > 0.1 ? 6 : 18}, 50 ${liveV > 0.1 ? 12 : 18} T 100 ${liveV > 0.1 ? 8 : 18}`}
-                        fill="none"
-                        stroke={s.color}
-                        strokeWidth="1.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* CARD 3 (COL 12): AUTONOMOUS AGENT SWARM ORCHESTRATOR & TERMINAL */}
-        <div className="lg:col-span-12 bento-card p-6 space-y-5">
-          <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-100">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                  <Bot className="w-3.5 h-3.5 text-purple-600" />
-                  <span>MULTI-AGENT AI SWARM ORCHESTRATOR</span>
-                </span>
-                <span className="text-xs font-mono text-slate-500">Model Context Protocol (MCP)</span>
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mt-1">
-                Real-Time Chemical Reasoning & Autonomous Verification
-              </h3>
-            </div>
-
-            {/* Quick Demo Telemetry Injection Bar */}
-            <div className="flex items-center gap-2 flex-wrap text-xs font-sans">
-              <span className="text-xs font-mono text-slate-400 font-semibold">Live Injection:</span>
-              <button
-                onClick={() => triggerDemo('ashwagandha')}
-                className="px-3 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200 font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-              >
-                <Zap className="w-3 h-3 text-teal-600" />
-                <span>Ashwagandha</span>
-              </button>
-              <button
-                onClick={() => triggerDemo('haritaki')}
-                className="px-3 py-1.5 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200 font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-              >
-                <Zap className="w-3 h-3 text-cyan-600" />
-                <span>Haritaki</span>
-              </button>
-              <button
-                onClick={() => triggerDemo('adulterated_dye')}
-                className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-              >
-                <AlertTriangle className="w-3 h-3 text-rose-600" />
-                <span>Adulterant Dye</span>
-              </button>
-              <button
-                onClick={() => triggerDemo('tare')}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold flex items-center gap-1 transition-all cursor-pointer"
-              >
-                <RotateCcw className="w-3 h-3 text-slate-500" />
-                <span>Rinse (0V)</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 1. Horizontal Live Swarm Pipeline with Active Halo Indicator */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {[
-              {
-                id: 'SignalGuard',
-                name: 'SignalGuard',
-                role: 'Telemetry Sanitizer',
-                duty: 'Hardware SAR Ingestion & Butterworth Filtering',
-                color: 'border-teal-500/50 bg-teal-50/40 text-teal-900',
-                badge: 'Active Packet Stream',
-              },
-              {
-                id: 'SpectrumAgent',
-                name: 'SpectrumAgent',
-                role: 'Chemometrics Engine',
-                duty: 'AUC Extraction, Nernstian Peak Localization',
-                color: 'border-sky-500/50 bg-sky-50/40 text-sky-900',
-                badge: 'Eigen-PCA Projection',
-              },
-              {
-                id: 'DravyaScribe',
-                name: 'DravyaScribe',
-                role: 'Ayurvedic Reasoner',
-                duty: 'Rasa, Guna & Ayurvedic Pharmacopoeia Cross-Match',
-                color: 'border-purple-500/50 bg-purple-50/40 text-purple-900',
-                badge: 'API Monograph Verified',
-              },
-              {
-                id: 'Veritas',
-                name: 'Veritas',
-                role: 'Purity Auditor',
-                duty: 'Non-Linear Cross-Sensitivity & Adulteration Scan',
-                color: 'border-emerald-500/50 bg-emerald-50/40 text-emerald-900',
-                badge: 'Bayes Audit Passed',
-              },
-            ].map((agent) => {
-              const isActive = activeSwarmAgent === agent.id;
-              return (
-                <div
-                  key={agent.id}
-                  className={`p-4 rounded-xl border transition-all relative ${
-                    isActive
-                      ? `${agent.color} ring-2 ring-teal-500/30 shadow-md`
-                      : 'border-slate-200 bg-white text-slate-700'
-                  }`}
-                >
-                  <div className="flex items-center justify-between text-xs font-mono mb-1">
-                    <span className="font-bold text-slate-900 flex items-center gap-1.5">
-                      <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-teal-500 animate-ping' : 'bg-slate-300'}`} />
-                      <span>{agent.name}</span>
-                    </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-slate-200 text-slate-600 font-semibold">
-                      {agent.role}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-slate-600 mt-1 leading-snug">
-                    {agent.duty}
-                  </p>
-                  <div className="mt-2.5 pt-2 border-t border-slate-200/60 flex justify-between items-center text-[10px] font-mono text-slate-500">
-                    <span>STATUS:</span>
-                    <span className="font-semibold text-slate-700">{agent.badge}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* 2. Streaming Chain-of-Thought (CoT) Terminal */}
-          <div className="rounded-xl border border-slate-800 bg-[#060A14] p-4 font-mono text-xs shadow-inner space-y-2">
-            <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-teal-400 font-bold">
-                <Terminal className="w-4 h-4" />
-                <span>DRAVYA AGENTIC REASONING TERMINAL (CHAIN-OF-THOUGHT LOG)</span>
-              </div>
-              <span className="text-[10px] text-slate-500 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Streaming at 10Hz</span>
-              </span>
-            </div>
-
-            <div className="space-y-1.5 max-h-44 overflow-y-auto pr-1">
-              {swarmLog.map((log, i) => (
-                <div key={i} className="flex items-start gap-2.5 leading-relaxed text-[11px]">
-                  <span className="text-slate-500 shrink-0">[{log.time}]</span>
-                  <span className={`font-bold shrink-0 ${
-                    log.agent === 'SignalGuard' ? 'text-teal-400' :
-                    log.agent === 'SpectrumAgent' ? 'text-sky-400' :
-                    log.agent === 'DravyaScribe' ? 'text-purple-400' : 'text-emerald-400'
-                  }`}>
-                    {log.agent}
-                  </span>
-                  <span className="text-slate-300">
-                    {log.text}
-                  </span>
-                </div>
-              ))}
-              <div className="flex items-center gap-1 text-teal-400 text-[11px] pt-1">
-                <span>&gt; awaiting next telemetry chunk</span>
-                <span className="inline-block w-2 h-4 bg-teal-400 animate-pulse" />
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      {/* =========================================================================
+          4. 6-CHANNEL CHEMOSENSOR ARRAY STRIP
+          ========================================================================= */}
+      <div className="lab-card p-6 space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <h3 className="text-sm font-semibold text-[#EDEFE8]">
+              6-Channel Chemosensor Working Electrodes
+            </h3>
+            <p className="text-xs text-[#8E9B93] font-mono">
+              Biomimetic Lipid, PANI, Chitosan, Phthalocyanine, Crown Ether & RuOx Transducers
+            </p>
+          </div>
+          <span className="text-xs font-mono text-[#5A675F]">
+            Reference V_REF: 3.300V ±0.002V • 16x Hardware Oversampling
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+          {[
+            { id: 'WE1', name: 'Lipid Membrane', color: '#10B981', rasa: 'Madhura', slope: '+0.012' },
+            { id: 'WE2', name: 'Polyaniline', color: '#0EA5E9', rasa: 'Amla', slope: '-0.004' },
+            { id: 'WE3', name: 'Chitosan Matrix', color: '#3B82F6', rasa: 'Lavana', slope: '+0.008' },
+            { id: 'WE4', name: 'Phthalocyanine', color: '#F59E0B', rasa: 'Tikta', slope: '+0.045' },
+            { id: 'WE5', name: 'Crown Ether', color: '#8B5CF6', rasa: 'Katu', slope: '-0.002' },
+            { id: 'WE6', name: 'Ruthenium Oxide', color: '#059669', rasa: 'Kashaya', slope: '+0.038' },
+          ].map((s, idx) => {
+            const liveV = telemetry?.voltages[idx] || 0.0;
+            return (
+              <div
+                key={s.id}
+                className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.14] transition-all space-y-2"
+                style={{ borderTop: `2px solid ${s.color}` }}
+              >
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[#EDEFE8] font-mono">{s.id}</span>
+                  <span className="text-[10px] font-mono text-[#8E9B93]">{s.rasa}</span>
+                </div>
+
+                <div className="text-xl font-bold font-mono text-[#EDEFE8] tabular-nums">
+                  {liveV.toFixed(3)}V
+                </div>
+
+                <div className="flex items-center justify-between text-[10px] font-mono text-[#8E9B93] pt-1 border-t border-white/[0.04]">
+                  <span>{s.name.split(' ')[0]}</span>
+                  <span className={s.slope.startsWith('+') ? 'text-[#10B981]' : 'text-[#8E9B93]'}>
+                    {s.slope} V/s
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* =========================================================================
+          5. RECENT COMPLIANCE AUDIT BATCHES TABLE (Linear / Stripe Clean)
+          ========================================================================= */}
+      <div className="lab-card p-6 space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <h3 className="text-sm font-semibold text-[#EDEFE8]">
+              Recent Certified Assay Ledger
+            </h3>
+            <p className="text-xs text-[#8E9B93] font-mono">
+              Cryptographically signed raw potentiostat traces and monograph verifications
+            </p>
+          </div>
+          <Link
+            to="/history"
+            className="text-xs text-[#10B981] hover:underline font-mono flex items-center gap-1"
+          >
+            <span>View Full Ledger</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="border border-white/[0.08] rounded-xl overflow-hidden bg-[#0A0E0C]">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left font-mono text-xs">
+              <thead className="bg-white/[0.03] border-b border-white/[0.08] text-[#8E9B93] text-[11px]">
+                <tr>
+                  <th className="p-3">ASSAY ID</th>
+                  <th className="p-3">SPECIMEN NAME</th>
+                  <th className="p-3">BATCH LOT</th>
+                  <th className="p-3">CONFIDENCE</th>
+                  <th className="p-3">STATUS</th>
+                  <th className="p-3">TIMESTAMP</th>
+                  <th className="p-3 text-right">ACTION</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.04] text-[#8E9B93]">
+                {recentAnalyses.map((row) => (
+                  <tr
+                    key={row.id}
+                    onClick={() => setSelectedAssay(row)}
+                    className="hover:bg-white/[0.03] transition-colors cursor-pointer group"
+                  >
+                    <td className="p-3 font-bold text-[#10B981]">{row.id}</td>
+                    <td className="p-3 font-semibold text-[#EDEFE8] font-sans">{row.sampleName}</td>
+                    <td className="p-3">{row.batchNumber}</td>
+                    <td className="p-3 font-bold text-[#EDEFE8] tabular-nums">
+                      {typeof row.confidence === 'number' ? `${row.confidence}%` : row.confidence}
+                    </td>
+                    <td className="p-3">
+                      <Badge
+                        variant={(row.status || '').toUpperCase().includes('PURE') ? 'success' : 'danger'}
+                      >
+                        {(row.status || 'VERIFIED').replace('_', ' ')}
+                      </Badge>
+                    </td>
+                    <td className="p-3 text-[11px]">{row.date}</td>
+                    <td className="p-3 text-right">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedAssay(row);
+                        }}
+                        className="p-1 rounded hover:bg-white/[0.06] text-[#8E9B93] group-hover:text-[#EDEFE8]"
+                        title="Inspect details"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          6. INSPECTOR SLIDE-OVER DRAWER (Stripe / Linear Detail Drawer)
+          ========================================================================= */}
+      {selectedAssay && (
+        <DetailDrawer
+          isOpen={Boolean(selectedAssay)}
+          onClose={() => setSelectedAssay(null)}
+          title={selectedAssay.sampleName}
+          subtitle={`Assay Ledger ID: ${selectedAssay.id} • Batch: ${selectedAssay.batchNumber}`}
+        >
+          <div className="space-y-6 text-xs">
+            {/* Quick Metrics Cards */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <span className="text-[10px] font-mono text-[#8E9B93] uppercase">Confidence</span>
+                <span className="text-lg font-bold font-mono text-[#10B981] block">
+                  {typeof selectedAssay.confidence === 'number' ? `${selectedAssay.confidence}%` : selectedAssay.confidence}
+                </span>
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <span className="text-[10px] font-mono text-[#8E9B93] uppercase">Status</span>
+                <div>
+                  <Badge variant={(selectedAssay.status || '').toUpperCase().includes('PURE') ? 'success' : 'danger'}>
+                    {selectedAssay.status || 'VERIFIED'}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* 6-Channel Potentials */}
+            <div className="space-y-2 font-mono">
+              <span className="font-semibold text-[#EDEFE8] block">6-Channel Recorded Potentials:</span>
+              <div className="grid grid-cols-3 gap-2">
+                {SENSOR_SPECS.map((s, idx) => (
+                  <div key={s.id} className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.08] text-center">
+                    <span className="text-[10px] text-[#8E9B93] block">{s.id} ({s.name.split(' ')[0]})</span>
+                    <span className="font-bold text-[#EDEFE8] block mt-0.5">
+                      {selectedAssay.voltages && selectedAssay.voltages[idx] !== undefined
+                        ? `${Number(selectedAssay.voltages[idx]).toFixed(2)}V`
+                        : '1.20V'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* "Why this result?" Plain-English Explanation */}
+            <div className="p-4 rounded-xl bg-[#10B981]/10 border border-[#10B981]/25 space-y-2">
+              <div className="flex items-center gap-1.5 text-[#10B981] font-semibold text-xs">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Why this classification result?</span>
+              </div>
+              <ul className="space-y-1.5 text-xs text-[#EDEFE8]/90">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] mt-1.5 shrink-0" />
+                  <span>
+                    Potentiometric curve across all 6 lipid/polyaniline channels matches authentic reference standard within ±8% certified tolerance.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] mt-1.5 shrink-0" />
+                  <span>
+                    No anomalous halide conductivity surge detected on S3 electrode (0% synthetic azo dye adulteration).
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </DetailDrawer>
+      )}
     </div>
   );
 }

@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { path: '/3d', label: '3D Spatial Probe', icon: Compass, badge: '3D WEBGL' },
   { path: '/dashboard', label: 'Control Center', icon: LayoutDashboard },
   { path: '/agent', label: 'Dravya AI Agent', icon: Sparkles, badge: 'MCP' },
   { path: '/new-analysis', label: '3-Step Analysis Wizard', icon: FlaskConical, badge: 'GUIDED' },
@@ -44,40 +43,40 @@ export default function Sidebar({ isOpen, onClose, onOpenCommandPalette }) {
       )}
 
       <aside
-        className={`fixed lg:static top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-200 ease-in-out ${
+        className={`fixed lg:static top-0 bottom-0 left-0 z-50 w-64 bg-[#0B100D] border-r border-white/[0.08] flex flex-col transition-transform duration-200 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        {/* Header Branding - Apple Pro Laboratory */}
-        <div className="h-16 px-4 border-b border-slate-200 flex items-center justify-between shrink-0 bg-white">
+        {/* Header Branding */}
+        <div className="h-16 px-4 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-[#0B100D]">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-600 flex items-center justify-center font-bold shadow-2xs">
-              <Disc className="w-5 h-5 text-teal-600 animate-spin-slow" />
+            <div className="w-8 h-8 rounded-lg bg-[#10B981]/15 border border-[#10B981]/30 text-[#10B981] flex items-center justify-center font-bold">
+              <Disc className="w-4 h-4 text-[#10B981] animate-spin-slow" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-sm tracking-tight text-slate-900 block leading-tight">
-                  DRAVYA PRO
+                <span className="font-bold text-sm tracking-tight text-[#EDEFE8] block leading-tight">
+                  DRAVYA 6000
                 </span>
-                <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-teal-50 text-teal-700 border border-teal-200 font-bold">
-                  IITD
+                <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25 font-bold">
+                  PRO
                 </span>
               </div>
-              <span className="text-[10px] text-slate-500 font-mono block -mt-0.5">
-                Electronic Tongue Workstation
+              <span className="text-[10px] text-[#8E9B93] font-mono block -mt-0.5">
+                Electronic Tongue Lab
               </span>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="lg:hidden p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800"
+            className="lg:hidden p-1.5 rounded-lg hover:bg-white/[0.05] text-[#8E9B93] hover:text-[#EDEFE8]"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Navigation Item Links */}
-        <div className="p-3 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold px-4 pt-4">
+        {/* Navigation Section */}
+        <div className="p-3 text-[10px] font-mono uppercase tracking-wider text-[#5A675F] font-semibold px-4 pt-4">
           Analytical Instruments
         </div>
         <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
@@ -91,8 +90,8 @@ export default function Sidebar({ isOpen, onClose, onOpenCommandPalette }) {
                 className={({ isActive }) =>
                   `flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-slate-900 text-white font-semibold shadow-2xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'bg-[#10B981]/15 text-[#10B981] font-semibold border border-[#10B981]/25'
+                      : 'text-[#8E9B93] hover:text-[#EDEFE8] hover:bg-white/[0.04]'
                   }`
                 }
               >
@@ -101,7 +100,7 @@ export default function Sidebar({ isOpen, onClose, onOpenCommandPalette }) {
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-bold border border-slate-200">
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-[#8E9B93] font-medium border border-white/[0.08]">
                     {item.badge}
                   </span>
                 )}
@@ -111,19 +110,19 @@ export default function Sidebar({ isOpen, onClose, onOpenCommandPalette }) {
         </nav>
 
         {/* Bottom Hardware Diagnostics Pill */}
-        <div className="p-3 border-t border-slate-200 bg-slate-50/50">
-          <div className="p-3 rounded-xl bg-white border border-slate-200 space-y-1.5 shadow-2xs">
+        <div className="p-3 border-t border-white/[0.08] bg-[#090D0B]">
+          <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-900 font-mono flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-semibold text-[#EDEFE8] font-mono flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
                 <span>AFE Potentiostat</span>
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
-                ACTIVE
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#10B981]/15 text-[#10B981] font-bold border border-[#10B981]/30">
+                COM3
               </span>
             </div>
-            <p className="text-[10px] text-slate-500 font-mono">
-              IIT Delhi Bio-Instrumentation Lab • 250 S/s
+            <p className="text-[10px] text-[#8E9B93] font-mono">
+              6-Ch SAR ADC • 250 S/s
             </p>
           </div>
         </div>

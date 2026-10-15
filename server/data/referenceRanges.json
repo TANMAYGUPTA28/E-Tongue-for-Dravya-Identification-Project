@@ -1,0 +1,110 @@
+{
+  "turmeric": {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "botanical": "Curcuma longa L.",
+    "hindi": "हल्दी",
+    "sanskrit": "हरिद्रा",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. I, p. 45)",
+    "primaryBioactive": "Curcuminoids (Curcumin, Demethoxycurcumin)",
+    "adulterantRisk": "Metanil Yellow synthetic azo dye, Lead chromate, Starch",
+    "channels": {
+      "S1": { "min": 0.35, "max": 0.65, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 0.38, "max": 0.70, "unit": "V", "name": "Conductive (Acids)" },
+      "S3": { "min": 0.25, "max": 0.55, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 2.10, "max": 2.80, "unit": "V", "name": "Phthalocyanine (Alkaloids)" },
+      "S5": { "min": 2.70, "max": 3.40, "unit": "V", "name": "Crown Ether (Curcuminoids)" },
+      "S6": { "min": 1.20, "max": 1.90, "unit": "V", "name": "Ruthenium Oxide (Polyphenols)" }
+    }
+  },
+  "ashwagandha": {
+    "id": "ashwagandha",
+    "name": "Ashwagandha",
+    "botanical": "Withania somnifera (L.) Dunal",
+    "hindi": "अश्वगंधा",
+    "sanskrit": "अश्वगंधा",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. I, p. 19)",
+    "primaryBioactive": "Withanolides (Withaferin A, Withanolide D)",
+    "adulterantRisk": "Exhausted root marc, Commercial starch, Sawdust",
+    "channels": {
+      "S1": { "min": 0.55, "max": 0.90, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 0.25, "max": 0.50, "unit": "V", "name": "Conductive (Acids)" },
+      "S3": { "min": 0.30, "max": 0.60, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 2.45, "max": 3.10, "unit": "V", "name": "Phthalocyanine (Withanolides)" },
+      "S5": { "min": 0.90, "max": 1.40, "unit": "V", "name": "Crown Ether (Volatiles)" },
+      "S6": { "min": 2.05, "max": 2.65, "unit": "V", "name": "Ruthenium Oxide (Polyphenols)" }
+    }
+  },
+  "haritaki": {
+    "id": "haritaki",
+    "name": "Haritaki",
+    "botanical": "Terminalia chebula Retz.",
+    "hindi": "हरड़",
+    "sanskrit": "हरीतकी",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. I, p. 47)",
+    "primaryBioactive": "Chebulinic acid, Chebulagic acid, Ellagic acid",
+    "adulterantRisk": "Immature galls, Foreign tannins, Spent fruit pericarp",
+    "channels": {
+      "S1": { "min": 0.75, "max": 1.10, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 2.50, "max": 3.20, "unit": "V", "name": "Conductive (Organic Acids)" },
+      "S3": { "min": 0.30, "max": 0.55, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 1.85, "max": 2.50, "unit": "V", "name": "Phthalocyanine (Alkaloids)" },
+      "S5": { "min": 0.65, "max": 1.10, "unit": "V", "name": "Crown Ether (Volatiles)" },
+      "S6": { "min": 2.90, "max": 3.50, "unit": "V", "name": "Ruthenium Oxide (Tannins)" }
+    }
+  },
+  "guduchi": {
+    "id": "guduchi",
+    "name": "Guduchi (Giloy)",
+    "botanical": "Tinospora cordifolia (Willd.)",
+    "hindi": "गिलोय",
+    "sanskrit": "गुडूची",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. I, p. 41)",
+    "primaryBioactive": "Tinosporide, Cordifolioside A, Berberine",
+    "adulterantRisk": "Tinospora crispa (toxic surrogate species)",
+    "channels": {
+      "S1": { "min": 0.20, "max": 0.45, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 0.15, "max": 0.35, "unit": "V", "name": "Conductive (Acids)" },
+      "S3": { "min": 0.20, "max": 0.40, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 2.75, "max": 3.40, "unit": "V", "name": "Phthalocyanine (Bitter Alkaloids)" },
+      "S5": { "min": 0.80, "max": 1.25, "unit": "V", "name": "Crown Ether (Volatiles)" },
+      "S6": { "min": 1.60, "max": 2.15, "unit": "V", "name": "Ruthenium Oxide (Polyphenols)" }
+    }
+  },
+  "amalaki": {
+    "id": "amalaki",
+    "name": "Amalaki (Amla)",
+    "botanical": "Phyllanthus emblica L.",
+    "hindi": "आंवला",
+    "sanskrit": "आमलकी",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. I, p. 5)",
+    "primaryBioactive": "Ascorbic acid, Emblicanin A & B, Gallic acid",
+    "adulterantRisk": "Synthetic citric acid spiking, Dried wood-apple flesh",
+    "channels": {
+      "S1": { "min": 0.40, "max": 0.70, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 2.70, "max": 3.35, "unit": "V", "name": "Conductive (Ascorbic Acid)" },
+      "S3": { "min": 0.15, "max": 0.35, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 1.10, "max": 1.70, "unit": "V", "name": "Phthalocyanine (Alkaloids)" },
+      "S5": { "min": 0.45, "max": 0.85, "unit": "V", "name": "Crown Ether (Volatiles)" },
+      "S6": { "min": 2.70, "max": 3.30, "unit": "V", "name": "Ruthenium Oxide (Polyphenols)" }
+    }
+  },
+  "tulsi": {
+    "id": "tulsi",
+    "name": "Tulsi (Holy Basil)",
+    "botanical": "Ocimum sanctum L.",
+    "hindi": "तुलसी",
+    "sanskrit": "तुलसी",
+    "source": "Ayurvedic Pharmacopoeia of India (API Vol. II, p. 165)",
+    "primaryBioactive": "Eugenol, Rosmarinic acid, Ursolic acid",
+    "adulterantRisk": "Ocimum gratissimum (Wild Basil), Exhausted leaf residue",
+    "channels": {
+      "S1": { "min": 0.30, "max": 0.55, "unit": "V", "name": "Lipid (Neutral Glycosides)" },
+      "S2": { "min": 0.40, "max": 0.75, "unit": "V", "name": "Conductive (Organic Acids)" },
+      "S3": { "min": 0.20, "max": 0.45, "unit": "V", "name": "Chitosan (Electrolytes)" },
+      "S4": { "min": 1.90, "max": 2.55, "unit": "V", "name": "Phthalocyanine (Alkaloids)" },
+      "S5": { "min": 2.40, "max": 3.05, "unit": "V", "name": "Crown Ether (Eugenol Volatiles)" },
+      "S6": { "min": 1.45, "max": 2.05, "unit": "V", "name": "Ruthenium Oxide (Rosmarinic Tannins)" }
+    }
+  }
+}

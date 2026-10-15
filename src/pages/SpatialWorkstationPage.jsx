@@ -131,10 +131,10 @@ export default function SpatialWorkstationPage() {
           {/* Section Indicator Pills */}
           <div className="hidden sm:flex items-center gap-1.5 p-1 rounded-2xl bg-[#090E1F]/70 backdrop-blur-xl border border-white/10 text-xs font-mono">
             {[
-              { id: 0, label: 'Hero Probe' },
-              { id: 1, label: 'Sensor Dip' },
-              { id: 2, label: 'Swarm HUD' },
-              { id: 3, label: '3D Radar' },
+              { id: 0, label: 'Standby Inspection' },
+              { id: 1, label: 'Sensor Immersion' },
+              { id: 2, label: 'Voltammetric Assay' },
+              { id: 3, label: '6-Axis Radar' },
             ].map((s) => (
               <button
                 key={s.id}
@@ -155,7 +155,7 @@ export default function SpatialWorkstationPage() {
         <div className="flex items-center gap-2 font-mono text-xs">
           <div className="px-3 py-1.5 rounded-2xl bg-[#090E1F]/80 backdrop-blur-xl border border-white/10 flex items-center gap-2 text-zinc-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>COM3 Active</span>
+            <span>COM3 Active (250 S/s)</span>
           </div>
 
           <div className="px-3 py-1.5 rounded-2xl bg-[#090E1F]/80 backdrop-blur-xl border border-white/10 flex items-center gap-1.5 text-teal-300">
@@ -165,7 +165,7 @@ export default function SpatialWorkstationPage() {
 
           <Link
             to="/dashboard"
-            className="px-3.5 py-1.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold transition-all flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-2xl bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/30 text-teal-300 font-semibold transition-all flex items-center gap-1.5"
           >
             <span>2D Dashboard</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -175,7 +175,7 @@ export default function SpatialWorkstationPage() {
 
       {/* 3. Floating 3D Spatial Hover Hotspot Card (When Pin is Hovered) */}
       {hoveredPin && (
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 p-4 rounded-2xl bg-[#070C1A]/90 backdrop-blur-2xl border border-teal-500/40 shadow-[0_0_35px_rgba(45,212,191,0.25)] font-mono text-xs animate-in fade-in zoom-in-95 duration-150 space-y-1.5 min-w-[260px]">
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 p-4 rounded-2xl bg-[#070C1A]/90 backdrop-blur-2xl border border-teal-500/40 shadow-[0_0_35px_rgba(45,212,191,0.25)] font-mono text-xs animate-in fade-in zoom-in-95 duration-150 space-y-1.5 min-w-[280px]">
           <div className="flex items-center justify-between">
             <span className="font-extrabold text-sm text-white flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: hoveredPin.colorHex }} />
@@ -185,13 +185,14 @@ export default function SpatialWorkstationPage() {
               MICRO-ELECTRODE
             </span>
           </div>
-          <div className="text-zinc-300 text-xs font-semibold">{hoveredPin.name}</div>
+          <div className="text-zinc-200 text-xs font-semibold">{hoveredPin.name}</div>
+          <div className="text-[11px] text-zinc-400 font-sans">{hoveredPin.material}</div>
           <div className="flex justify-between items-center text-[11px] pt-1 border-t border-white/10">
             <span className="text-zinc-400">Ayurvedic Rasa:</span>
             <span className="text-teal-400 font-bold">{hoveredPin.rasa}</span>
           </div>
           <div className="flex justify-between items-center text-[11px]">
-            <span className="text-zinc-400">Nernstian Potential:</span>
+            <span className="text-zinc-400">Baseline Potential:</span>
             <span className="text-white font-bold">{hoveredPin.targetV}</span>
           </div>
         </div>
@@ -203,25 +204,25 @@ export default function SpatialWorkstationPage() {
           {/* Left Hero Card */}
           <div className="absolute top-24 left-6 z-20 max-w-sm p-6 rounded-3xl bg-[#070B18]/90 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] space-y-4 font-mono animate-in slide-in-from-left duration-300">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/15 border border-teal-500/30 text-teal-300 text-xs font-bold shadow-[0_0_20px_rgba(45,212,191,0.2)]">
-              <Sparkles className="w-3.5 h-3.5 text-teal-400 animate-spin-slow" />
-              <span>ANTIGRAVITY // 01 HERO</span>
+              <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+              <span>LABORATORY WORKSTATION // ISO 17025</span>
             </div>
             <div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white drop-shadow">
-                E-TONGUE PRO
+                DRAVYA 6000
               </h1>
               <p className="text-xs text-zinc-400 mt-1 font-sans leading-relaxed">
-                Biomimetic 6-Channel Potentiostat with Tri-Ring Gyroscope levitation. Hover over electrode pins or engage the autonomous sequence.
+                Precision 6-Channel Potentiostat Stage with motorized micrometer elevation and Borosilicate immersion chamber. Click & drag to inspect the sensor head.
               </p>
             </div>
             <div className="space-y-1.5 text-[11px] pt-1 border-t border-white/10">
               <div className="flex justify-between text-zinc-400">
-                <span>AFE Potential:</span>
-                <span className="text-emerald-400 font-bold">250 S/s • COM3</span>
+                <span>AFE Sampling Rate:</span>
+                <span className="text-emerald-400 font-bold">250 S/s • 16-Bit ADC</span>
               </div>
               <div className="flex justify-between text-zinc-400">
-                <span>Levitation Stability:</span>
-                <span className="text-teal-300 font-bold">99.8% Nominal</span>
+                <span>Electrode Matrix:</span>
+                <span className="text-teal-300 font-bold">Au, Pt, Glassy C, RuOx, PANI</span>
               </div>
             </div>
             <button
@@ -229,7 +230,7 @@ export default function SpatialWorkstationPage() {
               className="w-full py-3 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(45,212,191,0.35)] flex items-center justify-center gap-2 transition-all cursor-pointer hover:scale-[1.02]"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
-              <span>Engage Quantum Dip</span>
+              <span>Lower Sensor into Solution</span>
             </button>
           </div>
 
