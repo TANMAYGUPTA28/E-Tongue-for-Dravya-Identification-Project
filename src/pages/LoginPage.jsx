@@ -174,21 +174,6 @@ export default function LoginPage() {
     }
   };
 
-  // One-click demo login
-  const handleDemoLogin = async () => {
-    setLoading(true);
-    setErrorMessage('');
-    try {
-      await login('tanmay@etongue.lab', 'DravyaLab#2026!');
-      navigate('/dashboard');
-    } catch (err) {
-      setErrorMessage(err.message);
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#07100B] text-[#EDEFE8] flex flex-col lg:flex-row overflow-hidden selection:bg-[#3E7B4C]/40 selection:text-[#B6F36A]">
       {/* LEFT HALF: Form & Auth Controls */}
@@ -264,7 +249,7 @@ export default function LoginPage() {
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Dr. Tanmay Gupta"
+                      placeholder="Dr. Analyst Chemist"
                       className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/[0.04] border border-white/10 text-[#EDEFE8] placeholder:text-[#4F5B53] focus:outline-none focus:border-[#B6F36A]"
                     />
                   </div>

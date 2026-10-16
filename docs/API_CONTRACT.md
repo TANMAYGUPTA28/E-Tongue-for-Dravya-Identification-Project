@@ -16,9 +16,9 @@ Creates a new laboratory analyst or auditor account.
 - **Request Body**:
   ```json
   {
-    "name": "Dr. Tanmay Gupta",
+    "name": "Dr. Analyst Chemist",
     "email": "analyst@etongue.lab",
-    "password": "StrongPassword#2026",
+    "password": "sample_password_placeholder",
     "role": "Senior Chemometrician",
     "institution": "AYUSH Analytical QC Wing"
   }
@@ -32,7 +32,7 @@ Creates a new laboratory analyst or auditor account.
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
       "user": {
         "id": "670c5b3e18a9",
-        "name": "Dr. Tanmay Gupta",
+        "name": "Dr. Analyst Chemist",
         "email": "analyst@etongue.lab",
         "role": "Senior Chemometrician",
         "institution": "AYUSH Analytical QC Wing"
@@ -50,7 +50,7 @@ Authenticates analyst credentials and issues a JWT token.
   ```json
   {
     "email": "analyst@etongue.lab",
-    "password": "StrongPassword#2026"
+    "password": "sample_password_placeholder"
   }
   ```
 - **Responses**:
@@ -61,7 +61,7 @@ Authenticates analyst credentials and issues a JWT token.
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
       "user": {
         "id": "670c5b3e18a9",
-        "name": "Dr. Tanmay Gupta",
+        "name": "Dr. Analyst Chemist",
         "email": "analyst@etongue.lab",
         "role": "Senior Chemometrician"
       }
@@ -98,8 +98,8 @@ Saves fresh multi-channel sensor readings from the hardware AFE or virtual bench
       "orp": -142
     },
     "metadata": {
-      "operator": "Dr. Tanmay Gupta",
-      "lab": "IIT Delhi Bio-Instrumentation Core",
+      "operator": "Lead Analytical Chemist",
+      "lab": "AYUSH Bio-Instrumentation Core",
       "tareOffset": 0.0012
     }
   }

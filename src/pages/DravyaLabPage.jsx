@@ -106,7 +106,7 @@ export default function DravyaLabPage() {
         kashaya: `${features[5]} V`,
       },
       doshaImpact: prediction.doshaEffect,
-      operator: 'Tanmay Gupta (Lead ML Systems Eng)',
+      operator: 'Lead Analytical Chemist',
     };
 
     const blob = new Blob([JSON.stringify(cert, null, 2)], { type: 'application/json' });

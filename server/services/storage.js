@@ -29,7 +29,7 @@ const DATA_FILE = path.join(__dirname, '../data/store.json');
 const INITIAL_HISTORY = [
   {
     id: 'ET-90421', sampleName: 'Haritaki Kashayam Lot 04', batchNumber: 'BATCH-HAR-2026-A',
-    category: 'Triphala / Kashayam', operator: 'Tanmay Gupta', verdict: 'Haritaki (Terminalia chebula)',
+    category: 'Triphala / Kashayam', operator: 'Lead Chemist', verdict: 'Haritaki (Terminalia chebula)',
     botanicalName: 'Terminalia chebula Retz.', confidence: 96.4, status: 'VERIFIED_PURE',
     date: 'Oct 12, 2026 11:34 AM', sensorPeak: '3.22V (S6)', voltages: [0.92, 2.85, 0.42, 2.18, 0.88, 3.22],
   },
@@ -41,7 +41,7 @@ const INITIAL_HISTORY = [
   },
   {
     id: 'ET-90419', sampleName: 'Market Ashwagandha Sample B', batchNumber: 'BATCH-ASH-RAW-2',
-    category: 'Commercial Root Powder', operator: 'Tanmay Gupta', verdict: 'Adulterated Ashwagandha (Starch Cut)',
+    category: 'Commercial Root Powder', operator: 'Lead Chemist', verdict: 'Adulterated Ashwagandha (Starch Cut)',
     botanicalName: 'Commercial Adulterant', confidence: 95.2, status: 'ADULTERATION_FLAG',
     date: 'Oct 12, 2026 09:40 AM', sensorPeak: '1.85V (S1 Spike)', voltages: [1.85, 0.82, 1.65, 0.75, 0.45, 0.65],
   },
@@ -53,7 +53,7 @@ const INITIAL_HISTORY = [
   },
   {
     id: 'ET-90417', sampleName: 'Lakadong Turmeric Powder', batchNumber: 'BATCH-TUR-88',
-    category: 'Varnya / Rhizome', operator: 'Tanmay Gupta', verdict: 'Lakadong Turmeric (Haridra)',
+    category: 'Varnya / Rhizome', operator: 'Lead Chemist', verdict: 'Lakadong Turmeric (Haridra)',
     botanicalName: 'Curcuma longa L.', confidence: 96.5, status: 'VERIFIED_PURE',
     date: 'Oct 11, 2026 02:10 PM', sensorPeak: '3.05V (S5)', voltages: [0.48, 0.52, 0.36, 2.45, 3.05, 1.55],
   },
@@ -65,7 +65,7 @@ const INITIAL_HISTORY = [
   },
   {
     id: 'ET-90415', sampleName: 'Wild Forest Raw Honey', batchNumber: 'BATCH-HON-55',
-    category: 'Sandhaniya / Nectar', operator: 'Tanmay Gupta', verdict: 'Natural Forest Honey (Madhu)',
+    category: 'Sandhaniya / Nectar', operator: 'Lead Chemist', verdict: 'Natural Forest Honey (Madhu)',
     botanicalName: 'Apis dorsata Nectar', confidence: 98.2, status: 'VERIFIED_PURE',
     date: 'Oct 10, 2026 09:15 AM', sensorPeak: '2.92V (S1)', voltages: [2.92, 0.88, 0.25, 0.18, 0.35, 1.75],
   },
@@ -82,17 +82,7 @@ class StorageEngine {
   constructor() {
     this.history = [];
     this.specimens = [];
-    this.users = [
-      {
-        id: 'usr_default',
-        email: 'tanmay@etongue.lab',
-        password: 'DravyaLab#2026!',
-        name: 'Tanmay Gupta',
-        role: 'Lead ML Systems Engineer',
-        institution: 'Biomimetic Olfactory & Gustatory AI Lab',
-        createdAt: new Date().toISOString(),
-      },
-    ];
+    this.users = [];
     this.useMongo = false;
     this._loadJSON();
   }
@@ -105,7 +95,7 @@ class StorageEngine {
 
     // Seed default user if empty
     const userCount = await User.countDocuments();
-    if (userCount === 0) {
+    if (userCount === 0 && this.users.length > 0) {
       await User.create(this.users[0]);
       console.log('[STORAGE] Seeded default analyst user to MongoDB');
     }

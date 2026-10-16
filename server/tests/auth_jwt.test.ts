@@ -26,9 +26,9 @@ describe('Auth Service & Domain Restrictions', () => {
   });
 
   it('permits @gmail.com and @yahoo.com addresses', () => {
-    const gmail = validateAllowedEmail('tanmay.researcher@gmail.com');
+    const gmail = validateAllowedEmail('senior.analyst@gmail.com');
     expect(gmail.valid).toBe(true);
-    expect(gmail.cleanEmail).toBe('tanmay.researcher@gmail.com');
+    expect(gmail.cleanEmail).toBe('senior.analyst@gmail.com');
 
     const yahoo = validateAllowedEmail('analyst@yahoo.com');
     expect(yahoo.valid).toBe(true);
@@ -39,7 +39,7 @@ describe('Auth Service & Domain Restrictions', () => {
     expect(edu.valid).toBe(true);
     expect(edu.domainType).toContain('Institutional');
 
-    const acIn = validateAllowedEmail('tanmay@iitd.ac.in');
+    const acIn = validateAllowedEmail('researcher@lab.ac.in');
     expect(acIn.valid).toBe(true);
     expect(acIn.domainType).toContain('Institutional');
   });
@@ -64,10 +64,10 @@ describe('Auth Service & Domain Restrictions', () => {
   it('signs and cryptographically verifies real HMAC-SHA256 JWT tokens', () => {
     const testUser = {
       id: 'usr_test_99',
-      email: 'tanmay@iitd.ac.in',
-      name: 'Tanmay Gupta',
+      email: 'analyst@lab.ac.in',
+      name: 'Lab Analyst',
       role: 'Lead ML Engineer',
-      institution: 'IIT Delhi Biomimetic Lab',
+      institution: 'Biomimetic Research Lab',
     };
 
     const token = signJWT(testUser);
@@ -77,13 +77,13 @@ describe('Auth Service & Domain Restrictions', () => {
     const verified = verifyJWT(token);
     expect(verified.valid).toBe(true);
     const payload = verified.payload as any;
-    expect(payload?.email).toBe('tanmay@iitd.ac.in');
+    expect(payload?.email).toBe('analyst@lab.ac.in');
     expect(payload?.role).toBe('Lead ML Engineer');
     expect(payload?.sub).toBe('usr_test_99');
   });
 
   it('securely hashes passwords with salt and verifies timing-safe scrypt match', () => {
-    const rawPass = 'SecretAyushLabPass#2026';
+    const rawPass = 'MockTestPassword#2026';
     const hashed = hashPassword(rawPass);
 
     expect(typeof hashed).toBe('string');

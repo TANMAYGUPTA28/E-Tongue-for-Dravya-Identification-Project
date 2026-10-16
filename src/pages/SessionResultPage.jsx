@@ -41,7 +41,7 @@ export default function SessionResultPage() {
           sampleName: 'Pure Ashwagandha Root',
           botanical: 'Withania somnifera (L.) Dunal',
           batchNumber: 'LOT-2026-ASH-01',
-          operator: 'Tanmay Gupta (Lead Analyst)',
+          operator: 'Lead Analytical Chemist',
           verdict: 'Pass',
           status: 'VERIFIED_PURE',
           qualityScore: 96,

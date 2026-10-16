@@ -31,7 +31,7 @@ export default function NewAnalysisWizardPage() {
     batchNumber: 'BATCH-HAR-2026-A',
     extractionMedium: 'Aqueous (Deionized Water 1:10)',
     referenceStandard: 'Haritaki (Terminalia chebula)',
-    operator: 'Tanmay Gupta (Lead Analyst)',
+    operator: 'Lead Analytical Chemist',
     temperatureC: '25.0',
   });
 

@@ -12,8 +12,8 @@ export function AuthProvider({ children }) {
     }
     return {
       id: 'usr_default',
-      name: 'Tanmay Gupta',
-      email: 'tanmay@etongue.lab',
+      name: 'Lab Analyst',
+      email: 'analyst@etongue.lab',
       role: 'Lead AI Systems Engineer',
       institution: 'Biomimetic Olfactory & Gustatory AI Lab',
       clearance: 'Level-4 Senior Researcher',

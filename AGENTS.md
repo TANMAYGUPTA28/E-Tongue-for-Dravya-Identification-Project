@@ -48,7 +48,7 @@
 PORT=5000
 NODE_ENV=development
 MONGO_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/etongue?retryWrites=true&w=majority
-JWT_ACCESS_SECRET=etongue_ayurveda_dravya_sih2025_secure_key_98347
+JWT_ACCESS_SECRET=your_jwt_access_secret_min_32_chars_random
 LLM_PROVIDER=gemini        # 'gemini' | 'grok'
 GEMINI_API_KEY=AIzaSy...
 GROK_API_KEY=xai-...

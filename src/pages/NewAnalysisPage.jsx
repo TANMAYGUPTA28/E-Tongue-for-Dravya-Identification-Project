@@ -13,7 +13,7 @@ export default function NewAnalysisPage() {
     temperature: '24.5',
     phLevel: '6.7',
     dilution: '1:10 Distilled H2O',
-    operator: 'Tanmay Gupta (Lead ML Eng)',
+    operator: 'Lead Analytical Chemist',
   });
   const [lastResult, setLastResult] = useState(null);
 

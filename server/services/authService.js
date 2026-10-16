@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-
-const JWT_SECRET = process.env.JWT_ACCESS_SECRET || 'etongue_ayurveda_dravya_sih2025_secure_key_98347';
+const JWT_SECRET = process.env.JWT_ACCESS_SECRET || (process.env.NODE_ENV === 'test' ? 'etongue-test-secret-salt-environment-safe' : crypto.randomBytes(32).toString('hex'));
 const OTP_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
 const OTP_COOLDOWN_MS = 30 * 1000;  // 30 seconds between requests
 

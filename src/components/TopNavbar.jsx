@@ -87,11 +87,11 @@ export default function TopNavbar({ onMenuClick, onOpenCommandPalette }) {
         {/* User Pill */}
         <div className="flex items-center gap-2 pl-1">
           <div className="w-8 h-8 rounded-lg bg-[#10B981]/20 border border-[#10B981]/30 text-[#10B981] font-bold flex items-center justify-center text-xs">
-            TG
+            {user?.name ? user.name.slice(0, 2).toUpperCase() : 'QC'}
           </div>
           <div className="hidden xl:block text-left text-[11px] leading-tight">
-            <span className="font-semibold text-[#EDEFE8] block">Tanmay Gupta</span>
-            <span className="text-[#8E9B93] text-[10px]">Lead Chemist</span>
+            <span className="font-semibold text-[#EDEFE8] block">{user?.name || 'Lab Analyst'}</span>
+            <span className="text-[#8E9B93] text-[10px]">{user?.role || 'Lead Chemist'}</span>
           </div>
         </div>
       </div>
